@@ -10,7 +10,6 @@
         rel="stylesheet" />
     <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="style-upgrade.css" />
     <style>
         /* CURSOR */
         * {
@@ -471,16 +470,225 @@
             }
         }
     </style>
+
+    <style id="patch-v2">
+        /* ── LOGO TEXTO ── */
+        .nav-logo-text {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            line-height: 1;
+            text-decoration: none;
+        }
+
+        .logo-uai {
+            color: var(--amber-light);
+            font-weight: 900;
+            font-style: italic;
+        }
+
+        .logo-turismo {
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            letter-spacing: .02em;
+        }
+
+        /* ── HERO: carrossel não cortado ao abrir ── */
+        #hero {
+            padding-top: 80px !important;
+            /* exatamente a altura da nav fixa */
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            box-sizing: border-box;
+        }
+
+        .hero-content {
+            padding-top: 20px !important;
+            padding-bottom: 40px !important;
+        }
+
+        .hero-carousel {
+            height: 460px !important;
+        }
+
+        @media (max-width: 768px) {
+            #hero {
+                padding-top: 70px !important;
+                min-height: auto;
+            }
+
+            .hero-carousel {
+                height: 280px !important;
+            }
+        }
+
+        /* ── DIFERENCIAIS: 3 colunas ── */
+        .diferenciais-grid {
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 20px !important;
+        }
+
+        @media (max-width: 1024px) {
+            .diferenciais-grid {
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .diferenciais-grid {
+                grid-template-columns: 1fr !important;
+            }
+        }
+
+        /* ── MASCOTE ── */
+        #mascote {
+            position: fixed;
+            bottom: 100px;
+            left: 28px;
+            z-index: 998;
+            cursor: pointer;
+            animation: mascoteFloat 4s ease-in-out infinite;
+            filter: drop-shadow(0 4px 12px rgba(0, 105, 120, .35));
+            transition: transform .3s ease;
+        }
+
+        #mascote:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        #mascote svg {
+            display: block;
+        }
+
+        #mascote-balao {
+            position: absolute;
+            bottom: 76px;
+            left: 76px;
+            background: white;
+            border-radius: 16px 16px 16px 4px;
+            padding: 10px 16px;
+            font-size: .8rem;
+            font-weight: 600;
+            color: var(--text);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .15);
+            width: 200px;
+            line-height: 1.4;
+            opacity: 0;
+            transform: translateY(6px) scale(.95);
+            transition: opacity .3s ease, transform .3s ease;
+            pointer-events: none;
+            white-space: normal;
+        }
+
+        #mascote:hover #mascote-balao {
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        @keyframes mascoteFloat {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
+        /* Esconder mascote em mobile pequeno */
+        @media (max-width: 480px) {
+            #mascote {
+                bottom: 90px;
+                left: 12px;
+            }
+
+            #mascote svg {
+                width: 52px;
+                height: 52px;
+            }
+
+            #mascote-balao {
+                display: none;
+            }
+        }
+
+        /* ── FOOTER LOGO TEXTO ── */
+        .footer-logo-text {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            line-height: 1;
+            margin-bottom: 10px;
+        }
+
+        .footer-logo-text .logo-uai {
+            color: var(--amber-light);
+            font-weight: 900;
+            font-style: italic;
+        }
+
+        .footer-logo-text .logo-turismo {
+            color: rgba(255, 255, 255, .85);
+            font-weight: 700;
+            font-size: 1rem;
+        }
+
+        /* ── NÚMEROS: 5000 com separador de milhar ── */
+        /* (tratado via JS) */
+    </style>
+
 </head>
 
 <body>
+
+
+    <!-- MASCOTE FLUTUANTE -->
+    <div id="mascote" title="Oi! Sou a tartaruga da Uai Turismo 🐢">
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" width="70" height="70">
+            <!-- carapaça -->
+            <ellipse cx="60" cy="62" rx="34" ry="26" fill="#0097A7" />
+            <ellipse cx="60" cy="62" rx="24" ry="17" fill="#006978" />
+            <!-- padrão carapaça -->
+            <path d="M48 58 Q60 52 72 58 Q67 68 60 70 Q53 68 48 58Z" fill="#004D5C" opacity="0.35" />
+            <line x1="60" y1="52" x2="60" y2="70" stroke="#004D5C" stroke-width="1" opacity="0.4" />
+            <line x1="48" y1="58" x2="72" y2="65" stroke="#004D5C" stroke-width="1" opacity="0.4" />
+            <line x1="72" y1="58" x2="48" y2="65" stroke="#004D5C" stroke-width="1" opacity="0.4" />
+            <!-- patas -->
+            <ellipse cx="30" cy="50" rx="9" ry="6" fill="#0097A7" />
+            <ellipse cx="90" cy="50" rx="9" ry="6" fill="#0097A7" />
+            <ellipse cx="30" cy="76" rx="9" ry="6" fill="#0097A7" />
+            <ellipse cx="90" cy="76" rx="9" ry="6" fill="#0097A7" />
+            <!-- cabeça -->
+            <ellipse cx="60" cy="38" rx="12" ry="10" fill="#0097A7" />
+            <!-- olhos -->
+            <circle cx="55" cy="35" r="3.5" fill="white" />
+            <circle cx="65" cy="35" r="3.5" fill="white" />
+            <circle cx="56" cy="35" r="2" fill="#004D5C" />
+            <circle cx="66" cy="35" r="2" fill="#004D5C" />
+            <circle cx="56.8" cy="34.2" r=".7" fill="white" />
+            <circle cx="66.8" cy="34.2" r=".7" fill="white" />
+            <!-- sorriso -->
+            <path d="M54 41 Q60 46 66 41" stroke="#004D5C" stroke-width="1.5" fill="none" stroke-linecap="round" />
+            <!-- cauda -->
+            <ellipse cx="60" cy="87" rx="6" ry="4" fill="#0097A7" />
+        </svg>
+        <div id="mascote-balao">Oi! Posso te ajudar a escolher seu passeio? 🌊</div>
+    </div>
 
     <div id="cursor-dot"></div>
     <div id="cursor-ring"></div>
     <div id="scroll-progress"></div>
 
     <div id="preloader">
-        <div class="preloader-logo">Uai <span>Turismo</span></div>
+        <div class="preloader-logo"><span>Uai</span> Turismo</div>
         <div class="preloader-bar-wrap">
             <div class="preloader-bar"></div>
         </div>
@@ -488,7 +696,8 @@
 
     <!-- NAV -->
     <nav id="nav">
-        <a class="nav-logo" href="#"><img src="foto/logoo.png" alt="Uai Turismo" class="logo-img"></a>
+        <a class="nav-logo nav-logo-text" href="#"><span class="logo-uai">Uai</span><span
+                class="logo-turismo">Turismo</span></a>
         <button class="nav-toggle" id="navToggle"
             aria-label="Abrir menu"><span></span><span></span><span></span></button>
         <ul id="navMenu">
@@ -515,18 +724,19 @@
                 <div class="hero-tag" id="heroTag">🏝️ Maragogi &bull; Carneiros &bull; Milagres &bull; Buggy</div>
                 <h1 id="heroTitle">Sua jornada<br><span>inesquecível</span><br>começa aqui</h1>
                 <p id="heroP">Os melhores roteiros de <strong>Porto de Galinhas, Maragogi, Carneiros e Milagres</strong>
-                    — passeios privativos, segurança total e fotos profissionais inclusas.</p>
+                    — passeios compartilhados e privativos, com atendimento próximo, personalizado e fotos de cortesia
+                    inclusas.</p>
                 <div class="hero-actions" id="heroActions">
                     <a href="https://wa.me/5581997484915" class="btn-primary" target="_blank">🌊 Reservar Agora</a>
                     <a href="#destinos" class="btn-ghost">Ver Roteiros ↓</a>
                 </div>
                 <div class="hero-badges" id="heroBadges">
-                    <div class="badge"><strong class="counter" data-target="500">0</strong><span>Passeios
+                    <div class="badge"><strong class="counter" data-target="5000">0</strong><span>Sonhos
                             realizados</span></div>
                     <div class="badge-divider"></div>
                     <div class="badge"><strong>5★</strong><span>Avaliação média</span></div>
                     <div class="badge-divider"></div>
-                    <div class="badge"><strong>100%</strong><span>Privativo</span></div>
+                    <div class="badge"><strong>🤝</strong><span>Compartilhado ou Privativo</span></div>
                 </div>
             </div>
             <div class="hero-right" id="heroRight">
@@ -560,16 +770,16 @@
                 class="marquee-item">🌊 Maragogi <span class="marquee-sep">✦</span></span><span class="marquee-item">⛵
                 Praia dos Carneiros <span class="marquee-sep">✦</span></span><span class="marquee-item">🐠 São Miguel
                 dos Milagres <span class="marquee-sep">✦</span></span><span class="marquee-item">🚗 Passeio de Buggy
-                <span class="marquee-sep">✦</span></span><span class="marquee-item">📸 Fotos Profissionais Inclusas
-                <span class="marquee-sep">✦</span></span><span class="marquee-item">🔒 100% Privativo <span
+                <span class="marquee-sep">✦</span></span><span class="marquee-item">📸 Fotos de Cortesia Inclusas
+                <span class="marquee-sep">✦</span></span><span class="marquee-item">🤝 Compartilhado ou Privativo <span
                     class="marquee-sep">✦</span></span><span class="marquee-item">⭐ Avaliação 5 Estrelas <span
                     class="marquee-sep">✦</span></span><span class="marquee-item">🏝️ Porto de Galinhas <span
                     class="marquee-sep">✦</span></span><span class="marquee-item">🌊 Maragogi <span
                     class="marquee-sep">✦</span></span><span class="marquee-item">⛵ Praia dos Carneiros <span
                     class="marquee-sep">✦</span></span><span class="marquee-item">🐠 São Miguel dos Milagres <span
                     class="marquee-sep">✦</span></span><span class="marquee-item">🚗 Passeio de Buggy <span
-                    class="marquee-sep">✦</span></span><span class="marquee-item">📸 Fotos Profissionais Inclusas <span
-                    class="marquee-sep">✦</span></span><span class="marquee-item">🔒 100% Privativo <span
+                    class="marquee-sep">✦</span></span><span class="marquee-item">📸 Fotos de Cortesia Inclusas <span
+                    class="marquee-sep">✦</span></span><span class="marquee-item">🤝 Compartilhado ou Privativo <span
                     class="marquee-sep">✦</span></span><span class="marquee-item">⭐ Avaliação 5 Estrelas <span
                     class="marquee-sep">✦</span></span>
         </div>
@@ -591,27 +801,26 @@
         </div>
         <div class="destinos-grid">
             <div class="destino-card destino-card--featured" data-aos="fade-right" data-aos-duration="800"><img
-                    src="foto/buggy.JPEG" alt="Porto de Galinhas de Buggy">
+                    src="foto/buggy.JPEG" alt="Porto de Galinhas">
                 <div class="destino-overlay">
-                    <div class="destino-tag">⭐ Mais Popular</div>
-                    <h3>Buggy – Porto de Galinhas</h3>
-                    <p>Percorra as praias mais belas do litoral pernambucano em um passeio de buggy inesquecível.</p><a
-                        href="https://wa.me/5581997484915" class="btn-card" target="_blank">Saiba mais →</a>
+                    <h3>Porto de Galinhas</h3>
+                    <p>Piscinas naturais, jangadas e buggys — o litoral mais completo de Pernambuco.</p><a
+                        href="passeio-porto-de-galinhas.html" class="btn-card">Saiba mais →</a>
                 </div>
             </div>
             <div class="destino-card" data-aos="fade-up" data-aos-delay="100"><img src="foto/2.2.jpeg" alt="Maragogi">
                 <div class="destino-overlay">
                     <h3>Maragogi – Alagoas</h3>
                     <p>As águas cristalinas das galés de Maragogi, consideradas o Caribe Brasileiro.</p><a
-                        href="https://wa.me/5581997484915" class="btn-card" target="_blank">Saiba mais →</a>
+                        href="passeio-maragogi.html" class="btn-card">Saiba mais →</a>
                 </div>
             </div>
             <div class="destino-card" data-aos="fade-up" data-aos-delay="200"><img src="foto/carneiro2.JPEG"
                     alt="Carneiros">
                 <div class="destino-overlay">
                     <h3>Praia dos Carneiros</h3>
-                    <p>Mar esmeralda, coqueiros e a famosa Igrejinha.</p><a href="https://wa.me/5581997484915"
-                        class="btn-card" target="_blank">Saiba mais →</a>
+                    <p>Mar esmeralda, coqueiros e a famosa Igrejinha — cenário cinematográfico.</p><a
+                        href="passeio-carneiros.html" class="btn-card">Saiba mais →</a>
                 </div>
             </div>
             <div class="destino-card" data-aos="fade-up" data-aos-delay="300"><img src="foto/2.jpg"
@@ -619,7 +828,7 @@
                 <div class="destino-overlay">
                     <h3>São Miguel dos Milagres</h3>
                     <p>Praias desertas e recifes naturais de tirar o fôlego no litoral alagoano.</p><a
-                        href="https://wa.me/5581997484915" class="btn-card" target="_blank">Saiba mais →</a>
+                        href="passeio-milagres.html" class="btn-card">Saiba mais →</a>
                 </div>
             </div>
         </div>
@@ -628,14 +837,14 @@
     <!-- NUMBERS -->
     <div class="numbers-strip">
         <div class="numbers-grid">
-            <div class="number-item" data-aos="fade-up"><span class="number-val counter" data-target="500">0</span><span
-                    class="number-label">Passeios realizados</span></div>
+            <div class="number-item" data-aos="fade-up"><span class="number-val counter"
+                    data-target="5000">0</span><span class="number-label">Sonhos realizados</span></div>
             <div class="number-item" data-aos="fade-up" data-aos-delay="100"><span class="number-val">5★</span><span
                     class="number-label">Avaliação no Google</span></div>
             <div class="number-item" data-aos="fade-up" data-aos-delay="200"><span class="number-val counter"
                     data-target="4">0</span><span class="number-label">Destinos exclusivos</span></div>
             <div class="number-item" data-aos="fade-up" data-aos-delay="300"><span class="number-val">100%</span><span
-                    class="number-label">Passeios privativos</span></div>
+                    class="number-label">Atendimento personalizado</span></div>
         </div>
     </div>
 
@@ -671,26 +880,39 @@
         <div class="diferenciais-grid">
             <div class="diferencial-card" data-aos="fade-up" data-aos-delay="0"><span class="diferencial-num">01</span>
                 <div class="diferencial-icon">📸</div>
-                <h4>Fotos Profissionais</h4>
-                <p>Fotógrafo incluso em todos os passeios para registrar cada momento especial.</p>
+                <h4>Fotos de Cortesia</h4>
+                <p>Fotos inclusas em todos os passeios para registrar cada momento especial da sua viagem.</p>
             </div>
             <div class="diferencial-card" data-aos="fade-up" data-aos-delay="100"><span
                     class="diferencial-num">02</span>
                 <div class="diferencial-icon">🔒</div>
-                <h4>Passeios Privativos</h4>
-                <p>Exclusividade total. Você e seus acompanhantes, sem dividir o roteiro.</p>
+                <h4>Compartilhado ou Privativo</h4>
+                <p>Escolha o formato ideal: compartilhado em carros pequenos com atendimento próximo, ou totalmente
+                    privativo.</p>
             </div>
             <div class="diferencial-card" data-aos="fade-up" data-aos-delay="200"><span
                     class="diferencial-num">03</span>
                 <div class="diferencial-icon">🗺️</div>
-                <h4>Guias Locais</h4>
-                <p>Guias experientes que conhecem cada cantinho da região.</p>
+                <h4>Guias Capacitados</h4>
+                <p>Guias treinados e capacitados para enriquecer cada etapa do seu roteiro.</p>
             </div>
             <div class="diferencial-card" data-aos="fade-up" data-aos-delay="300"><span
                     class="diferencial-num">04</span>
                 <div class="diferencial-icon">⭐</div>
                 <h4>Avaliação 5 Estrelas</h4>
-                <p>Centenas de viajantes satisfeitos atestam a qualidade dos nossos serviços.</p>
+                <p>Centenas de viajantes satisfeitos atestam a qualidade dos nossos serviços no Google.</p>
+            </div>
+            <div class="diferencial-card" data-aos="fade-up" data-aos-delay="400"><span
+                    class="diferencial-num">05</span>
+                <div class="diferencial-icon">🌊</div>
+                <h4>Roteiros Personalizados</h4>
+                <p>Montamos o passeio ideal para o seu grupo — horários, destinos e ritmo do seu jeito.</p>
+            </div>
+            <div class="diferencial-card" data-aos="fade-up" data-aos-delay="500"><span
+                    class="diferencial-num">06</span>
+                <div class="diferencial-icon">🛡️</div>
+                <h4>Empresa Regularizada</h4>
+                <p>CADASTUR ativo, CNPJ regularizado — você viaja com total segurança jurídica e tranquilidade.</p>
             </div>
         </div>
     </section>
@@ -1045,18 +1267,6 @@
                 <p>A Uai Turismo é cadastrada no <strong>CADASTUR</strong> — sistema oficial do Ministério do Turismo do
                     Brasil, assegurando seus direitos e sua tranquilidade.</p>
                 <div class="cadastur-items">
-                    <div class="cadastur-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12" />
-                        </svg><span>Empresa legalmente habilitada pelo Ministério do Turismo</span></div>
-                    <div class="cadastur-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12" />
-                        </svg><span>CNPJ: 54.181.357/0001-42 | Porto de Galinhas, PE</span></div>
-                    <div class="cadastur-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <polyline points="20 6 9 17 4 12" />
-                        </svg><span>Seguro de responsabilidade civil incluso</span></div>
                 </div>
                 <a href="https://wa.me/5581997484915" class="btn-primary" target="_blank">Fale Conosco no WhatsApp</a>
             </div>
@@ -1066,7 +1276,9 @@
     <!-- FOOTER -->
     <footer class="main-footer">
         <div class="footer-inner">
-            <div class="footer-brand"><img src="foto/logoo.png" alt="Uai Turismo" class="footer-logo">
+            <div class="footer-brand">
+                <div class="footer-logo-text"><span class="logo-uai">Uai</span><span class="logo-turismo">
+                        Turismo</span></div>
                 <p>Seu turismo no lugar certo.</p>
             </div>
             <div class="footer-links">
@@ -1124,7 +1336,7 @@
         gsap.utils.toArray('.destino-card img').forEach(img => { gsap.to(img, { yPercent: -8, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }); });
 
         // COUNTERS
-        document.querySelectorAll('.counter').forEach(el => { const t = +el.dataset.target; ScrollTrigger.create({ trigger: el, start: 'top 85%', once: true, onEnter: () => { gsap.to({ val: 0 }, { val: t, duration: 1.8, ease: 'power2.out', onUpdate: function () { el.textContent = Math.round(this.targets()[0].val) + (t === 500 ? '+' : ''); } }); } }); });
+        document.querySelectorAll('.counter').forEach(el => { const t = +el.dataset.target; ScrollTrigger.create({ trigger: el, start: 'top 85%', once: true, onEnter: () => { gsap.to({ val: 0 }, { val: t, duration: 1.8, ease: 'power2.out', onUpdate: function () { const v = Math.round(this.targets()[0].val); el.textContent = (v >= 1000 ? v.toLocaleString('pt-BR') : v) + (t >= 1000 ? '+' : ''); } }); } }); });
 
         // PARTICLES
         (function () { const c = document.getElementById('hero-canvas'); if (!c) return; const ctx = c.getContext('2d'); let W, H, p = []; function resize() { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; } resize(); window.addEventListener('resize', resize); function rand(a, b) { return Math.random() * (b - a) + a; } function P() { this.x = rand(0, W); this.y = rand(0, H); this.r = rand(1, 3); this.vx = rand(-.3, .3); this.vy = rand(-.5, -.1); this.alpha = rand(.2, .7); this.color = Math.random() > .5 ? '245,168,0' : '0,151,167'; } for (let i = 0; i < 55; i++)p.push(new P()); function draw() { ctx.clearRect(0, 0, W, H); p.forEach(pt => { ctx.beginPath(); ctx.arc(pt.x, pt.y, pt.r, 0, Math.PI * 2); ctx.fillStyle = `rgba(${pt.color},${pt.alpha})`; ctx.fill(); pt.x += pt.vx; pt.y += pt.vy; if (pt.y < -5) { pt.y = H + 5; pt.x = rand(0, W); } if (pt.x < -5) pt.x = W + 5; if (pt.x > W + 5) pt.x = -5; }); requestAnimationFrame(draw); } draw(); })();
@@ -1141,9 +1353,12 @@
 <style>
     /* Desativa o cursor personalizado em dispositivos touch para evitar bugs de clique */
     @media (pointer: coarse) {
-        #cursor-dot, #cursor-ring {
+
+        #cursor-dot,
+        #cursor-ring {
             display: none !important;
         }
+
         * {
             cursor: auto !important;
         }
