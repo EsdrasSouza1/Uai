@@ -62,12 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
     nav.classList.toggle('scrolled', window.scrollY > 60);
   }, { passive: true });
 
-  navToggle.addEventListener('click', () => {
-    const isOpen = navMenu.classList.toggle('open');
-    navToggle.classList.toggle('open', isOpen);
-    navToggle.setAttribute('aria-expanded', isOpen);
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-  });
+  // Duplicate toggle listener removed – now only the enhanced listener below handles the menu toggle.
 
   navMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
