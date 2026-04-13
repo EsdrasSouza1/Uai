@@ -1,208 +1,928 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Praia dos Carneiros – Uai Turismo</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
-  <link rel="stylesheet" href="style.css"/>
-  <link rel="stylesheet" href="style-upgrade.css"/>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="style-upgrade.css" />
   <style>
-  :root { --accent: #0097A7; }
-  * { cursor: none !important; }
-  @media (pointer: coarse) { * { cursor: auto !important; } }
-  #cursor-dot, #cursor-ring { position:fixed;top:0;left:0;border-radius:50%;pointer-events:none;z-index:99999;transform:translate(-50%,-50%); transition-property:opacity,background,border-color,transform;transition-timing-function:ease; }
-  #cursor-dot { width:8px;height:8px;background:var(--amber);transition-duration:.08s; }
-  #cursor-ring { width:36px;height:36px;border:2px solid rgba(245,168,0,.5);background:transparent;transition-duration:.18s;mix-blend-mode:exclusion; }
-  @media (pointer: coarse) { #cursor-dot, #cursor-ring { display:none!important; } }
+    /* CURSOR */
+    * {
+      cursor: none !important;
+    }
 
-  /* NAV LOGO TEXTO */
-  .nav-logo-text { display:flex;align-items:center;gap:4px;font-family:'Playfair Display',serif;font-size:1.5rem;line-height:1;text-decoration:none; }
-  .logo-uai { color:var(--amber-light);font-weight:900;font-style:italic; }
-  .logo-turismo { color:white;font-weight:700;font-size:1.1rem; }
+    @media(pointer:coarse) {
+      * {
+        cursor: auto !important;
+      }
+    }
 
-  /* HERO PASSEIO */
-  .passeio-hero {
-    min-height: 70vh;
-    background: linear-gradient(155deg, var(--teal-deeper) 0%, var(--teal) 60%, #00bcd4 100%);
-    display: flex; align-items: center;
-    padding: 120px 5% 80px;
-    position: relative; overflow: hidden;
-  }
-  .passeio-hero::before {
-    content:''; position:absolute; inset:0;
-    background: url("carneiro2.JPEG") center/cover no-repeat;
-    opacity: .18; z-index: 0;
-  }
-  .passeio-hero-content { position:relative;z-index:1;max-width:780px; }
-  .passeio-hero-emoji { font-size:3.5rem;margin-bottom:16px;display:block; }
-  .passeio-hero h1 {
-    font-family:'Playfair Display',serif;
-    font-size:clamp(2.4rem,5vw,4rem);
-    color:white; line-height:1.1; margin-bottom:16px;
-  }
-  .passeio-hero h1 span { color:var(--amber-light);font-style:italic; }
-  .passeio-hero-sub { color:rgba(255,255,255,.80);font-size:1.1rem;line-height:1.7;max-width:560px;margin-bottom:32px; }
-  .passeio-hero-badges { display:flex;gap:16px;flex-wrap:wrap; }
-  .passeio-badge { background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:white;padding:8px 18px;border-radius:50px;font-size:.82rem;font-weight:600; }
+    #cursor-dot,
+    #cursor-ring {
+      position: fixed;
+      top: 0;
+      left: 0;
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition-property: opacity, background, border-color, transform;
+      transition-timing-function: ease;
+    }
 
-  /* WAVE */
-  .p-wave { line-height:0;background:linear-gradient(155deg,var(--teal-deeper),var(--teal) 60%,#00bcd4); }
-  .p-wave svg { width:100%;display:block; }
+    #cursor-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--amber);
+      transition-duration: .08s;
+    }
 
-  /* CORPO */
-  .passeio-body { max-width:1100px;margin:0 auto;padding:80px 5%; display:grid;grid-template-columns:1fr 380px;gap:60px;align-items:start; }
-  @media(max-width:900px) { .passeio-body { grid-template-columns:1fr; } }
+    #cursor-ring {
+      width: 36px;
+      height: 36px;
+      border: 2px solid rgba(245, 168, 0, .5);
+      background: transparent;
+      transition-duration: .18s;
+      mix-blend-mode: exclusion;
+    }
 
-  /* FOTO PRINCIPAL */
-  .passeio-img { border-radius:24px;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.18); aspect-ratio:4/3; }
-  .passeio-img img { width:100%;height:100%;object-fit:cover; }
+    @media(pointer:coarse) {
 
-  /* CONTEÚDO */
-  .passeio-desc { font-size:1rem;color:var(--text-muted);line-height:1.8;margin-bottom:36px; }
-  .passeio-desc p + p { margin-top:16px; }
-  .passeio-includes { background:var(--off-white);border-radius:20px;padding:32px 28px;margin-bottom:28px; }
-  .passeio-includes h3 { font-family:'Playfair Display',serif;font-size:1.2rem;color:var(--text);margin-bottom:20px; }
-  .passeio-includes ul { list-style:none;display:flex;flex-direction:column;gap:10px; }
-  .passeio-includes li { display:flex;align-items:flex-start;gap:12px;font-size:.93rem;color:var(--text-muted); }
-  .inc-icon { color:var(--teal);font-weight:800;flex-shrink:0;margin-top:1px; }
-  .passeio-tips { background:linear-gradient(135deg,var(--teal-deeper),var(--teal));border-radius:20px;padding:32px 28px;color:white; }
-  .passeio-tips h3 { font-family:'Playfair Display',serif;font-size:1.2rem;margin-bottom:18px; }
-  .passeio-tips ul { list-style:none;display:flex;flex-direction:column;gap:10px; }
-  .passeio-tips li { font-size:.9rem;color:rgba(255,255,255,.85);line-height:1.55; }
+      #cursor-dot,
+      #cursor-ring {
+        display: none !important;
+      }
+    }
 
-  /* SIDEBAR CTA */
-  .passeio-sidebar { display:flex;flex-direction:column;gap:24px; }
-  .cta-card { background:white;border-radius:24px;padding:36px 28px;box-shadow:0 8px 40px rgba(0,105,120,.14);border:1px solid rgba(0,151,167,.10);text-align:center; }
-  .cta-card-emoji { font-size:2.5rem;margin-bottom:12px; }
-  .cta-card h4 { font-family:'Playfair Display',serif;font-size:1.3rem;color:var(--text);margin-bottom:8px; }
-  .cta-card p { font-size:.88rem;color:var(--text-muted);margin-bottom:24px;line-height:1.6; }
-  .cta-card .btn-primary { width:100%;justify-content:center; }
-  .back-link { display:inline-flex;align-items:center;gap:8px;color:var(--teal);font-weight:600;font-size:.9rem;transition:.3s; }
-  .back-link:hover { color:var(--teal-dark); }
+    body:has(a:hover) #cursor-dot,
+    body:has(button:hover) #cursor-dot {
+      background: white;
+      transform: translate(-50%, -50%) scale(2);
+    }
 
-  /* OUTROS PASSEIOS */
-  .outros-section { background:var(--off-white);padding:80px 5%; }
-  .outros-grid { max-width:1100px;margin:32px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:20px; }
-  @media(max-width:768px) { .outros-grid { grid-template-columns:1fr; } }
-  .outro-card { border-radius:18px;overflow:hidden;position:relative;height:220px;cursor:pointer; }
-  .outro-card img { width:100%;height:100%;object-fit:cover;transition:transform .5s ease; }
-  .outro-card:hover img { transform:scale(1.06); }
-  .outro-overlay { position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(0,40,50,.88));display:flex;flex-direction:column;justify-content:flex-end;padding:20px;color:white; }
-  .outro-overlay h4 { font-family:'Playfair Display',serif;font-size:1.1rem;margin-bottom:4px; }
-  .outro-overlay a { font-size:.8rem;color:var(--amber-light);font-weight:600; }
+    body:has(a:hover) #cursor-ring,
+    body:has(button:hover) #cursor-ring {
+      border-color: white;
+      transform: translate(-50%, -50%) scale(1.6);
+    }
+
+    /* NAV LOGO */
+    .nav-logo-img {
+      height: 46px;
+      border-radius: 8px;
+      display: block;
+    }
+
+    /* HERO */
+    .ph {
+      min-height: 68vh;
+      background: linear-gradient(155deg, var(--teal-deeper) 0%, var(--teal) 55%, #00bcd4 100%);
+      display: flex;
+      align-items: center;
+      padding: 110px 5% 70px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ph::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("foto/carneiro2.JPEG") center/cover no-repeat;
+      opacity: .15;
+      z-index: 0;
+    }
+
+    .ph::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(90deg, rgba(0, 77, 92, .85) 0%, rgba(0, 77, 92, .4) 60%, transparent 100%);
+      z-index: 0;
+    }
+
+    .phc {
+      position: relative;
+      z-index: 1;
+      max-width: 700px;
+    }
+
+    .ph-emoji {
+      font-size: 3rem;
+      margin-bottom: 14px;
+      display: block;
+    }
+
+    .ph h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 5vw, 3.8rem);
+      color: white;
+      line-height: 1.1;
+      margin-bottom: 14px;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, .25);
+    }
+
+    .ph h1 span {
+      color: var(--amber-light);
+      font-style: italic;
+    }
+
+    .ph-sub {
+      color: rgba(255, 255, 255, .82);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 520px;
+      margin-bottom: 28px;
+    }
+
+    .ph-badges {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .ph-badge {
+      background: rgba(255, 255, 255, .12);
+      border: 1px solid rgba(255, 255, 255, .22);
+      color: white;
+      padding: 7px 16px;
+      border-radius: 50px;
+      font-size: .8rem;
+      font-weight: 600;
+      backdrop-filter: blur(6px);
+    }
+
+    /* WAVE */
+    .pwav {
+      line-height: 0;
+      background: linear-gradient(155deg, var(--teal-deeper), var(--teal) 60%, #00bcd4);
+    }
+
+    .pwav svg {
+      width: 100%;
+      display: block;
+    }
+
+    /* LAYOUT */
+    .pbody {
+      max-width: 1160px;
+      margin: 0 auto;
+      padding: 70px 5%;
+      display: grid;
+      grid-template-columns: 1fr 360px;
+      gap: 56px;
+      align-items: start;
+    }
+
+    @media(max-width:940px) {
+      .pbody {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+    }
+
+    /* ═══ CARROSSEL ═══ */
+    .pcwrap {
+      position: relative;
+      margin-bottom: 48px;
+    }
+
+    .pclabel {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 14px;
+    }
+
+    .pclabel::before {
+      content: '';
+      width: 24px;
+      height: 2px;
+      background: var(--amber);
+      border-radius: 1px;
+      display: block;
+    }
+
+    /* Moldura com borda gradiente */
+    .pcframe {
+      position: relative;
+      padding: 8px;
+      background: linear-gradient(135deg, var(--amber) 0%, var(--teal) 50%, var(--amber-light) 100%);
+      border-radius: 28px;
+      box-shadow: 0 24px 64px rgba(0, 105, 120, .22), 0 0 0 1px rgba(255, 255, 255, .06);
+    }
+
+    /* Enfeites de canto */
+    .pcframe::before,
+    .pcframe::after {
+      content: '✦';
+      position: absolute;
+      font-size: 1rem;
+      color: var(--amber);
+      z-index: 10;
+      line-height: 1;
+    }
+
+    .pcframe::before {
+      top: -11px;
+      left: 22px;
+    }
+
+    .pcframe::after {
+      bottom: -11px;
+      right: 22px;
+      color: var(--amber-light);
+    }
+
+    .pc {
+      position: relative;
+      border-radius: 22px;
+      overflow: hidden;
+      background: var(--teal-deeper);
+      aspect-ratio: 4/3;
+    }
+
+    .pctrack {
+      display: flex;
+      height: 100%;
+      transition: transform .65s cubic-bezier(.4, 0, .2, 1);
+      will-change: transform;
+    }
+
+    .pcs {
+      flex: 0 0 100%;
+      min-width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
+    .pcs img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      transition: transform .7s ease;
+    }
+
+    .pcs:hover img {
+      transform: scale(1.04);
+    }
+
+    /* Setas */
+    .pcprev,
+    .pcnext {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: none;
+      background: rgba(0, 0, 0, .42);
+      color: white;
+      font-size: 1.1rem;
+      cursor: pointer;
+      z-index: 5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .25s, transform .25s;
+      backdrop-filter: blur(8px);
+    }
+
+    .pcprev {
+      left: 14px;
+    }
+
+    .pcnext {
+      right: 14px;
+    }
+
+    .pcprev:hover,
+    .pcnext:hover {
+      background: var(--amber);
+      color: var(--text);
+      transform: translateY(-50%) scale(1.1);
+    }
+
+    /* Contador */
+    .pccount {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: rgba(0, 0, 0, .45);
+      backdrop-filter: blur(8px);
+      color: white;
+      font-size: .75rem;
+      font-weight: 700;
+      padding: 5px 12px;
+      border-radius: 50px;
+      z-index: 5;
+      letter-spacing: .06em;
+    }
+
+    /* Caption hover */
+    .pccap {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 40px 20px 16px;
+      background: linear-gradient(transparent, rgba(0, 20, 30, .75));
+      color: white;
+      font-size: .82rem;
+      font-weight: 600;
+      opacity: 0;
+      transition: opacity .3s;
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    .pc:hover .pccap {
+      opacity: 1;
+    }
+
+    /* Dots */
+    .pcdots {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 7px;
+      margin-top: 16px;
+    }
+
+    .pcd {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: rgba(0, 105, 120, .25);
+      border: none;
+      cursor: pointer;
+      transition: all .3s;
+      padding: 0;
+    }
+
+    .pcd.active {
+      background: var(--amber);
+      width: 26px;
+      border-radius: 5px;
+    }
+
+    .pcd:hover {
+      background: var(--teal);
+    }
+
+    /* CONTEÚDO */
+    .pdesc {
+      font-size: 1rem;
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 36px;
+    }
+
+    .pdesc p+p {
+      margin-top: 16px;
+    }
+
+    .pinc {
+      background: var(--off-white);
+      border-radius: 20px;
+      padding: 32px 28px;
+      margin-bottom: 24px;
+      border: 1px solid rgba(0, 151, 167, .10);
+    }
+
+    .pinc h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--text);
+      margin-bottom: 18px;
+    }
+
+    .pinc ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .pinc li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: .92rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    .ii {
+      color: var(--teal);
+      font-weight: 800;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    .ptips {
+      background: linear-gradient(135deg, var(--teal-deeper), var(--teal));
+      border-radius: 20px;
+      padding: 32px 28px;
+      color: white;
+    }
+
+    .ptips h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      margin-bottom: 16px;
+    }
+
+    .ptips ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .ptips li {
+      font-size: .9rem;
+      color: rgba(255, 255, 255, .85);
+      line-height: 1.55;
+    }
+
+    /* SIDEBAR */
+    .psidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .ctacard {
+      background: white;
+      border-radius: 24px;
+      padding: 34px 26px;
+      box-shadow: 0 8px 40px rgba(0, 105, 120, .13);
+      border: 1px solid rgba(0, 151, 167, .10);
+      text-align: center;
+    }
+
+    .ctacard-em {
+      font-size: 2.4rem;
+      margin-bottom: 10px;
+    }
+
+    .ctacard h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .ctacard p {
+      font-size: .87rem;
+      color: var(--text-muted);
+      margin-bottom: 22px;
+      line-height: 1.6;
+    }
+
+    .ctacard .btn-primary {
+      width: 100%;
+      justify-content: center;
+    }
+
+    /* Mascote placeholder — pronto para receber imagem */
+    .mascote-box {
+      background: var(--off-white);
+      border-radius: 20px;
+      border: 2px dashed rgba(0, 151, 167, .30);
+      padding: 28px 20px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .mascote-img-wrap {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 6px 24px rgba(0, 105, 120, .25);
+    }
+
+    /* ↓↓↓ QUANDO TIVER A FOTO DO MASCOTE:
+     Coloque <img src="foto/mascote.png" ...> dentro de .mascote-img-wrap
+     e remova o span .mascote-ph abaixo */
+    .mascote-ph {
+      font-size: 4rem;
+      line-height: 1;
+    }
+
+    .mascote-box p {
+      font-size: .84rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+      font-style: italic;
+    }
+
+    .mascote-box strong {
+      color: var(--teal);
+      font-style: normal;
+    }
+
+    .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--teal);
+      font-weight: 600;
+      font-size: .88rem;
+      transition: .3s;
+    }
+
+    .back-link:hover {
+      color: var(--teal-dark);
+    }
+
+    /* OUTROS */
+    .outros-sec {
+      background: var(--off-white);
+      padding: 80px 5%;
+    }
+
+    .outros-hd {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .outros-grid {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    @media(max-width:768px) {
+      .outros-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .outro-card {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      height: 230px;
+      cursor: pointer;
+    }
+
+    .outro-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform .5s;
+      display: block;
+    }
+
+    .outro-card:hover img {
+      transform: scale(1.07);
+    }
+
+    .outro-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 35%, rgba(0, 40, 50, .90));
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 22px;
+      color: white;
+    }
+
+    .outro-overlay h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      margin-bottom: 5px;
+    }
+
+    .outro-overlay a {
+      font-size: .8rem;
+      color: var(--amber-light);
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .outro-overlay a:hover {
+      color: white;
+    }
+
+    /* FOOTER LOGO */
+    .fl-wrap {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .fl-wrap img {
+      height: 42px;
+      border-radius: 7px;
+    }
+
+    @media(max-width:600px) {
+      .ph {
+        padding: 100px 5% 60px;
+      }
+
+      .pcprev,
+      .pcnext {
+        width: 36px;
+        height: 36px;
+        font-size: .9rem;
+      }
+    }
   </style>
 </head>
+
 <body>
-<div id="cursor-dot"></div>
-<div id="cursor-ring"></div>
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
 
-<!-- NAV -->
-<nav id="nav">
-  <a class="nav-logo nav-logo-text" href="index.html"><span class="logo-uai">Uai</span><span class="logo-turismo"> Turismo</span></a>
-  <button class="nav-toggle" id="navToggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
-  <ul id="navMenu">
-    <li><a href="index.html#hero">Início</a></li>
-    <li><a href="index.html#destinos">Destinos</a></li>
-    <li><a href="index.html#galeria">Galeria</a></li>
-    <li><a href="index.html#avaliacoes">Avaliações</a></li>
-    <li><a href="index.html#faq">Dúvidas</a></li>
-    <li><a href="https://wa.me/5581997484915" class="nav-cta" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>Solicitar Orçamento</a></li>
-  </ul>
-</nav>
+  <!-- NAV -->
+  <nav id="nav">
+    <a class="nav-logo" href="index.html">
+      <img src="foto/logoo.png" alt="Uai Turismo" class="nav-logo-img">
+    </a>
+    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+    <ul id="navMenu">
+      <li><a href="index.html#hero">Início</a></li>
+      <li><a href="index.html#destinos">Destinos</a></li>
+      <li><a href="index.html#galeria">Galeria</a></li>
+      <li><a href="index.html#avaliacoes">Avaliações</a></li>
+      <li><a href="index.html#faq">Dúvidas</a></li>
+      <li><a href="https://wa.me/5581997484915" class="nav-cta" target="_blank"><svg width="16" height="16"
+            viewBox="0 0 24 24" fill="currentColor">
+            <path
+              d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+          </svg> Solicitar Orçamento</a></li>
+    </ul>
+  </nav>
 
-<!-- HERO -->
-<section class="passeio-hero">
-  <div class="passeio-hero-content">
-    <span class="passeio-hero-emoji">⛵</span>
-    <h1>Praia dos Carneiros<br><span>a Igrejinha e o mar esmeralda de Pernambuco</span></h1>
-    <p class="passeio-hero-sub"><p>A Praia dos Carneiros é um dos cenários mais fotogênicos do Nordeste. Localizada entre coqueiros, água esmeralda e areia fina, ela abriga a famosa Igrejinha de São Benedito — um...</p>
-    <div class="passeio-hero-badges">
-      <span class="passeio-badge">📸 Fotos de cortesia inclusas</span>
-      <span class="passeio-badge">🚐 Transporte incluso</span>
-      <span class="passeio-badge">🤝 Compartilhado ou Privativo</span>
-    </div>
-  </div>
-</section>
-
-<div class="p-wave"><svg viewBox="0 0 1440 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,24 C360,48 1080,0 1440,24 L1440,48 L0,48 Z" fill="#f4f8f7"/></svg></div>
-
-<!-- CORPO -->
-<div style="background:var(--off-white);padding:0 0 80px;">
-  <div class="passeio-body">
-    <!-- Coluna esquerda -->
-    <div>
-      <div class="passeio-img" style="margin-bottom:40px;">
-        <img src="foto/carneiro2.JPEG" alt="Praia dos Carneiros">
-      </div>
-      <div class="passeio-desc">
-        <p>A Praia dos Carneiros é um dos cenários mais fotogênicos do Nordeste. Localizada entre coqueiros, água esmeralda e areia fina, ela abriga a famosa Igrejinha de São Benedito — uma das imagens mais icônicas do litoral pernambucano.</p><p>O passeio inclui um agradável trajeto de barco pelo Rio Formoso, chegando em pontos paradisíacos que poucos turistas conhecem a fundo.</p><p>Com a Uai Turismo, você tem um guia dedicado que apresenta cada cantinho com cuidado e entusiasmo, tornando sua experiência verdadeiramente especial.</p>
-      </div>
-      <div class="passeio-includes">
-        <h3>✅ O que está incluso</h3>
-        <ul><li><span class="inc-icon">✓</span>Transporte de ida e volta</li>
-<li><span class="inc-icon">✓</span>Fotos de cortesia</li>
-<li><span class="inc-icon">✓</span>Guia capacitado</li>
-<li><span class="inc-icon">✓</span>Passeio de barco pelo Rio Formoso</li></ul>
-      </div>
-      <div class="passeio-tips" style="margin-top:0;">
-        <h3>💡 Dicas do roteiro</h3>
-        <ul><li>🔹 A ida de barco é parte da experiência — aproveite!</li>
-<li>🔹 Reserve uma mesa em um dos restaurantes à beira do rio</li>
-<li>🔹 Leve câmera — os cenários são cinematográficos</li>
-<li>🔹 Horários variáveis conforme a maré: confirme ao reservar</li></ul>
+  <!-- HERO -->
+  <section class="ph">
+    <div class="phc">
+      <span class="ph-emoji">⛵</span>
+      <h1>Praia dos Carneiros<br><span>a Igrejinha e o mar esmeralda de Pernambuco</span></h1>
+      <p class="ph-sub">A Praia dos Carneiros é um dos cenários mais fotogênicos do Nordeste. Entre coqueiros, água
+        esmeralda e areia fina, ela abriga a famosa Igrejinha de São Benedito....</p>
+      <div class="ph-badges">
+        <span class="ph-badge">📸 Fotos de cortesia inclusas</span>
+        <span class="ph-badge">🚐 Transporte incluso</span>
+        <span class="ph-badge">🤝 Compartilhado ou Privativo</span>
       </div>
     </div>
-    <!-- Sidebar -->
-    <div class="passeio-sidebar">
-      <div class="cta-card">
-        <div class="cta-card-emoji">🌊</div>
-        <h4>Garanta sua vaga!</h4>
-        <p>Vagas limitadas. Entre em contato pelo WhatsApp e reserve seu passeio agora com segurança.</p>
-        <a href="https://wa.me/5581997484915?text=Ol%C3%A1%21+Tenho+interesse+no+passeio+carneiros." class="btn-primary" target="_blank">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-          Reservar no WhatsApp
-        </a>
+  </section>
+
+  <div class="pwav"><svg viewBox="0 0 1440 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+      <path d="M0,24 C360,48 1080,0 1440,24 L1440,48 L0,48 Z" fill="#f4f8f7" />
+    </svg></div>
+
+  <!-- CORPO -->
+  <div style="background:var(--off-white);padding-bottom:80px;">
+    <div class="pbody">
+
+      <!-- Coluna principal -->
+      <div>
+
+        <!-- CARROSSEL -->
+        <div class="pcwrap">
+          <p class="pclabel">Galeria de fotos</p>
+          <div class="pcframe">
+            <div class="pc" id="pc-carneiros">
+              <div class="pctrack" id="pct-carneiros">
+                <div class="pcs">
+                  <img src="foto/carneiro2.JPEG" alt="Praia dos Carneiros foto 1" loading="lazy">
+                </div>
+                <div class="pcs">
+                  <img src="foto/carneiros.jpeg" alt="Praia dos Carneiros foto 2" loading="lazy">
+                </div>
+                <div class="pcs">
+                  <img src="foto/carneiro3.jpg" alt="Praia dos Carneiros foto 3" loading="lazy">
+                </div>
+                <div class="pcs">
+                  <img src="foto/carneiro4.jpg" alt="Praia dos Carneiros foto 4" loading="lazy">
+                </div>
+                <div class="pcs">
+                  <img src="foto/carneiro5.jpg" alt="Praia dos Carneiros foto 5" loading="lazy">
+                </div>
+              </div>
+              <button class="pcprev" id="pcp-carneiros" aria-label="Anterior">&#8592;</button>
+              <button class="pcnext" id="pcn-carneiros" aria-label="Próxima">&#8594;</button>
+              <div class="pccount" id="pcc-carneiros">1 / 5</div>
+              <div class="pccap">📍 Praia dos Carneiros</div>
+            </div>
+          </div>
+          <div class="pcdots" id="pcd-carneiros"><button class="pcd active" data-i="0"
+              aria-label="Foto 1"></button><button class="pcd" data-i="1" aria-label="Foto 2"></button><button
+              class="pcd" data-i="2" aria-label="Foto 3"></button><button class="pcd" data-i="3"
+              aria-label="Foto 4"></button><button class="pcd" data-i="4" aria-label="Foto 5"></button></div>
+        </div>
+
+        <!-- DESC -->
+        <div class="pdesc">
+          <p>A Praia dos Carneiros é um dos cenários mais fotogênicos do Nordeste. Entre coqueiros, água esmeralda e
+            areia fina, ela abriga a famosa Igrejinha de São Benedito.</p>
+          <p>O passeio inclui um agradável trajeto de barco pelo Rio Formoso, chegando a pontos paradisíacos que poucos
+            turistas conhecem. O caminho de ida já é parte da experiência.</p>
+          <p>Com a Uai Turismo você tem um guia dedicado que apresenta cada cantinho com cuidado — em passeio
+            compartilhado ou privativo.</p>
+        </div>
+
+        <!-- INCLUSO -->
+        <div class="pinc">
+          <h3>✅ O que está incluso</h3>
+          <ul>
+            <li><span class="ii">✓</span>Transporte de ida e volta (buscamos no local de hospedagem)</li>
+            <li><span class="ii">✓</span>Fotos de cortesia 📸 (enviadas após o passeio)</li>
+            <li><span class="ii">✓</span>Guiamento completo com orientações durante o trajeto e no destino</li>
+            <li><span class="ii">✨</span>Lancha — embarcação inclusa no passeio</li>
+            <li><span class="ii">✓</span>Tempo livre para almoço à beira-mar e curtir a praia</li>
+          </ul>
+        </div>
+
+        <!-- DICAS -->
+        <div class="ptips">
+          <h3>💡 Dicas do roteiro</h3>
+          <ul>
+            <li>🔹 A ida de barco é parte da experiência — aproveite!</li>
+            <li>🔹 Reserve mesa em um dos restaurantes à beira do rio</li>
+            <li>🔹 Leve câmera — os cenários são cinematográficos</li>
+            <li>🔹 Horários variáveis conforme a maré: confirme ao reservar</li>
+          </ul>
+        </div>
       </div>
-      <a href="index.html#destinos" class="back-link">← Ver todos os destinos</a>
+
+      <!-- SIDEBAR -->
+      <div class="psidebar">
+
+        <div class="ctacard">
+          <div class="ctacard-em">🌊</div>
+          <h4>Garanta sua vaga!</h4>
+          <p>Vagas limitadas. Fale com a gente no WhatsApp e reserve com segurança agora mesmo.</p>
+          <a href="https://wa.me/5581997484915?text=Ol%C3%A1%21+Tenho+interesse+no+passeio+da+Praia+dos+Carneiros."
+            class="btn-primary" target="_blank">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+              <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+            </svg> Reservar no WhatsApp
+          </a>
+        </div>
+
+        <!-- MASCOTE — pronto para receber foto -->
+        <div class="mascote-box">
+          <div class="mascote-img-wrap">
+            <!--
+            📌 SUBSTITUA QUANDO TIVER A FOTO:
+            <img src="foto/mascote.png" alt="Mascote Uai Turismo" style="width:100%;height:100%;object-fit:cover;">
+          -->
+            <span class="mascote-ph">🐢</span>
+          </div>
+          <p><strong>Oi! Sou o mascote da Uai Turismo.</strong><br>
+            Estou aqui para te ajudar a escolher o passeio perfeito!</p>
+        </div>
+
+        <a href="index.html#destinos" class="back-link">← Ver todos os destinos</a>
+      </div>
+
     </div>
   </div>
-</div>
 
-<!-- OUTROS PASSEIOS -->
-<div class="outros-section">
-  <div style="text-align:center;">
-    <p class="section-label">Conheça também</p>
-    <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--text)">Outros <span style="color:var(--teal);font-style:italic">Roteiros</span></h2>
+  <!-- OUTROS ROTEIROS -->
+  <div class="outros-sec">
+    <div class="outros-hd">
+      <p class="section-label">Conheça também</p>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--text)">Outros <span
+          style="color:var(--teal);font-style:italic">Roteiros</span></h2>
+    </div>
+    <div class="outros-grid">
+      <div class="outro-card">
+        <img src="foto/praia-de-porto-de-galinhas.jpg" alt="Porto de Galinhas – PE">
+        <div class="outro-overlay">
+          <h4>Porto de Galinhas – PE</h4>
+          <a href="passeio-porto-de-galinhas.html">Ver passeio →</a>
+        </div>
+      </div>
+      <div class="outro-card">
+        <img src="foto/2.2.jpeg" alt="Maragogi – AL">
+        <div class="outro-overlay">
+          <h4>Maragogi – AL</h4>
+          <a href="passeio-maragogi.html">Ver passeio →</a>
+        </div>
+      </div>
+      <div class="outro-card">
+        <img src="foto/milagres.jpg" alt="São Miguel dos Milagres – AL">
+        <div class="outro-overlay">
+          <h4>São Miguel dos Milagres – AL</h4>
+          <a href="passeio-milagres.html">Ver passeio →</a>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="outros-grid">
-    <div class="outro-card"><img src="foto/2.2.jpeg" alt="Maragogi"><div class="outro-overlay"><h4>Maragogi – AL</h4><a href="passeio-maragogi.html">Ver passeio →</a></div></div>
-    <div class="outro-card"><img src="foto/carneiro2.JPEG" alt="Carneiros"><div class="outro-overlay"><h4>Praia dos Carneiros – PE</h4><a href="passeio-carneiros.html">Ver passeio →</a></div></div>
-    <div class="outro-card"><img src="foto/milagres.jpg" alt="Milagres"><div class="outro-overlay"><h4>São Miguel dos Milagres – AL</h4><a href="passeio-milagres.html">Ver passeio →</a></div></div>
-  </div>
-</div>
 
-<!-- FOOTER -->
-<footer class="main-footer">
-  <div class="footer-inner">
-    <div class="footer-brand"><div class="footer-logo-text"><span class="logo-uai" style="color:var(--amber-light);font-family:'Playfair Display',serif;font-weight:900;font-style:italic;font-size:1.4rem;">Uai</span><span style="color:rgba(255,255,255,.85);font-family:'Playfair Display',serif;font-weight:700;font-size:1rem;"> Turismo</span></div><p>Seu turismo no lugar certo.</p></div>
-    <div class="footer-links"><h5>Navegação</h5><a href="index.html">Início</a><a href="index.html#destinos">Destinos</a><a href="index.html#galeria">Galeria</a><a href="index.html#faq">Dúvidas</a></div>
-    <div class="footer-contact"><h5>Contato</h5><a href="https://wa.me/5581997484915" target="_blank">📱 (81) 99748-4915</a><p>📍 Porto de Galinhas, PE</p><p>CNPJ: 54.181.357/0001-42</p></div>
-  </div>
-  <div class="footer-bottom"><p>© 2025 Uai Turismo. Todos os direitos reservados.</p></div>
-</footer>
+  <!-- FOOTER -->
+  <footer class="main-footer">
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <div class="fl-wrap">
+          <img src="foto/logoo.png" alt="Uai Turismo">
+        </div>
+        <p>Seu turismo no lugar certo.</p>
+      </div>
+      <div class="footer-links">
+        <h5>Navegação</h5><a href="index.html">Início</a><a href="index.html#destinos">Destinos</a><a
+          href="index.html#galeria">Galeria</a><a href="index.html#faq">Dúvidas</a>
+      </div>
+      <div class="footer-contact">
+        <h5>Contato</h5><a href="https://wa.me/5581997484915" target="_blank">📱 (81) 99748-4915</a>
+        <p>📍 Porto de Galinhas, PE</p>
+        <p>CNPJ: 54.181.357/0001-42</p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Uai Turismo. Todos os direitos reservados. &nbsp;|&nbsp; <a href="politica-de-privacidade.html"
+          style="color:rgba(255,255,255,.55);transition:color .3s" onmouseover="this.style.color='#FFD166'"
+          onmouseout="this.style.color='rgba(255,255,255,.55)'">Política de Privacidade</a></p>
+    </div>
+  </footer>
 
-<a href="https://wa.me/5581997484915" class="whatsapp-float" target="_blank" aria-label="WhatsApp"><svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg></a>
+  <a href="https://wa.me/5581997484915" class="whatsapp-float" target="_blank" aria-label="WhatsApp"><svg width="28"
+      height="28" viewBox="0 0 24 24" fill="currentColor">
+      <path
+        d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+    </svg></a>
 
-<script>
-const dot=document.getElementById('cursor-dot'),ring=document.getElementById('cursor-ring');
-if(window.matchMedia('(pointer: fine)').matches){document.addEventListener('mousemove',e=>{dot.style.left=e.clientX+'px';dot.style.top=e.clientY+'px';ring.style.left=e.clientX+'px';ring.style.top=e.clientY+'px';});}
-// Nav scroll
-const nav=document.getElementById('nav');window.addEventListener('scroll',()=>nav.classList.toggle('scrolled',window.scrollY>60),{passive:true});
-// Nav mobile
-const navToggle=document.getElementById('navToggle'),navMenu=document.getElementById('navMenu');
-navToggle.addEventListener('click',()=>{const o=navMenu.classList.toggle('open');navToggle.classList.toggle('open',o);document.body.style.overflow=o?'hidden':'';}); 
-navMenu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{navMenu.classList.remove('open');navToggle.classList.remove('open');document.body.style.overflow='';})  );
-</script>
+  <script>
+    /* Cursor */
+    const dot = document.getElementById('cursor-dot'), ring = document.getElementById('cursor-ring');
+    if (window.matchMedia('(pointer: fine)').matches) { document.addEventListener('mousemove', e => { dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px'; ring.style.left = e.clientX + 'px'; ring.style.top = e.clientY + 'px'; }); }
+    /* Nav */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+    const nt = document.getElementById('navToggle'), nm = document.getElementById('navMenu');
+    nt.addEventListener('click', () => { const o = nm.classList.toggle('open'); nt.classList.toggle('open', o); document.body.style.overflow = o ? 'hidden' : ''; });
+    nm.querySelectorAll('a').forEach(a => a.addEventListener('click', () => { nm.classList.remove('open'); nt.classList.remove('open'); document.body.style.overflow = ''; }));
+
+    /* Carrossel */
+    (function () {
+      const track = document.getElementById('pct-carneiros');
+      const dotsW = document.getElementById('pcd-carneiros');
+      const count = document.getElementById('pcc-carneiros');
+      const prev = document.getElementById('pcp-carneiros');
+      const next = document.getElementById('pcn-carneiros');
+      const dots = dotsW ? dotsW.querySelectorAll('.pcd') : [];
+      const total = 5;
+      if (!track) return;
+      let cur = 0, timer;
+
+      function goTo(i) {
+        if (dots[cur]) dots[cur].classList.remove('active');
+        cur = (i + total) % total;
+        track.style.transform = 'translateX(-' + (cur * 100) + '%)';
+        if (dots[cur]) dots[cur].classList.add('active');
+        if (count) count.textContent = (cur + 1) + ' / ' + total;
+        reset();
+      }
+      function reset() { clearInterval(timer); timer = setInterval(() => goTo(cur + 1), 4200); }
+
+      if (prev) prev.addEventListener('click', () => goTo(cur - 1));
+      if (next) next.addEventListener('click', () => goTo(cur + 1));
+      dots.forEach((d, i) => d.addEventListener('click', () => goTo(i)));
+
+      let tx = 0;
+      track.addEventListener('touchstart', e => { tx = e.touches[0].clientX; }, { passive: true });
+      track.addEventListener('touchend', e => { const d = tx - e.changedTouches[0].clientX; if (Math.abs(d) > 40) goTo(d > 0 ? cur + 1 : cur - 1); });
+
+      const pcEl = document.getElementById('pc-carneiros');
+      if (pcEl) { pcEl.addEventListener('mouseenter', () => clearInterval(timer)); pcEl.addEventListener('mouseleave', reset); }
+
+      reset();
+    })();
+  </script>
 </body>
+
 </html>
