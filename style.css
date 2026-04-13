@@ -933,17 +933,28 @@ a {
   #navMenu {
     display: none;
     position: fixed;
-    inset: 0;
-    top: 70px;
+    top: 64px;
+    left: 0;
+    right: 0;
+    bottom: 0;
     background: var(--teal-deeper);
     flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 28px;
+    z-index: 998;
+    overflow-y: auto;
+    padding: 24px 0;
   }
 
   #navMenu.open {
     display: flex;
+  }
+
+  #navMenu a {
+    color: white !important;
+    font-size: 1.1rem;
+    font-weight: 600;
   }
 
   .hero-content {

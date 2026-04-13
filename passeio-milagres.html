@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -93,7 +93,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: url("foto/milagres.jpg") center/cover no-repeat;
+      background: url("foto/milagres/IMG_0303.jpg") center/cover no-repeat;
       opacity: .15;
       z-index: 0;
     }
@@ -716,31 +716,24 @@
             <div class="pc" id="pc-milagres">
               <div class="pctrack" id="pct-milagres">
                 <div class="pcs">
-                  <img src="foto/milagres.jpg" alt="São Miguel dos Milagres foto 1" loading="lazy">
+                  <img src="foto/milagres/IMG_0303.jpg" alt="São Miguel dos Milagres foto 1" loading="lazy">
                 </div>
                 <div class="pcs">
-                  <img src="foto/milagres2.jpg" alt="São Miguel dos Milagres foto 2" loading="lazy">
+                  <img src="foto/milagres/IMG_0997.jpg" alt="São Miguel dos Milagres foto 2" loading="lazy">
                 </div>
                 <div class="pcs">
-                  <img src="foto/milagres3.jpg" alt="São Miguel dos Milagres foto 3" loading="lazy">
-                </div>
-                <div class="pcs">
-                  <img src="foto/milagres4.jpg" alt="São Miguel dos Milagres foto 4" loading="lazy">
-                </div>
-                <div class="pcs">
-                  <img src="foto/milagres5.jpg" alt="São Miguel dos Milagres foto 5" loading="lazy">
+                  <img src="foto/milagres/IMG_2773.jpg" alt="São Miguel dos Milagres foto 3" loading="lazy">
                 </div>
               </div>
               <button class="pcprev" id="pcp-milagres" aria-label="Anterior">&#8592;</button>
               <button class="pcnext" id="pcn-milagres" aria-label="Próxima">&#8594;</button>
-              <div class="pccount" id="pcc-milagres">1 / 5</div>
+              <div class="pccount" id="pcc-milagres">1 / 3</div>
               <div class="pccap">📍 São Miguel dos Milagres</div>
             </div>
           </div>
           <div class="pcdots" id="pcd-milagres"><button class="pcd active" data-i="0"
               aria-label="Foto 1"></button><button class="pcd" data-i="1" aria-label="Foto 2"></button><button
-              class="pcd" data-i="2" aria-label="Foto 3"></button><button class="pcd" data-i="3"
-              aria-label="Foto 4"></button><button class="pcd" data-i="4" aria-label="Foto 5"></button></div>
+              class="pcd" data-i="2" aria-label="Foto 3"></button></div>
         </div>
 
         <!-- DESC -->
@@ -785,7 +778,7 @@
           <div class="ctacard-em">🌊</div>
           <h4>Garanta sua vaga!</h4>
           <p>Vagas limitadas. Fale com a gente no WhatsApp e reserve com segurança agora mesmo.</p>
-          <a href="https://wa.me/5581997484915?text=Ol%C3%A1%21+Tenho+interesse+no+passeio+de+S%C3%A3o+Miguel+dos+Milagres."
+          <a href="https://wa.me/5581997484915?text=Ol%C3%A1%20pessoal%20da%20Uai!%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais!"
             class="btn-primary" target="_blank">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
               <path
@@ -794,17 +787,9 @@
           </a>
         </div>
 
-        <!-- MASCOTE — pronto para receber foto -->
         <div class="mascote-box">
-          <div class="mascote-img-wrap">
-            <!--
-            📌 SUBSTITUA QUANDO TIVER A FOTO:
-            <img src="foto/mascote.png" alt="Mascote Uai Turismo" style="width:100%;height:100%;object-fit:cover;">
-          -->
-            <span class="mascote-ph">🐢</span>
-          </div>
-          <p><strong>Oi! Sou o mascote da Uai Turismo.</strong><br>
-            Estou aqui para te ajudar a escolher o passeio perfeito!</p>
+          <img src="foto/Mascote UAI.png" alt="Mascote Uai Turismo" style="width:100%;border-radius:16px;display:block;">
+          <p><strong>Dúvidas sobre o passeio?</strong><br>Fale com a gente pelo WhatsApp! 🐊</p>
         </div>
 
         <a href="index.html#destinos" class="back-link">← Ver todos os destinos</a>
@@ -896,7 +881,7 @@
       const prev = document.getElementById('pcp-milagres');
       const next = document.getElementById('pcn-milagres');
       const dots = dotsW ? dotsW.querySelectorAll('.pcd') : [];
-      const total = 5;
+      const total = 3;
       if (!track) return;
       let cur = 0, timer;
 
