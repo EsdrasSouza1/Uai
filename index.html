@@ -662,10 +662,9 @@
     }
 
     @media (max-width: 768px) {
-      /* Esconder por padrão */
+      /* Menu mobile: sempre flex, escondido por visibility/opacity para transição funcionar */
       #navMenu {
-        display: none;
-        /* Cobrir a tela inteira de forma independente da scroll */
+        display: flex !important;
         position: fixed !important;
         top: 0 !important;
         left: 0 !important;
@@ -673,25 +672,24 @@
         bottom: 0 !important;
         width: 100% !important;
         height: 100% !important;
-        /* Z-index acima de absolutamente tudo */
         z-index: 99990 !important;
         background: var(--teal-deeper) !important;
         flex-direction: column !important;
         align-items: center !important;
         justify-content: center !important;
         gap: 8px !important;
-        /* Sem transform no pai para não criar stacking context */
         transform: none !important;
-        /* Transição suave */
+        /* Estado fechado */
         opacity: 0;
         visibility: hidden;
-        transition: opacity 0.3s ease, visibility 0.3s ease;
+        pointer-events: none;
+        transition: opacity 0.35s ease, visibility 0.35s ease;
       }
 
       #navMenu.open {
-        display: flex !important;
         opacity: 1 !important;
         visibility: visible !important;
+        pointer-events: all !important;
       }
 
       /* Links do menu mobile — maiores e espaçados */
@@ -758,8 +756,9 @@
 
     <!-- NAV -->
     <nav id="nav">
-        <a class="nav-logo nav-logo-text" href="#"><span class="logo-uai">Uai</span><span
-                class="logo-turismo">Turismo</span></a>
+        <a class="nav-logo" href="#" style="display:flex;align-items:center;">
+            <img src="foto/logoo.png" alt="Uai Turismo" style="height:70px;border-radius:10px;display:block;filter:drop-shadow(0 2px 8px rgba(0,0,0,.25));">
+        </a>
         <button class="nav-toggle" id="navToggle"
             aria-label="Abrir menu"><span></span><span></span><span></span></button>
         <ul id="navMenu">
@@ -1233,6 +1232,30 @@
 
         // AOS
         AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
+
+        // NAV TOGGLE MOBILE — fix scroll lock
+        (function() {
+            var toggle = document.getElementById('navToggle');
+            var menu = document.getElementById('navMenu');
+            if (!toggle || !menu) return;
+            // Remove any existing listeners by cloning
+            var newToggle = toggle.cloneNode(true);
+            toggle.parentNode.replaceChild(newToggle, toggle);
+            newToggle.addEventListener('click', function() {
+                var isOpen = menu.classList.toggle('open');
+                newToggle.classList.toggle('open', isOpen);
+                newToggle.setAttribute('aria-expanded', isOpen);
+                document.body.style.overflow = isOpen ? 'hidden' : '';
+            });
+            menu.querySelectorAll('a').forEach(function(link) {
+                link.addEventListener('click', function() {
+                    menu.classList.remove('open');
+                    newToggle.classList.remove('open');
+                    newToggle.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                });
+            });
+        })();
 
         // GSAP HERO
         function heroEntrance() { const tl = gsap.timeline({ defaults: { ease: 'power3.out' } }); tl.from('#heroTag', { y: 30, opacity: 0, duration: .7 }).from('#heroTitle', { y: 50, opacity: 0, duration: .9 }, '-=.4').from('#heroP', { y: 30, opacity: 0, duration: .7 }, '-=.5').from('#heroActions', { y: 24, opacity: 0, duration: .6 }, '-=.4').from('#heroBadges', { y: 20, opacity: 0, duration: .6 }, '-=.3').from('#heroRight', { x: 60, opacity: 0, duration: 1 }, '-=.9'); }

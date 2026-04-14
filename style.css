@@ -1406,3 +1406,24 @@ a {
 .nav-toggle {
   z-index: 10001 !important;
 }
+
+/* -- LOGO IMAGEM -- */
+.nav-logo-img {
+    height: 65px;
+    border-radius: 8px;
+    display: block;
+}
+
+@media (max-width: 768px) {
+    .nav-logo-img {
+        height: 52px;
+    }
+}
+
+/* -- FOOTER LOGO IMAGEM -- */
+.footer-logo-img {
+    height: 55px;
+    border-radius: 8px;
+    display: block;
+    margin-bottom: 10px;
+}
