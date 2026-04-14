@@ -645,6 +645,99 @@
         /* (tratado via JS) */
     </style>
 
+
+    <style id="nav-mobile-fix">
+    /* ═══════════════════════════════════════════
+       CORREÇÃO MENU MOBILE — funciona ao rolar
+       ═══════════════════════════════════════════ */
+
+    /* O navMenu precisa de z-index acima de TUDO,
+       incluindo o scroll-progress (2000) e cursor (99999) */
+    #navMenu {
+      /* Desktop: flex normal */
+      display: flex;
+      list-style: none;
+      gap: 4px;
+      align-items: center;
+    }
+
+    @media (max-width: 768px) {
+      /* Esconder por padrão */
+      #navMenu {
+        display: none;
+        /* Cobrir a tela inteira de forma independente da scroll */
+        position: fixed !important;
+        top: 0 !important;
+        left: 0 !important;
+        right: 0 !important;
+        bottom: 0 !important;
+        width: 100% !important;
+        height: 100% !important;
+        /* Z-index acima de absolutamente tudo */
+        z-index: 99990 !important;
+        background: var(--teal-deeper) !important;
+        flex-direction: column !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 8px !important;
+        /* Sem transform no pai para não criar stacking context */
+        transform: none !important;
+        /* Transição suave */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+      }
+
+      #navMenu.open {
+        display: flex !important;
+        opacity: 1 !important;
+        visibility: visible !important;
+      }
+
+      /* Links do menu mobile — maiores e espaçados */
+      #navMenu li {
+        width: 100%;
+        text-align: center;
+      }
+
+      #navMenu li a {
+        display: block;
+        font-size: 1.2rem !important;
+        padding: 14px 24px !important;
+        color: white !important;
+        border-radius: 12px;
+        transition: background 0.2s ease;
+      }
+
+      #navMenu li a:hover {
+        background: rgba(255,255,255,0.10);
+      }
+
+      /* CTA dentro do menu mobile */
+      #navMenu .nav-cta {
+        background: var(--amber) !important;
+        color: var(--text) !important;
+        border-radius: 50px !important;
+        font-weight: 700 !important;
+        margin-top: 8px;
+        display: inline-flex !important;
+        width: auto !important;
+        padding: 12px 28px !important;
+      }
+
+      /* Botão hambúrguer acima do menu aberto */
+      .nav-toggle {
+        z-index: 99995 !important;
+        position: relative;
+      }
+
+      /* Nav bar por cima do menu */
+      #nav {
+        z-index: 99992 !important;
+      }
+    }
+    </style>
+
 </head>
 
 <body>
@@ -677,7 +770,7 @@
             <li><a href="#avaliacoes">Avaliações</a></li>
             <li><a href="#faq">Dúvidas</a></li>
             <li><a href="#cadastur">Cadastur</a></li>
-            <li><a href="https://wa.me/5581997484915?text=Ol%C3%A1%20pessoal%20da%20Uai!%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais!"
+            <li><a href="https://wa.me/5581997484915?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais"
                     class="nav-cta" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                         <path
                             d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
@@ -696,7 +789,7 @@
                     — passeios compartilhados e privativos, com atendimento próximo, personalizado e fotos de cortesia
                     inclusas.</p>
                 <div class="hero-actions" id="heroActions">
-                    <a href="https://wa.me/5581997484915?text=Ol%C3%A1%20pessoal%20da%20Uai!%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais!"
+                    <a href="https://wa.me/5581997484915?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais"
                         class="btn-primary" target="_blank">🌊 Reservar Agora</a>
                     <a href="#destinos" class="btn-ghost">Ver Roteiros ↓</a>
                 </div>
@@ -793,8 +886,7 @@
                         href="passeio-carneiros.html" class="btn-card">Saiba mais →</a>
                 </div>
             </div>
-            <div class="destino-card" data-aos="fade-up" data-aos-delay="300"><img src="foto/2.jpg"
-                    alt="São Miguel dos Milagres">
+            <div class="destino-card" data-aos="fade-up" data-aos-delay="300"><img src="foto/milagres/IMG_0303.jpg" alt="São Miguel dos Milagres">
                 <div class="destino-overlay">
                     <h3>São Miguel dos Milagres</h3>
                     <p>Praias desertas e recifes naturais de tirar o fôlego no litoral alagoano.</p><a
@@ -906,7 +998,7 @@
                 <div class="elfsight-app-4d9f4101-ac82-4d5a-adef-8e7e1bbda3ba" data-elfsight-app-lazy></div>
             </div>
             <div class="gallery-cta-wrap" data-aos="fade-up"><a
-                    href="https://wa.me/5581997484915?text=Ol%C3%A1%20pessoal%20da%20Uai!%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais!"
+                    href="https://wa.me/5581997484915?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais"
                     class="btn-primary" target="_blank">🌊 Quero Viver Isso!</a></div>
         </div>
     </section> <!-- removed testimonials strip -->
@@ -988,8 +1080,7 @@
                             <polyline points="6 9 12 15 18 9" />
                         </svg></button>
                     <div class="faq-answer">
-                        <p>Sim! <strong>Fotos profissionais de cortesia</strong> em todos os passeios, sem custo
-                            adicional.</p>
+                        <p>Sim! As <strong>fotos de cortesia</strong> estão inclusas em todos os passeios, sem custo adicional.</p>
                     </div>
                 </div>
                 <div class="faq-item" data-aos="fade-up"><button class="faq-question" aria-expanded="false">Qual a
@@ -1048,7 +1139,7 @@
                     <span class="faq-cta-emoji">🐢</span>
                     <div class="faq-cta-text"><strong>Tem outra dúvida?</strong><span>Nos chame no WhatsApp, estamos
                             prontos para te ajudar!</span></div>
-                    <a href="https://wa.me/5581997484915?text=Ol%C3%A1%20pessoal%20da%20Uai!%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais!"
+                    <a href="https://wa.me/5581997484915?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais"
                         class="btn-primary" target="_blank"><svg width="18" height="18" viewBox="0 0 24 24"
                             fill="currentColor">
                             <path
@@ -1078,7 +1169,7 @@
                     Brasil, assegurando seus direitos e sua tranquilidade.</p>
                 <div class="cadastur-items">
                 </div>
-                <a href="https://wa.me/5581997484915?text=Ol%C3%A1%20pessoal%20da%20Uai!%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais!"
+                <a href="https://wa.me/5581997484915?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais"
                     class="btn-primary" target="_blank">Fale Conosco no WhatsApp</a>
             </div>
         </div>
@@ -1099,7 +1190,7 @@
             </div>
             <div class="footer-contact">
                 <h5>Contato</h5><a
-                    href="https://wa.me/5581997484915?text=Ol%C3%A1%20pessoal%20da%20Uai!%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais!"
+                    href="https://wa.me/5581997484915?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais"
                     target="_blank">📱 (81) 99748-4915</a>
                 <p>📍 Porto de Galinhas, PE</p>
                 <p>CNPJ: 54.181.357/0001-42</p>
@@ -1112,7 +1203,7 @@
         </div>
     </footer>
 
-    <a href="https://wa.me/5581997484915?text=Ol%C3%A1%20pessoal%20da%20Uai!%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais!"
+    <a href="https://wa.me/5581997484915?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais"
         class="whatsapp-float" target="_blank" aria-label="WhatsApp"><svg width="28" height="28" viewBox="0 0 24 24"
             fill="currentColor">
             <path
@@ -1138,7 +1229,7 @@
         window.addEventListener('scroll', () => { pb.style.transform = `scaleX(${window.scrollY / (document.body.scrollHeight - window.innerHeight)})`; }, { passive: true });
 
         // LENIS
-        try { const lenis = new Lenis({ lerp: .08, smooth: true }); function raf(t) { lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf); lenis.on('scroll', ScrollTrigger.update); gsap.ticker.add(t => { lenis.raf(t * 1000); }); gsap.ticker.lagSmoothing(0); } catch (e) { }
+        try { window._lenis = new Lenis({ lerp: .08, smooth: true }); function raf(t) { window._lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf); window._lenis.on('scroll', ScrollTrigger.update); gsap.ticker.add(t => { window._lenis.raf(t * 1000); }); gsap.ticker.lagSmoothing(0); } catch (e) { }
 
         // AOS
         AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });

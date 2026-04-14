@@ -1243,46 +1243,54 @@ a {
 
 /* 1. Garanta que a seção pai (onde o grid está) tenha um contexto de empilhamento limpo */
 #avaliacoes {
-    position: relative; /* Mantém o contexto de animações interno */
-    z-index: 1; /* Força um nível base */
-    overflow: hidden; /* Importante para conter elementos flutuantes de animação */
-    padding-bottom: 80px; /* Dá um respiro para a próxima seção */
+  position: relative;
+  /* Mantém o contexto de animações interno */
+  z-index: 1;
+  /* Força um nível base */
+  overflow: hidden;
+  /* Importante para conter elementos flutuantes de animação */
+  padding-bottom: 80px;
+  /* Dá um respiro para a próxima seção */
 }
 
 /* 2. Ajuste o Grid para garantir fluxo e evitar sobreposição */
 .avaliacoes-grid {
-    display: grid;
-    /* Altere de minmax fixo para repeat(auto-fit) para responsividade real */
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
-    gap: 30px;
-    max-width: 1240px;
-    margin: 0 auto;
-    position: relative;
-    /* O "X" da questão: Certifique-se de que nada saia do fluxo do grid */
-    overflow: visible; 
+  display: grid;
+  /* Altere de minmax fixo para repeat(auto-fit) para responsividade real */
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)) !important;
+  gap: 30px;
+  max-width: 1240px;
+  margin: 0 auto;
+  position: relative;
+  /* O "X" da questão: Certifique-se de que nada saia do fluxo do grid */
+  overflow: visible;
 }
 
 /* 3. Ajuste os cards individuais (Seu código original mantido com correções) */
 .avaliacao-card {
-    background: var(--white);
-    padding: 30px;
-    border-radius: var(--radius);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
-    transition: all 0.4s ease;
-    border: 1px solid rgba(0, 0, 0, 0.03);
-    
-    /* Correção Crítica: Força o card a ficar dentro do seu espaço no grid */
-    position: relative;
-    z-index: 2; /* Fica acima de fundos de animação, mas abaixo da Nav */
-    opacity: 1 !important; /* Previne conflito com AOS/Reveal */
-    transform: none !important; /* Previne conflito com animações antigas */
+  background: var(--white);
+  padding: 30px;
+  border-radius: var(--radius);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+  transition: all 0.4s ease;
+  border: 1px solid rgba(0, 0, 0, 0.03);
+
+  /* Correção Crítica: Força o card a ficar dentro do seu espaço no grid */
+  position: relative;
+  z-index: 2;
+  /* Fica acima de fundos de animação, mas abaixo da Nav */
+  opacity: 1 !important;
+  /* Previne conflito com AOS/Reveal */
+  transform: none !important;
+  /* Previne conflito com animações antigas */
 }
 
 /* 4. Garanta que o título e o formulário fiquem em cima */
 .form-solicitacao h2,
 .form-solicitacao form {
-    position: relative;
-    z-index: 10; /* Fica acima de qualquer card flutuante */
+  position: relative;
+  z-index: 10;
+  /* Fica acima de qualquer card flutuante */
 }
 
 /* ============================================================
@@ -1291,19 +1299,24 @@ a {
 
 /* 5. Isolamento visual da seção de orçamento */
 #orcamento {
-    position: relative;
-    background-color: var(--teal-deeper); /* Se você já tiver um fundo diferente */
-    z-index: 5; /* Garante que o formulário apareça acima de fundos de avaliações */
-    padding: 100px 5%; /* Aumenta o padding para separar bem visualmente */
-    margin-top: -20px; /* Um pequeno ajuste negativo se houver sobreposição visual desejada */
+  position: relative;
+  background-color: var(--teal-deeper);
+  /* Se você já tiver um fundo diferente */
+  z-index: 5;
+  /* Garante que o formulário apareça acima de fundos de avaliações */
+  padding: 100px 5%;
+  /* Aumenta o padding para separar bem visualmente */
+  margin-top: -20px;
+  /* Um pequeno ajuste negativo se houver sobreposição visual desejada */
 }
 
 /* --- CORREÇÃO DE GRID DE DESTINOS (RESPONSIVO) --- */
 .destinos-grid {
   display: grid;
   /* Muda de fixo para adaptável: ele tenta colocar colunas de 300px, se não couber, quebra a linha */
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important; 
-  grid-template-rows: auto !important; /* Remove alturas fixas que bugam no mobile */
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)) !important;
+  grid-template-rows: auto !important;
+  /* Remove alturas fixas que bugam no mobile */
   gap: 20px;
   max-width: 1240px;
   margin: 0 auto;
@@ -1317,7 +1330,8 @@ a {
 }
 
 .destino-card {
-  height: 350px; /* Altura fixa para manter o alinhamento em todas as telas */
+  height: 350px;
+  /* Altura fixa para manter o alinhamento em todas as telas */
 }
 
 /* --- CORREÇÃO DE RESPONSIVIDADE (MEDIA QUERIES) --- */
@@ -1328,16 +1342,19 @@ a {
   }
 
   .hero-content {
-    grid-template-columns: 1fr; /* Força uma única coluna no celular */
+    grid-template-columns: 1fr;
+    /* Força uma única coluna no celular */
     gap: 32px;
   }
 
   .hero-left p {
-    margin: 0 auto 24px; /* Centraliza o texto no mobile */
+    margin: 0 auto 24px;
+    /* Centraliza o texto no mobile */
   }
 
   .hero-actions {
-    justify-content: center; /* Centraliza botões */
+    justify-content: center;
+    /* Centraliza botões */
   }
 
   .hero-badges {
@@ -1355,10 +1372,37 @@ a {
 
 @media (max-width: 480px) {
   .numbers-grid {
-    grid-template-columns: 1fr !important; /* Uma coluna em telas muito pequenas */
+    grid-template-columns: 1fr !important;
+    /* Uma coluna em telas muito pequenas */
   }
-  
+
   .hero-left h1 {
     font-size: 2.2rem !important;
   }
+}
+
+/* Garante que a Nav esteja sempre no topo de tudo */
+#nav {
+  z-index: 10000 !important;
+  /* Valor bem alto para ficar acima de carrosséis e animações */
+}
+
+/* Garante que o menu aberto ocupe a tela toda e seja clicável */
+#navMenu.open {
+  display: flex !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  z-index: 9999 !important;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: var(--teal-deeper);
+  /* Ou a cor que preferir */
+}
+
+/* Garante que o botão hambúrguer fique visível sobre o menu aberto */
+.nav-toggle {
+  z-index: 10001 !important;
 }

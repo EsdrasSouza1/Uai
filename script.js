@@ -58,18 +58,38 @@ document.addEventListener('DOMContentLoaded', function () {
   const navToggle = document.getElementById('navToggle');
   const navMenu = document.getElementById('navMenu');
 
+  // Marca scroll para aplicar classe .scrolled
   window.addEventListener('scroll', () => {
     nav.classList.toggle('scrolled', window.scrollY > 60);
   }, { passive: true });
 
-  // Duplicate toggle listener removed – now only the enhanced listener below handles the menu toggle.
+  // Toggle do menu hambúrguer — versão única e correta
+  navToggle.addEventListener('click', () => {
+    const isOpen = navMenu.classList.toggle('open');
+    navToggle.classList.toggle('open', isOpen);
+    navToggle.setAttribute('aria-expanded', isOpen);
+    // Trava/libera o scroll da página
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+    document.documentElement.style.overflow = isOpen ? 'hidden' : '';
+    // Integração com Lenis (se carregado)
+    try {
+      if (typeof window._lenis !== 'undefined') {
+        isOpen ? window._lenis.stop() : window._lenis.start();
+      }
+    } catch(e) {}
+  });
 
+  // Fechar menu ao clicar em qualquer link dentro dele
   navMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', () => {
       navMenu.classList.remove('open');
       navToggle.classList.remove('open');
       navToggle.setAttribute('aria-expanded', false);
       document.body.style.overflow = '';
+      document.documentElement.style.overflow = '';
+      try {
+        if (typeof window._lenis !== 'undefined') window._lenis.start();
+      } catch(e) {}
     });
   });
 
@@ -85,13 +105,13 @@ document.addEventListener('DOMContentLoaded', function () {
     btn.addEventListener('click', () => {
       const isOpen = answer.classList.contains('open');
 
-      // Close all
+      // Fechar todos
       faqItems.forEach(other => {
         other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
         other.querySelector('.faq-answer').classList.remove('open');
       });
 
-      // Open current if it was closed
+      // Abrir o clicado se estava fechado
       if (!isOpen) {
         btn.setAttribute('aria-expanded', 'true');
         answer.classList.add('open');
@@ -139,21 +159,3 @@ document.addEventListener('DOMContentLoaded', function () {
   });
 
 });
-
-// Localize a parte do navToggle no seu script.js e substitua por esta:
-if (navToggle) {
-    navToggle.addEventListener('click', () => {
-        const isOpen = navMenu.classList.toggle('open');
-        navToggle.classList.toggle('open', isOpen);
-        
-        if (isOpen) {
-            // Se o menu abrir, trava o scroll
-            document.body.style.overflow = 'hidden';
-            if(typeof lenis !== 'undefined') lenis.stop(); 
-        } else {
-            // Se fechar, libera o scroll
-            document.body.style.overflow = '';
-            if(typeof lenis !== 'undefined') lenis.start();
-        }
-    });
-}
