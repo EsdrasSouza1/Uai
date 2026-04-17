@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 
 <head>
@@ -875,59 +875,96 @@
   </div>
 
   <!-- OUTROS ROTEIROS -->
-  <div class="outros-sec">
-    <div class="outros-hd">
+
+  <!-- OUTROS ROTEIROS - Carrossel -->
+  <section class="rc-section">
+    <div class="rc-hd">
       <p class="section-label">Conheça também</p>
-      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--text)">Outros <span
-          style="color:var(--teal);font-style:italic">Roteiros</span></h2>
+      <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.6rem);color:var(--text)">Outros <span style="color:var(--teal);font-style:italic">Roteiros</span></h2>
     </div>
-    <div class="outros-grid">
-      <div class="outro-card">
-        <img src="foto/praia-de-porto-de-galinhas.jpg" alt="Porto de Galinhas – PE">
-        <div class="outro-overlay">
-          <h4>Porto de Galinhas – PE</h4>
-          <a href="passeio-porto-de-galinhas.html">Ver passeio →</a>
+    <div class="rc-outer" id="rc-outer">
+      <button class="rc-prev-btn" id="rc-prev" aria-label="Anterior">&#8592;</button>
+      <div class="rc-viewport">
+        <div class="rc-track" id="rc-track">
+          <div class="rc-card"><img src="foto/buggy.JPEG" alt="Porto de Galinhas" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Pernambuco</span><h4>Porto de Galinhas – Buggy</h4><a href="passeio-porto-de-galinhas.html">Ver passeio &rarr;</a></div></div>
+          <div class="rc-card"><img src="foto/2.2.jpeg" alt="Maragogi – Barra Grande" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Alagoas</span><h4>Maragogi – Barra Grande</h4><a href="passeio-maragogi.html">Ver passeio &rarr;</a></div></div>
+          <div class="rc-card"><img src="foto/maragogi/Maragogi Ponta de Mangue (4) (1).JPEG" alt="Maragogi – Ponta de Mangue" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Alagoas</span><h4>Maragogi – Ponta de Mangue</h4><a href="passeio-maragogi-ponta-de-mangue.html">Ver passeio &rarr;</a></div></div>
+          <div class="rc-card"><img src="foto/carneiro2.JPEG" alt="Praia dos Carneiros" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Pernambuco</span><h4>Praia dos Carneiros</h4><a href="passeio-carneiros.html">Ver passeio &rarr;</a></div></div>
+          <div class="rc-card"><img src="foto/buggy.JPEG" alt="Cabo de Santo Agostinho" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Pernambuco</span><h4>Cabo de Santo Agostinho – Buggy</h4><a href="passeio-cabo-santo-agostinho.html">Ver passeio &rarr;</a></div></div>
+          <div class="rc-card"><img src="foto/carneiros/Carneiros 1.jpeg" alt="Ilha de Santo Aleixo" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Pernambuco</span><h4>Ilha de Santo Aleixo</h4><a href="passeio-ilha-santo-aleixo.html">Ver passeio &rarr;</a></div></div>
+          <div class="rc-card"><img src="foto/milagres/IMG_0303.jpg" alt="São Miguel dos Milagres" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Alagoas</span><h4>São Miguel dos Milagres</h4><a href="passeio-milagres.html">Ver passeio &rarr;</a></div></div>
+          <div class="rc-card"><img src="foto/carneiros/Carneiros Capela.jpg" alt="City Tour Recife e Olinda" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Pernambuco</span><h4>City Tour Recife &amp; Olinda</h4><a href="passeio-city-tour.html">Ver passeio &rarr;</a></div></div>
         </div>
       </div>
-      <div class="outro-card">
-        <img src="foto/2.2.jpeg" alt="Maragogi – AL">
-        <div class="outro-overlay">
-          <h4>Maragogi – AL</h4>
-          <a href="passeio-maragogi.html">Ver passeio →</a>
-        </div>
-      </div>
-      <div class="outro-card">
-        <img src="foto/milagres/IMG_0303.jpg" alt="São Miguel dos Milagres – AL"
-          onerror="this.src='foto/2.jpg';this.onerror=null;">
-        <div class="outro-overlay">
-          <h4>São Miguel dos Milagres – AL</h4>
-          <a href="passeio-milagres.html">Ver passeio →</a>
-        </div>
-      </div>
+      <button class="rc-next-btn" id="rc-next" aria-label="Próximo">&#8594;</button>
     </div>
-  </div>
+  </section>
+
+  <script>
+  (function() {
+    var track = document.getElementById('rc-track');
+    var prev = document.getElementById('rc-prev');
+    var next = document.getElementById('rc-next');
+    if (!track) return;
+    var cards = track.querySelectorAll('.rc-card');
+    var total = cards.length;
+    var cur = 0;
+    function getVis() { return window.innerWidth <= 560 ? 1 : window.innerWidth <= 900 ? 2 : 3; }
+    function getCardW() { if (!cards[0]) return 0; return cards[0].getBoundingClientRect().width + 20; }
+    function update() {
+      var vis = getVis();
+      var maxCur = Math.max(0, total - vis);
+      if (cur > maxCur) cur = maxCur;
+      track.style.transform = 'translateX(-' + (cur * getCardW()) + 'px)';
+      if (prev) prev.disabled = cur <= 0;
+      if (next) next.disabled = cur >= maxCur;
+    }
+    if (prev) prev.addEventListener('click', function() { if (cur > 0) { cur--; update(); } });
+    if (next) next.addEventListener('click', function() { var maxCur = Math.max(0, total - getVis()); if (cur < maxCur) { cur++; update(); } });
+    var tx = 0;
+    track.addEventListener('touchstart', function(e) { tx = e.touches[0].clientX; }, { passive: true });
+    track.addEventListener('touchend', function(e) {
+      var d = tx - e.changedTouches[0].clientX;
+      if (Math.abs(d) > 40) { if (d > 0) { cur = Math.min(cur + 1, total - getVis()); } else { cur = Math.max(cur - 1, 0); } update(); }
+    });
+    window.addEventListener('resize', update);
+    update();
+  })();
+  </script>
 
   <!-- FOOTER -->
   <footer class="main-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <div class="fl-wrap">
-          <img src="foto/logoo.png" alt="Uai Turismo">
+        <div class="footer-logo-text" style="display:flex;align-items:center;gap:4px;font-family:'Playfair Display',serif;font-size:1.4rem;line-height:1;margin-bottom:10px;">
+          <span style="color:var(--amber-light);font-weight:900;font-style:italic;">Uai</span>
+          <span style="color:rgba(255,255,255,.85);font-weight:700;font-size:1rem;">Turismo</span>
         </div>
-        <p>Seu turismo no lugar certo.</p>
+        <p>Passeios privativos e compartilhados,<br>Buggy em Pernambuco e Alagoas.</p>
+        <p style="margin-top:8px;font-size:.78rem;color:rgba(255,255,255,.4);">CNPJ: 54.181.357/0001-42<br>MARCOS VINICIUS SILVA SOUZA</p>
       </div>
       <div class="footer-links">
-        <h5>Navegação</h5><a href="index.html">Início</a><a href="index.html#destinos">Destinos</a><a
-          href="index.html#galeria">Galeria</a><a href="index.html#faq">Dúvidas</a>
+        <h5>Links Rápidos</h5>
+        <a href="index.html">Início</a>
+        <a href="index.html#destinos">Passeios</a>
+        <a href="index.html#galeria">Galeria</a>
+        <a href="index.html#faq">Perguntas Frequentes</a>
+        <a href="index.html#cadastur">Sobre Nós</a>
       </div>
       <div class="footer-contact">
-        <h5>Contato</h5><a href="https://wa.me/5581997484915?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais" target="_blank">📱 (81) 99748-4915</a>
+        <h5>Contato</h5>
+        <a href="https://wa.me/5581997484915?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais" target="_blank">📞 (81) 99748-4915</a>
         <p>📍 Porto de Galinhas, PE</p>
-        <p>CNPJ: 54.181.357/0001-42</p>
+        <p>✉️ contato@uaitur.com</p>
+      </div>
+      <div class="footer-social">
+        <h5>Siga no Instagram</h5>
+        <p>Veja mais fotos dos nossos passeios e clientes felizes!</p>
+        <a href="https://www.instagram.com/uai_turismo/" target="_blank" style="display:inline-flex;align-items:center;gap:8px;margin-top:10px;color:var(--amber-light);font-weight:600;"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>@uai_turismo</a>
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2025 Uai Turismo. Todos os direitos reservados. &nbsp;|&nbsp; <a href="politica-de-privacidade.html"
+      <p>© 2026 Uai Turismo. Todos os direitos reservados. &nbsp;|&nbsp; <a href="politica-de-privacidade.html"
           style="color:rgba(255,255,255,.55);transition:color .3s" onmouseover="this.style.color='#FFD166'"
           onmouseout="this.style.color='rgba(255,255,255,.55)'">Política de Privacidade</a></p>
     </div>
