@@ -5,7 +5,55 @@
 document.addEventListener('DOMContentLoaded', function () {
 
   // =============================================
-  // 1. HERO CAROUSEL
+  // 1. NAVBAR & MOBILE MENU (Unificado e Corrigido)
+  // =============================================
+  const nav = document.getElementById('nav');
+  const navToggle = document.getElementById('navToggle');
+  const navMenu = document.getElementById('navMenu');
+  const body = document.body;
+  const html = document.documentElement;
+
+  if (navToggle && navMenu) {
+    // Controle de Scroll da Navbar
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 60);
+    }, { passive: true });
+
+    // Toggle do menu hambúrguer
+    navToggle.addEventListener('click', function (e) {
+      e.preventDefault();
+      const isOpen = navMenu.classList.toggle('open');
+      this.classList.toggle('open', isOpen);
+      this.setAttribute('aria-expanded', isOpen);
+
+      // Trava o scroll em qualquer parte do site (Fix para Imagem 2)
+      if (isOpen) {
+        body.style.overflow = 'hidden';
+        html.style.overflow = 'hidden';
+        try { if (window._lenis) window._lenis.stop(); } catch (e) { }
+      } else {
+        body.style.overflow = '';
+        html.style.overflow = '';
+        try { if (window._lenis) window._lenis.start(); } catch (e) { }
+      }
+    });
+
+    // Fecha o menu ao clicar em qualquer link
+    const navLinks = navMenu.querySelectorAll('a');
+    navLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        navToggle.classList.remove('open');
+        navMenu.classList.remove('open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        body.style.overflow = '';
+        html.style.overflow = '';
+        try { if (window._lenis) window._lenis.start(); } catch (e) { }
+      });
+    });
+  }
+
+  // =============================================
+  // 2. HERO CAROUSEL
   // =============================================
   const track = document.getElementById('heroTrack');
   const dotsEl = document.getElementById('heroDots');
@@ -17,19 +65,26 @@ document.addEventListener('DOMContentLoaded', function () {
     let current = 0;
     let timer;
 
+    // Criar dots dinamicamente
     slides.forEach((_, i) => {
       const dot = document.createElement('button');
       dot.className = 'hero-dot' + (i === 0 ? ' active' : '');
       dot.setAttribute('aria-label', 'Slide ' + (i + 1));
       dot.addEventListener('click', () => goTo(i));
-      dotsEl.appendChild(dot);
+      if (dotsEl) dotsEl.appendChild(dot);
     });
 
     function goTo(index) {
-      dotsEl.querySelectorAll('.hero-dot')[current].classList.remove('active');
-      current = (index + slides.length) % slides.length;
-      track.style.transform = `translateX(-${current * 100}%)`;
-      dotsEl.querySelectorAll('.hero-dot')[current].classList.add('active');
+      if (dotsEl) {
+        const dots = dotsEl.querySelectorAll('.hero-dot');
+        if (dots[current]) dots[current].classList.remove('active');
+        current = (index + slides.length) % slides.length;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        if (dots[current]) dots[current].classList.add('active');
+      } else {
+        current = (index + slides.length) % slides.length;
+        track.style.transform = `translateX(-${current * 100}%)`;
+      }
       resetTimer();
     }
 
@@ -38,9 +93,10 @@ document.addEventListener('DOMContentLoaded', function () {
       timer = setInterval(() => goTo(current + 1), 4500);
     }
 
-    prevBtn.addEventListener('click', () => goTo(current - 1));
-    nextBtn.addEventListener('click', () => goTo(current + 1));
+    if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));
+    if (nextBtn) nextBtn.addEventListener('click', () => goTo(current + 1));
 
+    // Touch swipe para mobile
     let touchStartX = 0;
     track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
     track.addEventListener('touchend', e => {
@@ -52,71 +108,32 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // =============================================
-  // 2. NAVBAR — scroll + mobile
-  // =============================================
-  const nav = document.getElementById('nav');
-  const navToggle = document.getElementById('navToggle');
-  const navMenu = document.getElementById('navMenu');
-
-  // Marca scroll para aplicar classe .scrolled
-  window.addEventListener('scroll', () => {
-    nav.classList.toggle('scrolled', window.scrollY > 60);
-  }, { passive: true });
-
-  // Toggle do menu hambúrguer — versão única e correta
-  navToggle.addEventListener('click', () => {
-    const isOpen = navMenu.classList.toggle('open');
-    navToggle.classList.toggle('open', isOpen);
-    navToggle.setAttribute('aria-expanded', isOpen);
-    // Trava/libera o scroll da página
-    document.body.style.overflow = isOpen ? 'hidden' : '';
-    document.documentElement.style.overflow = isOpen ? 'hidden' : '';
-    // Integração com Lenis (se carregado)
-    try {
-      if (typeof window._lenis !== 'undefined') {
-        isOpen ? window._lenis.stop() : window._lenis.start();
-      }
-    } catch(e) {}
-  });
-
-  // Fechar menu ao clicar em qualquer link dentro dele
-  navMenu.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      navMenu.classList.remove('open');
-      navToggle.classList.remove('open');
-      navToggle.setAttribute('aria-expanded', false);
-      document.body.style.overflow = '';
-      document.documentElement.style.overflow = '';
-      try {
-        if (typeof window._lenis !== 'undefined') window._lenis.start();
-      } catch(e) {}
-    });
-  });
-
-  // =============================================
   // 3. FAQ ACCORDION
   // =============================================
   const faqItems = document.querySelectorAll('.faq-item');
 
   faqItems.forEach(item => {
-    const btn = item.querySelector('.faq-question');
+    const btnFaq = item.querySelector('.faq-question');
     const answer = item.querySelector('.faq-answer');
 
-    btn.addEventListener('click', () => {
-      const isOpen = answer.classList.contains('open');
+    if (btnFaq && answer) {
+      btnFaq.addEventListener('click', () => {
+        const isOpen = answer.classList.contains('open');
 
-      // Fechar todos
-      faqItems.forEach(other => {
-        other.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
-        other.querySelector('.faq-answer').classList.remove('open');
+        // Fechar todos antes de abrir o novo
+        faqItems.forEach(other => {
+          const otherBtn = other.querySelector('.faq-question');
+          const otherAns = other.querySelector('.faq-answer');
+          if (otherBtn) otherBtn.setAttribute('aria-expanded', 'false');
+          if (otherAns) otherAns.classList.remove('open');
+        });
+
+        if (!isOpen) {
+          btnFaq.setAttribute('aria-expanded', 'true');
+          answer.classList.add('open');
+        }
       });
-
-      // Abrir o clicado se estava fechado
-      if (!isOpen) {
-        btn.setAttribute('aria-expanded', 'true');
-        answer.classList.add('open');
-      }
-    });
+    }
   });
 
   // =============================================
@@ -126,19 +143,21 @@ document.addEventListener('DOMContentLoaded', function () {
     '.destino-card, .diferencial-card, .cadastur-inner, .section-header, .gallery-header, .faq-item, .faq-cta, .reviews-placeholder'
   );
 
-  const observer = new IntersectionObserver(entries => {
-    entries.forEach(e => {
-      if (e.isIntersecting) {
-        e.target.classList.add('revealed');
-        observer.unobserve(e.target);
-      }
-    });
-  }, { threshold: 0.10 });
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('revealed');
+          observer.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.10 });
 
-  revealTargets.forEach(el => {
-    el.classList.add('will-reveal');
-    observer.observe(el);
-  });
+    revealTargets.forEach(el => {
+      el.classList.add('will-reveal');
+      observer.observe(el);
+    });
+  }
 
   // =============================================
   // 5. SMOOTH SCROLL

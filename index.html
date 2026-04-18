@@ -471,271 +471,6 @@
         }
     </style>
 
-    <style id="patch-v2">
-        /* ── LOGO TEXTO ── */
-        .nav-logo-text {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.5rem;
-            line-height: 1;
-            text-decoration: none;
-        }
-
-        .logo-uai {
-            color: var(--amber-light);
-            font-weight: 900;
-            font-style: italic;
-        }
-
-        .logo-turismo {
-            color: white;
-            font-weight: 700;
-            font-size: 1.1rem;
-            letter-spacing: .02em;
-        }
-
-        /* ── HERO: carrossel não cortado ao abrir ── */
-        #hero {
-            padding-top: 80px !important;
-            /* exatamente a altura da nav fixa */
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            box-sizing: border-box;
-        }
-
-        .hero-content {
-            padding-top: 20px !important;
-            padding-bottom: 40px !important;
-        }
-
-        .hero-carousel {
-            height: 460px !important;
-        }
-
-        @media (max-width: 768px) {
-            #hero {
-                padding-top: 70px !important;
-                min-height: auto;
-            }
-
-            .hero-carousel {
-                height: 280px !important;
-            }
-        }
-
-        /* ── DIFERENCIAIS: 3 colunas ── */
-        .diferenciais-grid {
-            grid-template-columns: repeat(3, 1fr) !important;
-            gap: 20px !important;
-        }
-
-        @media (max-width: 1024px) {
-            .diferenciais-grid {
-                grid-template-columns: repeat(2, 1fr) !important;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .diferenciais-grid {
-                grid-template-columns: 1fr !important;
-            }
-        }
-
-        /* ── MASCOTE ── */
-        #mascote {
-            position: fixed;
-            bottom: 100px;
-            left: 28px;
-            z-index: 998;
-            cursor: pointer;
-            animation: mascoteFloat 4s ease-in-out infinite;
-            filter: drop-shadow(0 4px 12px rgba(0, 105, 120, .35));
-            transition: transform .3s ease;
-        }
-
-        #mascote:hover {
-            transform: scale(1.1) rotate(-5deg);
-        }
-
-        #mascote svg {
-            display: block;
-        }
-
-        #mascote-balao {
-            position: absolute;
-            bottom: 76px;
-            left: 76px;
-            background: white;
-            border-radius: 16px 16px 16px 4px;
-            padding: 10px 16px;
-            font-size: .8rem;
-            font-weight: 600;
-            color: var(--text);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, .15);
-            width: 200px;
-            line-height: 1.4;
-            opacity: 0;
-            transform: translateY(6px) scale(.95);
-            transition: opacity .3s ease, transform .3s ease;
-            pointer-events: none;
-            white-space: normal;
-        }
-
-        #mascote:hover #mascote-balao {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-        }
-
-        @keyframes mascoteFloat {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        /* Esconder mascote em mobile pequeno */
-        @media (max-width: 480px) {
-            #mascote {
-                bottom: 90px;
-                left: 12px;
-            }
-
-            #mascote svg {
-                width: 52px;
-                height: 52px;
-            }
-
-            #mascote-balao {
-                display: none;
-            }
-        }
-
-        /* ── FOOTER LOGO TEXTO ── */
-        .footer-logo-text {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-family: 'Playfair Display', serif;
-            font-size: 1.4rem;
-            line-height: 1;
-            margin-bottom: 10px;
-        }
-
-        .footer-logo-text .logo-uai {
-            color: var(--amber-light);
-            font-weight: 900;
-            font-style: italic;
-        }
-
-        .footer-logo-text .logo-turismo {
-            color: rgba(255, 255, 255, .85);
-            font-weight: 700;
-            font-size: 1rem;
-        }
-
-        /* ── NÚMEROS: 5000 com separador de milhar ── */
-        /* (tratado via JS) */
-    </style>
-
-
-    <style id="nav-mobile-fix">
-    /* ═══════════════════════════════════════════
-       CORREÇÃO MENU MOBILE — funciona ao rolar
-       ═══════════════════════════════════════════ */
-
-    /* O navMenu precisa de z-index acima de TUDO,
-       incluindo o scroll-progress (2000) e cursor (99999) */
-    #navMenu {
-      /* Desktop: flex normal */
-      display: flex;
-      list-style: none;
-      gap: 4px;
-      align-items: center;
-    }
-
-    @media (max-width: 768px) {
-      /* Menu mobile: sempre flex, escondido por visibility/opacity para transição funcionar */
-      #navMenu {
-        display: flex !important;
-        position: fixed !important;
-        top: 0 !important;
-        left: 0 !important;
-        right: 0 !important;
-        bottom: 0 !important;
-        width: 100% !important;
-        height: 100% !important;
-        z-index: 99990 !important;
-        background: var(--teal-deeper) !important;
-        flex-direction: column !important;
-        align-items: center !important;
-        justify-content: center !important;
-        gap: 8px !important;
-        transform: none !important;
-        /* Estado fechado */
-        opacity: 0;
-        visibility: hidden;
-        pointer-events: none;
-        transition: opacity 0.35s ease, visibility 0.35s ease;
-      }
-
-      #navMenu.open {
-        opacity: 1 !important;
-        visibility: visible !important;
-        pointer-events: all !important;
-      }
-
-      /* Links do menu mobile — maiores e espaçados */
-      #navMenu li {
-        width: 100%;
-        text-align: center;
-      }
-
-      #navMenu li a {
-        display: block;
-        font-size: 1.2rem !important;
-        padding: 14px 24px !important;
-        color: white !important;
-        border-radius: 12px;
-        transition: background 0.2s ease;
-      }
-
-      #navMenu li a:hover {
-        background: rgba(255,255,255,0.10);
-      }
-
-      /* CTA dentro do menu mobile */
-      #navMenu .nav-cta {
-        background: var(--amber) !important;
-        color: var(--text) !important;
-        border-radius: 50px !important;
-        font-weight: 700 !important;
-        margin-top: 8px;
-        display: inline-flex !important;
-        width: auto !important;
-        padding: 12px 28px !important;
-      }
-
-      /* Botão hambúrguer acima do menu aberto */
-      .nav-toggle {
-        z-index: 99995 !important;
-        position: relative;
-      }
-
-      /* Nav bar por cima do menu */
-      #nav {
-        z-index: 99992 !important;
-      }
-    }
-    </style>
-
 </head>
 
 <body>
@@ -757,7 +492,7 @@
     <!-- NAV -->
     <nav id="nav">
         <a class="nav-logo" href="#" style="display:flex;align-items:center;">
-            <img src="foto/logoo.png" alt="Uai Turismo" style="height:70px;border-radius:10px;display:block;filter:drop-shadow(0 2px 8px rgba(0,0,0,.25));">
+            <img src="foto/logoo.png" alt="Uai Turismo" class="nav-logo-img">
         </a>
         <button class="nav-toggle" id="navToggle"
             aria-label="Abrir menu"><span></span><span></span><span></span></button>
@@ -1247,20 +982,63 @@
                 <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
                     <a href="https://wa.me/5581997484915?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais"
                         class="btn-primary" target="_blank">Fale Conosco no WhatsApp</a>
-                    <a href="https://cadastur.turismo.gov.br/hotsite/#!/public/pesquisar-prestador/inicio?filtro=%7B%22currentPage%22:1,%22pageSize%22:10,%22sortFields%22:%22nomePrestador%22,%22sortDirections%22:%22ASC%22,%22filtros%22:%7B%22noPrestador%22:%22uai%20turismo%22,%22localidade%22:%22%22,%22nuAtividadeTuristica%22:%22Ag%C3%AAncia%20de%20Turismo%22,%22souPrestador%22:false,%22souTurista%22:true,%22localidadeNuUf%22:%2217%22,%22flPossuiVeiculo%22:%22%22%7D%7D#pesquisar"
-                        target="_blank" rel="noopener"
-                        style="display:inline-flex;align-items:center;gap:8px;background:var(--off-white);color:var(--teal-deeper);padding:14px 28px;border-radius:50px;font-weight:700;font-size:.92rem;border:2px solid var(--teal);transition:all .3s;text-decoration:none;"
+                    <button id="btn-ver-cadastur"
+                        onclick="document.getElementById('cadastur-lightbox').classList.add('open')"
+                        style="display:inline-flex;align-items:center;gap:8px;background:var(--off-white);color:var(--teal-deeper);padding:14px 28px;border-radius:50px;font-weight:700;font-size:.92rem;border:2px solid var(--teal);transition:all .3s;cursor:pointer;"
                         onmouseover="this.style.background='var(--teal)';this.style.color='white';"
                         onmouseout="this.style.background='var(--off-white)';this.style.color='var(--teal-deeper)';">
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                           <path d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                         </svg>
                         Ver Certificado no CADASTUR
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
     </section> <!-- removed testimonials strip -->
+
+    <!-- LIGHTBOX CADASTUR -->
+    <div id="cadastur-lightbox" style="position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.82);align-items:center;justify-content:center;backdrop-filter:blur(6px);">
+        <div style="position:relative;max-width:90vw;max-height:90vh;">
+            <img src="informa%C3%A7%C3%B5es/CADASTUR.jpg" alt="Certificado CADASTUR – Uai Turismo"
+                style="max-width:90vw;max-height:85vh;border-radius:16px;box-shadow:0 24px 80px rgba(0,0,0,.6);display:block;">
+            <button id="cadastur-lb-close"
+                style="position:absolute;top:-16px;right:-16px;width:40px;height:40px;border-radius:50%;background:white;border:none;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;font-weight:700;color:#333;transition:transform .2s;"
+                onmouseover="this.style.transform='scale(1.15)'"
+                onmouseout="this.style.transform='scale(1)'"
+                aria-label="Fechar">✕</button>
+        </div>
+    </div>
+    <style>
+        @keyframes lbFadeIn { from { opacity:0; transform:scale(.97); } to { opacity:1; transform:scale(1); } }
+        #cadastur-lightbox.lb-visible { animation: lbFadeIn .25s ease; }
+    </style>
+    <script>
+        (function(){
+            var lb = document.getElementById('cadastur-lightbox');
+            var btnOpen = document.getElementById('btn-ver-cadastur');
+            var btnClose = document.getElementById('cadastur-lb-close');
+
+            // começa escondido
+            lb.style.display = 'none';
+
+            function abrirLB() {
+                lb.style.display = 'flex';
+                lb.classList.add('lb-visible');
+                document.body.style.overflow = 'hidden';
+            }
+            function fecharLB() {
+                lb.style.display = 'none';
+                lb.classList.remove('lb-visible');
+                document.body.style.overflow = '';
+            }
+
+            btnOpen.addEventListener('click', abrirLB);
+            btnClose.addEventListener('click', fecharLB);
+            lb.addEventListener('click', function(e){ if(e.target === lb) fecharLB(); });
+            document.addEventListener('keydown', function(e){ if(e.key==='Escape') fecharLB(); });
+        })();
+    </script>
 
     <!-- FOOTER -->
     <footer class="main-footer">
@@ -1330,26 +1108,18 @@
         // AOS
         AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
 
-        // NAV TOGGLE MOBILE — fix scroll lock
+        // NAV — fechar menu ao clicar em link (script.js cuida do toggle principal)
         (function() {
-            var toggle = document.getElementById('navToggle');
             var menu = document.getElementById('navMenu');
-            if (!toggle || !menu) return;
-            // Remove any existing listeners by cloning
-            var newToggle = toggle.cloneNode(true);
-            toggle.parentNode.replaceChild(newToggle, toggle);
-            newToggle.addEventListener('click', function() {
-                var isOpen = menu.classList.toggle('open');
-                newToggle.classList.toggle('open', isOpen);
-                newToggle.setAttribute('aria-expanded', isOpen);
-                document.body.style.overflow = isOpen ? 'hidden' : '';
-            });
+            var toggle = document.getElementById('navToggle');
+            if (!menu || !toggle) return;
             menu.querySelectorAll('a').forEach(function(link) {
                 link.addEventListener('click', function() {
                     menu.classList.remove('open');
-                    newToggle.classList.remove('open');
-                    newToggle.setAttribute('aria-expanded', 'false');
+                    toggle.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
                     document.body.style.overflow = '';
+                    document.documentElement.style.overflow = '';
                 });
             });
         })();
