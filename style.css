@@ -1766,3 +1766,29 @@ a { text-decoration: none; }
     color: white;
   }
 }
+
+/* Ajuste para Desktop */
+.nav-logo-img,
+.logo-img {
+  height: 65px; /* Aumentado de 52px para 65px */
+  border-radius: 8px;
+  display: block;
+  filter: drop-shadow(0 2px 8px rgba(0,0,0,.25));
+  transition: transform 0.3s ease; /* Adicionado para um efeito suave */
+}
+
+/* Garante que o container da Nav acompanhe o crescimento da logo */
+#nav {
+  min-height: 80px; /* Ajustado para acomodar a logo maior */
+}
+
+/* Ajuste específico para Mobile (dentro da media query 768px) */
+@media (max-width: 768px) {
+  .nav-logo-img, .logo-img {
+    height: 55px; /* No mobile, um pouco menor que no desktop para não ocupar a tela toda */
+  }
+  
+  #nav {
+    min-height: 70px;
+  }
+}
