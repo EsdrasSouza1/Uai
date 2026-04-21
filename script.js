@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function resetTimer() {
       clearInterval(timer);
-      timer = setInterval(() => goTo(current + 1), 4500);
+      timer = setInterval(() => goTo(current + 1), 4000);
     }
 
     if (prevBtn) prevBtn.addEventListener('click', () => goTo(current - 1));

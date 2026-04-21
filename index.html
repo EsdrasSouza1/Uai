@@ -869,7 +869,7 @@
 
                         <!-- 1 Praia dos Carneiros -->
                         <div class="rc3-card">
-                            <img class="rc3-card-img" src="foto/carneiro2.JPEG" alt="Praia dos Carneiros"
+                            <img class="rc3-card-img" src="foto/carneiros/Carneiros Capela.jpg" alt="Praia dos Carneiros"
                                 loading="lazy">
                             <div class="rc3-card-body">
                                 <span class="rc3-tag">📍 Pernambuco</span>
@@ -935,7 +935,7 @@
 
                         <!-- 4 Porto de Galinhas – Buggy -->
                         <div class="rc3-card">
-                            <img class="rc3-card-img" src="foto/buggy.JPEG" alt="Porto de Galinhas – Buggy"
+                            <img class="rc3-card-img" src="foto/Passeio Buggy - Porto de Galinhas/image-8.jpeg" alt="Porto de Galinhas – Buggy"
                                 loading="eager">
                             <div class="rc3-card-body">
                                 <span class="rc3-tag">📍 Pernambuco</span>
@@ -1816,14 +1816,14 @@
 
     <!-- Botão flutuante -->
     <button id="uai-chat-btn" aria-label="Chat com o mascote da Uai Turismo" title="Tire suas dúvidas comigo!">
-        <img src="foto/Mascote Uai Chatbot.png" alt="Mascote Uai Turismo">
+        <img loading="lazy" src="foto/Mascote Uai Chatbot.png" alt="Mascote Uai Turismo">
     </button>
     <div id="uai-chat-notif">Duvida? clique em mim!</div>
 
     <!-- Janela do chat -->
     <div id="uai-chat-window" role="dialog" aria-label="Chat Uai Turismo">
         <div class="chat-header">
-            <img src="foto/Mascote Uai Chatbot.png" alt="Mascote">
+            <img loading="lazy" src="foto/Mascote Uai Chatbot.png" alt="Mascote">
             <div class="chat-header-info">
                 <div class="chat-header-name">Assistente Uai Turismo</div>
                 <div class="chat-header-status">🟢 Online agora</div>
@@ -2157,9 +2157,9 @@
         update();
 
         // Autoplay Loop
-        var autoPlayLoop = setInterval(function () { goTo(cur + 1); }, 3500);
+        var autoPlayLoop = setInterval(function () { goTo(cur + 1); }, 4000);
         track.closest('.rc3-outer').addEventListener('mouseenter', function () { clearInterval(autoPlayLoop); });
-        track.closest('.rc3-outer').addEventListener('mouseleave', function () { autoPlayLoop = setInterval(function () { goTo(cur + 1); }, 3500); });
+        track.closest('.rc3-outer').addEventListener('mouseleave', function () { autoPlayLoop = setInterval(function () { goTo(cur + 1); }, 4000); });
 
     })();
 </script>

@@ -569,7 +569,7 @@
         <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;"
             data-aos="fade-up">
             <div style="border-radius:28px;overflow:hidden;box-shadow:0 24px 64px rgba(0,105,120,.18);">
-                <img src="informações/Equipe.jpg" alt="Equipe Uai Turismo"
+                <img loading="lazy" src="informações/Equipe.jpg" alt="Equipe Uai Turismo"
                     style="width:100%;aspect-ratio:1.05/1;object-fit:cover;display:block;">
             </div>
             <div>
@@ -600,7 +600,7 @@
                 <p style="font-size:1rem;color:var(--text-muted);line-height:1.8;margin-bottom:0;">Com dedicação e amor pelo que fazem, cada membro da nossa equipe contribui para criar experiências autênticas e memoráveis. Do planejamento à execução, trabalhamos unidos para superar expectativas e fazer de cada passeio um momento especial na vida dos nossos clientes.</p>
             </div>
             <div style="border-radius:28px;overflow:hidden;box-shadow:0 24px 64px rgba(0,105,120,.18);order:2;" class="equipe-img-box">
-                <img src="informações/equipe_uai segunda foto segundo texto.jpg" alt="Equipe Uai Turismo em campo"
+                <img loading="lazy" src="informações/equipe_uai segunda foto segundo texto.jpg" alt="Equipe Uai Turismo em campo"
                     style="width:100%;aspect-ratio:1.05/1;object-fit:cover;display:block;">
             </div>
         </div>
@@ -1223,14 +1223,14 @@
     
     <!-- Botão flutuante -->
     <button id="uai-chat-btn" aria-label="Chat com o mascote da Uai Turismo" title="Tire suas dúvidas comigo!">
-        <img src="foto/Mascote Uai Chatbot.png" alt="Mascote Uai Turismo">
+        <img loading="lazy" src="foto/Mascote Uai Chatbot.png" alt="Mascote Uai Turismo">
     </button>
     <div id="uai-chat-notif">Duvida? clique em mim!</div>
 
     <!-- Janela do chat -->
     <div id="uai-chat-window" role="dialog" aria-label="Chat Uai Turismo">
         <div class="chat-header">
-            <img src="foto/Mascote Uai Chatbot.png" alt="Mascote">
+            <img loading="lazy" src="foto/Mascote Uai Chatbot.png" alt="Mascote">
             <div class="chat-header-info">
                 <div class="chat-header-name">Assistente Uai Turismo</div>
                 <div class="chat-header-status">🟢 Online agora</div>
@@ -1558,9 +1558,9 @@
         update();
 
         // Autoplay Loop
-        var autoPlayLoop = setInterval(function() { goTo(cur + 1); }, 3500);
+        var autoPlayLoop = setInterval(function() { goTo(cur + 1); }, 4000);
         track.closest('.rc3-outer').addEventListener('mouseenter', function() { clearInterval(autoPlayLoop); });
-        track.closest('.rc3-outer').addEventListener('mouseleave', function() { autoPlayLoop = setInterval(function() { goTo(cur + 1); }, 3500); });
+        track.closest('.rc3-outer').addEventListener('mouseleave', function() { autoPlayLoop = setInterval(function() { goTo(cur + 1); }, 4000); });
         
     })();
 </script>
