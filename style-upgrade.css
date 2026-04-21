@@ -1,0 +1,19 @@
+
+/* Inclusions block similar to navbar color */
+.p-incluso {
+  background: var(--teal-deeper) !important;
+  color: white !important;
+  border: none !important;
+}
+.p-incluso h3 {
+  color: white !important;
+}
+.p-incluso .ii {
+  color: var(--amber) !important;
+}
+.p-incluso small {
+  color: rgba(255, 255, 255, 0.7) !important;
+}
+.p-incluso li {
+  color: rgba(255, 255, 255, 0.95) !important;
+}

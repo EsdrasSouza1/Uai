@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Uai Turismo – Porto de Galinhas e Região</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@2.3.4/dist/aos.css" />
+    <link rel="stylesheet" href="style.css" />
+    <style>
+        /* CURSOR */
+        * {
+            cursor: none !important;
+        }
+
+        @media (pointer: coarse) {
+            * {
+                cursor: auto !important;
+            }
+        }
+
+        #cursor-dot,
+        #cursor-ring {
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+            transition-property: opacity, background, border-color, transform;
+            transition-timing-function: ease;
+        }
+
+        #cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--amber);
+            transition-duration: .08s;
+        }
+
+        #cursor-ring {
+            width: 36px;
+            height: 36px;
+            border: 2px solid rgba(245, 168, 0, .5);
+            background: transparent;
+            transition-duration: .18s;
+            mix-blend-mode: exclusion;
+        }
+
+        body:has(a:hover) #cursor-dot,
+        body:has(button:hover) #cursor-dot {
+            background: white;
+            transform: translate(-50%, -50%) scale(2);
+        }
+
+        body:has(a:hover) #cursor-ring,
+        body:has(button:hover) #cursor-ring {
+            border-color: white;
+            transform: translate(-50%, -50%) scale(1.6);
+        }
+
+        /* PRELOADER */
+        #preloader {
+            position: fixed;
+            inset: 0;
+            z-index: 99998;
+            background: var(--teal-deeper);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 24px;
+            transition: opacity .6s ease, visibility .6s ease;
+        }
+
+        #preloader.done {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .preloader-logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            color: white;
+            letter-spacing: .04em;
+        }
+
+        .preloader-logo span {
+            color: var(--amber-light);
+            font-style: italic;
+        }
+
+        .preloader-bar-wrap {
+            width: 180px;
+            height: 2px;
+            background: rgba(255, 255, 255, .12);
+            border-radius: 1px;
+            overflow: hidden;
+        }
+
+        .preloader-bar {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, var(--teal), var(--amber));
+            border-radius: 1px;
+            animation: loadBar 1.4s cubic-bezier(.4, 0, .2, 1) forwards;
+        }
+
+        @keyframes loadBar {
+            to {
+                width: 100%;
+            }
+        }
+
+        /* SCROLL PROGRESS */
+        #scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            z-index: 2000;
+            background: linear-gradient(90deg, var(--teal), var(--amber));
+            transform-origin: left;
+            transform: scaleX(0);
+        }
+
+        /* CANVAS */
+        #hero-canvas {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 0;
+            opacity: .45;
+        }
+
+        /* MARQUEE */
+        .marquee-band {
+            background: var(--amber);
+            padding: 14px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        .marquee-track {
+            display: inline-flex;
+            animation: marqueeRun 22s linear infinite;
+        }
+
+        .marquee-track:hover {
+            animation-play-state: paused;
+        }
+
+        .marquee-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 36px;
+            font-size: .82rem;
+            font-weight: 700;
+            color: var(--text);
+            letter-spacing: .08em;
+            text-transform: uppercase;
+        }
+
+        .marquee-sep {
+            color: var(--teal-deeper);
+            opacity: .5;
+        }
+
+        @keyframes marqueeRun {
+            from {
+                transform: translateX(0)
+            }
+
+            to {
+                transform: translateX(-50%)
+            }
+        }
+
+        /* WAVE DIVIDER */
+        .wave-divider {
+            display: block;
+            width: 100%;
+            line-height: 0;
+        }
+
+        .wave-divider svg {
+            width: 100%;
+            display: block;
+        }
+
+        /* NUMBERS STRIP */
+        .numbers-strip {
+            background: var(--teal-deeper);
+            padding: 60px 5%;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .numbers-strip::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(ellipse at 20% 50%, rgba(0, 151, 167, .3) 0%, transparent 60%), radial-gradient(ellipse at 80% 50%, rgba(245, 168, 0, .10) 0%, transparent 60%);
+            pointer-events: none;
+        }
+
+        .numbers-grid {
+            max-width: 900px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 0;
+            position: relative;
+            z-index: 1;
+        }
+
+        .number-item {
+            text-align: center;
+            padding: 0 20px;
+            border-right: 1px solid rgba(255, 255, 255, .10);
+        }
+
+        .number-item:last-child {
+            border-right: none;
+        }
+
+        .number-val {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.4rem, 4vw, 3.4rem);
+            font-weight: 900;
+            color: var(--amber-light);
+            line-height: 1;
+            display: block;
+        }
+
+        .number-label {
+            font-size: .78rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, .55);
+            text-transform: uppercase;
+            letter-spacing: .12em;
+            margin-top: 8px;
+            display: block;
+        }
+
+        /* DESTINOS INTRO */
+        .destinos-intro {
+            max-width: 560px;
+            margin: 0 auto 56px;
+            text-align: center;
+        }
+
+        .destinos-intro p {
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.75;
+        }
+
+        /* DIFERENCIAL NUM */
+        .diferencial-num {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: rgba(0, 151, 167, .08);
+            line-height: 1;
+            position: absolute;
+            top: 12px;
+            right: 20px;
+            transition: color .35s ease;
+            pointer-events: none;
+        }
+
+        .diferencial-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .diferencial-card:hover .diferencial-num {
+            color: rgba(0, 151, 167, .15);
+        }
+
+        /* TESTIMONIALS */
+        .testimonials-strip {
+            background: var(--off-white);
+            padding: 80px 5%;
+            overflow: hidden;
+        }
+
+        .testimonials-track-wrap {
+            position: relative;
+            margin-top: 48px;
+        }
+
+        .testimonials-track {
+            display: flex;
+            gap: 24px;
+            animation: testimonialsScroll 32s linear infinite;
+        }
+
+        .testimonials-track:hover {
+            animation-play-state: paused;
+        }
+
+        @keyframes testimonialsScroll {
+            from {
+                transform: translateX(0)
+            }
+
+            to {
+                transform: translateX(-50%)
+            }
+        }
+
+        .tcard {
+            flex-shrink: 0;
+            width: 320px;
+            background: white;
+            border-radius: 20px;
+            padding: 28px 26px;
+            box-shadow: 0 4px 24px rgba(0, 105, 120, .10);
+            border: 1px solid rgba(0, 151, 167, .07);
+            position: relative;
+        }
+
+        .tcard-stars {
+            color: var(--amber);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            margin-bottom: 14px;
+        }
+
+        .tcard-text {
+            font-size: .9rem;
+            color: var(--text-muted);
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-style: italic;
+        }
+
+        .tcard-author {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .tcard-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--teal-dark), var(--teal));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: .95rem;
+            flex-shrink: 0;
+        }
+
+        .tcard-name {
+            font-size: .88rem;
+            font-weight: 700;
+            color: var(--text);
+        }
+
+        .tcard-trip {
+            font-size: .75rem;
+            color: var(--text-muted);
+        }
+
+        .tcard-quote {
+            position: absolute;
+            top: 20px;
+            right: 22px;
+            font-family: 'Playfair Display', serif;
+            font-size: 4rem;
+            line-height: 1;
+            color: rgba(0, 151, 167, .08);
+            font-style: italic;
+        }
+
+        .testimonials-track-wrap::before,
+        .testimonials-track-wrap::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 80px;
+            z-index: 2;
+            pointer-events: none;
+        }
+
+        .testimonials-track-wrap::before {
+            left: 0;
+            background: linear-gradient(90deg, var(--off-white), transparent);
+        }
+
+        .testimonials-track-wrap::after {
+            right: 0;
+            background: linear-gradient(-90deg, var(--off-white), transparent);
+        }
+
+        /* INSTAGRAM BADGE */
+        .instagram-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(255, 255, 255, .08);
+            border: 1px solid rgba(255, 255, 255, .14);
+            border-radius: 50px;
+            padding: 8px 18px;
+            color: white;
+            font-size: .82rem;
+            font-weight: 600;
+            transition: background .3s ease;
+            margin-bottom: 32px;
+        }
+
+        .instagram-badge:hover {
+            background: rgba(255, 255, 255, .14);
+        }
+
+        /* CADASTUR */
+        .cadastur-section {
+            background: linear-gradient(180deg, var(--off-white) 0%, #e8f4f5 100%);
+        }
+
+        @media (max-width:768px) {
+            .numbers-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 32px 0;
+            }
+
+            .number-item {
+                border-bottom: 1px solid rgba(255, 255, 255, .08);
+            }
+
+            .number-item:nth-child(2) {
+                border-right: none;
+            }
+
+            .number-item:nth-child(3),
+            .number-item:nth-child(4) {
+                border-bottom: none;
+            }
+
+            #cursor-dot,
+            #cursor-ring {
+                display: none;
+            }
+
+            * {
+                cursor: auto !important;
+            }
+
+            .tcard {
+                width: 280px;
+            }
+
+            .testimonials-strip {
+                padding: 60px 0;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+
+
+    <div id="cursor-dot"></div>
+    <div id="cursor-ring"></div>
+    <div id="scroll-progress"></div>
+
+    <div id="preloader">
+        <div class="preloader-logo"><span>Uai</span> Turismo</div>
+        <div class="preloader-bar-wrap">
+            <div class="preloader-bar"></div>
+        </div>
+    </div>
+
+    <!-- NAV -->
+    <nav id="nav">
+        <a class="nav-logo" href="#" style="display:flex;align-items:center;">
+            <img src="foto/logoo.png" alt="Uai Turismo" class="nav-logo-img">
+        </a>
+        <button class="nav-toggle" id="navToggle"
+            aria-label="Abrir menu"><span></span><span></span><span></span></button>
+            <ul id="navMenu">
+      <li><a href="index.html#hero">Início</a></li>
+      <li><a href="index.html#destinos">Destinos</a></li>
+      <li><a href="index.html#galeria">Galeria</a></li>
+      <li><a href="index.html#faq">Dúvidas</a></li>
+      <li><a href="quem-somos.html">Sobre nós</a></li>
+      <li><a href="https://uaiturismo.surishop.ai/catalog" target="_blank">Catálogo</a></li>
+      <li><a href="https://wa.me/5581997484915?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais" class="nav-cta" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" /></svg> Solicitar Orçamento</a></li>
+    </ul>
+    </nav>
+
+    <div style="padding-top: 100px;"></div>
+
+    <!-- CADASTUR -->
+    <section id="cadastur" class="cadastur-section">
+        <div class="cadastur-inner" data-aos="fade-up">
+            <div class="cadastur-badge-visual">
+                <div class="cadastur-ring cadastur-ring--outer"></div>
+                <div class="cadastur-ring cadastur-ring--inner"></div>
+                <div class="cadastur-center"><svg width="48" height="48" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="1.5">
+                        <path
+                            d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                    </svg><span>CADASTUR</span></div>
+            </div>
+            <div class="cadastur-info">
+                <p class="section-label">Certificação Oficial</p>
+                <h2>Empresa <span>Registrada</span> e Regulamentada</h2>
+                <p>A Uai Turismo é cadastrada no <strong>CADASTUR</strong> — sistema oficial do Ministério do Turismo do
+                    Brasil, assegurando seus direitos e sua tranquilidade.</p>
+                <div class="cadastur-items">
+                </div>
+                <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:center;">
+                    <a href="https://wa.me/5581997484915?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais"
+                        class="btn-primary" target="_blank">Fale Conosco no WhatsApp</a>
+                    <button id="btn-ver-cadastur"
+                        onclick="document.getElementById('cadastur-lightbox').classList.add('open')"
+                        style="display:inline-flex;align-items:center;gap:8px;background:var(--off-white);color:var(--teal-deeper);padding:14px 28px;border-radius:50px;font-weight:700;font-size:.92rem;border:2px solid var(--teal);transition:all .3s;cursor:pointer;"
+                        onmouseover="this.style.background='var(--teal)';this.style.color='white';"
+                        onmouseout="this.style.background='var(--off-white)';this.style.color='var(--teal-deeper)';">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                        </svg>
+                        Ver Certificado no CADASTUR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOSSA HISTÓRIA -->
+    <section id="nossa-historia" style="background:#fff;padding:90px 5%;">
+        <div style="max-width:900px;margin:0 auto;text-align:center;" data-aos="fade-up">
+            <p class="section-label">Como tudo começou</p>
+            <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);color:var(--text);margin-bottom:24px;">
+                Nossa <span style="color:var(--teal);font-style:italic;">História</span></h2>
+            <div style="font-size:1.05rem;color:var(--text-muted);line-height:1.8;text-align:left;display:flex;flex-direction:column;gap:16px;">
+                <p>A Uai Turismo nasceu da paixão em compartilhar as maravilhas do litoral Sul de Pernambuco e do Norte de Alagoas com quem deseja viver dias inesquecíveis. Com experiência sólida no mercado e um olhar atento para cada detalhe, transformamos passeios em memórias que ficam para sempre.</p>
+                <p>O nome Uai carrega nossa história no próprio som: o fundador, mineiro de Belo Horizonte, veio passear em Porto de Galinhas e… não voltou mais. Se apaixonou pela região, pelas pessoas e por esse ritmo único do litoral. Decidiu ficar e criar uma empresa que mostrasse toda a beleza desse pedaço do paraíso para mais pessoas, unindo o acolhimento mineiro à alma vibrante do Nordeste.</p>
+                <p>Com esse DNA, nos especializamos em levar você aos cenários mais paradisíacos da região: de Maragogi à Praia dos Carneiros, da São Miguel dos Milagres ao Cabo de Santo Agostinho. Nossa missão é simples: unir qualidade, segurança e cuidado para que cada viajante se sinta especial do início ao fim.</p>
+                <p>Nossa equipe é formada por profissionais apaixonados pelo que fazem e comprometidos em proporcionar uma experiência verdadeira, autêntica e cheia de atenção. Cada roteiro é planejado com carinho, respeitando o ritmo da natureza e garantindo que seu tempo e investimento sejam aproveitados ao máximo.</p>
+                <p style="font-weight:600;color:var(--teal-deeper);text-align:center;font-size:1.15rem;margin-top:16px;">Mais do que passeios, oferecemos vivências. Mais do que clientes, recebemos amigos. Essa é a essência da Uai Turismo!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOSSA EQUIPE 1 -->
+    <section id="nossa-equipe" style="background:var(--off-white);padding:90px 5%;">
+        <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;"
+            data-aos="fade-up">
+            <div style="border-radius:28px;overflow:hidden;box-shadow:0 24px 64px rgba(0,105,120,.18);">
+                <img src="informações/Equipe.jpg" alt="Equipe Uai Turismo"
+                    style="width:100%;aspect-ratio:1.05/1;object-fit:cover;display:block;">
+            </div>
+            <div>
+                <p class="section-label">Quem Faz Acontecer</p>
+                <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);color:var(--text);margin-bottom:18px;">
+                    Nossa <span style="color:var(--teal);font-style:italic;">Equipe</span></h2>
+                <p style="font-size:1rem;color:var(--text-muted);line-height:1.8;margin-bottom:16px;">Profissionais qualificados, apaixonados pelo que fazem e comprometidos em entregar a melhor experiência. Nossa equipe de marinheiros, motoristas, guias, atendente, social media e gestor de tráfego, trabalha em sintonia para garantir que cada detalhe da sua viagem seja pensado com cuidado, segurança e carinho.</p>
+                <p style="font-size:1rem;color:var(--text-muted);line-height:1.8;margin-bottom:28px;">Nos bastidores, nossa equipe de comunicação está sempre atenta para manter você bem informado, compartilhando dicas, atualizações e tudo o que faz parte do seu roteiro. Já em campo, nossos motoristas e guias conduzem cada passeio com responsabilidade e entusiasmo, enquanto os marinheiros oferecem toda a atenção necessária para que a experiência no mar seja tranquila, divertida e segura.</p>
+                
+                <div style="display:flex;gap:14px;flex-wrap:wrap;">
+                    <a href="https://wa.me/5581997484915?text=Olá%2C%20quero%20saber%20mais%20sobre%20o%20trabalho%20da%20equipe%20Uai%20Turismo"
+                        class="btn-primary" target="_blank"
+                        style="background:var(--teal-deeper);color:#fff;border-color:var(--teal-deeper);text-decoration:none;">Fale Conosco</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- NOSSA EQUIPE 2 -->
+    <section id="nossa-equipe-2" style="background:#fff;padding:90px 5%;">
+        <div style="max-width:1100px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center;"
+            data-aos="fade-up">
+            <div style="order:1;" class="equipe-texto-box">
+                <p class="section-label">Cuidado com Você</p>
+                <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);color:var(--text);margin-bottom:18px;">
+                    O Seu <span style="color:var(--teal);font-style:italic;">Momento Especial</span></h2>
+                <p style="font-size:1rem;color:var(--text-muted);line-height:1.8;margin-bottom:16px;">Do momento em que você chega até o último instante do passeio, estamos ao seu lado, cuidando para que tudo aconteça de forma leve e organizada. Trabalhamos todos os dias para transformar sua viagem em memórias que emocionam, porque acreditamos que a experiência começa muito antes de você embarcar e continua viva muito depois de voltar pra casa.</p>
+                <p style="font-size:1rem;color:var(--text-muted);line-height:1.8;margin-bottom:0;">Com dedicação e amor pelo que fazem, cada membro da nossa equipe contribui para criar experiências autênticas e memoráveis. Do planejamento à execução, trabalhamos unidos para superar expectativas e fazer de cada passeio um momento especial na vida dos nossos clientes.</p>
+            </div>
+            <div style="border-radius:28px;overflow:hidden;box-shadow:0 24px 64px rgba(0,105,120,.18);order:2;" class="equipe-img-box">
+                <img src="informações/equipe_uai segunda foto segundo texto.jpg" alt="Equipe Uai Turismo em campo"
+                    style="width:100%;aspect-ratio:1.05/1;object-fit:cover;display:block;">
+            </div>
+        </div>
+    </section>
+
+    <!-- NOSSOS PASSEIOS LIST -->
+    <section id="nossos-passeios-lista" style="background:var(--off-white);padding:90px 5%;">
+        <div style="max-width:900px;margin:0 auto;" data-aos="fade-up">
+            <div style="text-align:center;margin-bottom:48px;">
+                <p class="section-label">Explore com a Uai</p>
+                <h2 style="font-family:'Playfair Display',serif;font-size:clamp(1.8rem,3vw,2.8rem);color:var(--text);">
+                    Nossos <span style="color:var(--teal);font-style:italic;">Passeios</span></h2>
+                <p style="font-size:1.05rem;color:var(--text-muted);margin-top:16px;">Oferecemos uma variedade de passeios cuidadosamente selecionados para você conhecer o melhor do litoral nordestino:</p>
+            </div>
+            
+            <ul style="list-style:none;padding:0;display:flex;flex-direction:column;gap:20px;">
+                <li style="display:flex;gap:16px;background:#fff;padding:24px;border-radius:16px;box-shadow:0 8px 24px rgba(0,105,120,.06);align-items:center;">
+                    <div style="font-size:2rem;">🌴</div>
+                    <div>
+                        <h4 style="margin:0 0 6px 0;font-size:1.15rem;color:var(--teal-deeper);">Praia dos Carneiros</h4>
+                        <p style="margin:0;font-size:.95rem;color:var(--text-muted);">Paraíso de águas cristalinas com a famosa Capela de São Benedito.</p>
+                    </div>
+                </li>
+                <li style="display:flex;gap:16px;background:#fff;padding:24px;border-radius:16px;box-shadow:0 8px 24px rgba(0,105,120,.06);align-items:center;">
+                    <div style="font-size:2rem;">🐠</div>
+                    <div>
+                        <h4 style="margin:0 0 6px 0;font-size:1.15rem;color:var(--teal-deeper);">São Miguel dos Milagres</h4>
+                        <p style="margin:0;font-size:.95rem;color:var(--text-muted);">Refúgio de tranquilidade com piscinas naturais espetaculares.</p>
+                    </div>
+                </li>
+                <li style="display:flex;gap:16px;background:#fff;padding:24px;border-radius:16px;box-shadow:0 8px 24px rgba(0,105,120,.06);align-items:center;">
+                    <div style="font-size:2rem;">🏝️</div>
+                    <div>
+                        <h4 style="margin:0 0 6px 0;font-size:1.15rem;color:var(--teal-deeper);">Maragogi</h4>
+                        <p style="margin:0;font-size:.95rem;color:var(--text-muted);">O Caribe Brasileiro com praias paradisíacas.</p>
+                    </div>
+                </li>
+                <li style="display:flex;gap:16px;background:#fff;padding:24px;border-radius:16px;box-shadow:0 8px 24px rgba(0,105,120,.06);align-items:center;">
+                    <div style="font-size:2rem;">🚗</div>
+                    <div>
+                        <h4 style="margin:0 0 6px 0;font-size:1.15rem;color:var(--teal-deeper);">Passeios de Buggy</h4>
+                        <p style="margin:0;font-size:.95rem;color:var(--text-muted);">Aventura pelas praias de Porto de Galinhas e Cabo de Santo Agostinho.</p>
+                    </div>
+                </li>
+                <li style="display:flex;gap:16px;background:#fff;padding:24px;border-radius:16px;box-shadow:0 8px 24px rgba(0,105,120,.06);align-items:center;">
+                    <div style="font-size:2rem;">⛵</div>
+                    <div>
+                        <h4 style="margin:0 0 6px 0;font-size:1.15rem;color:var(--teal-deeper);">Ilha de Santo Aleixo</h4>
+                        <p style="margin:0;font-size:.95rem;color:var(--text-muted);">Um paraíso de águas cristalinas, areia clara e formações rochosas únicas.</p>
+                    </div>
+                </li>
+                <li style="display:flex;gap:16px;background:#fff;padding:24px;border-radius:16px;box-shadow:0 8px 24px rgba(0,105,120,.06);align-items:center;">
+                    <div style="font-size:2rem;">🏛️</div>
+                    <div>
+                        <h4 style="margin:0 0 6px 0;font-size:1.15rem;color:var(--teal-deeper);">City Tour</h4>
+                        <p style="margin:0;font-size:.95rem;color:var(--text-muted);">Uma imersão na cultura, história e beleza do Nordeste entre pontes, igrejas seculares e casarios coloridos.</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <style>
+            @media(max-width:768px) {
+                #nossa-equipe > div,
+                #nossa-equipe-2 > div {
+                    grid-template-columns: 1fr !important;
+                    gap: 32px !important;
+                }
+                #nossa-equipe > div > div:first-child img,
+                .equipe-img-box img {
+                    height: 280px !important;
+                    min-height: auto !important;
+                }
+                .equipe-texto-box {
+                    order: 2 !important;
+                }
+                .equipe-img-box {
+                    order: 1 !important;
+                }
+            }
+        </style>
+    </section>
+
+
+    <!-- LIGHTBOX CADASTUR -->
+    <div id="cadastur-lightbox"
+        style="position:fixed;inset:0;z-index:99999;background:rgba(0,0,0,.82);align-items:center;justify-content:center;backdrop-filter:blur(6px);">
+        <div style="position:relative;max-width:90vw;max-height:90vh;">
+            <img src="informa%C3%A7%C3%B5es/CADASTUR.jpg" alt="Certificado CADASTUR – Uai Turismo"
+                style="max-width:90vw;max-height:85vh;border-radius:16px;box-shadow:0 24px 80px rgba(0,0,0,.6);display:block;">
+            <button id="cadastur-lb-close"
+                style="position:absolute;top:-16px;right:-16px;width:40px;height:40px;border-radius:50%;background:white;border:none;font-size:1.3rem;cursor:pointer;box-shadow:0 4px 16px rgba(0,0,0,.3);display:flex;align-items:center;justify-content:center;font-weight:700;color:#333;transition:transform .2s;"
+                onmouseover="this.style.transform='scale(1.15)'" onmouseout="this.style.transform='scale(1)'"
+                aria-label="Fechar">✕</button>
+        </div>
+    </div>
+    <style>
+        @keyframes lbFadeIn {
+            from {
+                opacity: 0;
+                transform: scale(.97);
+            }
+
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        #cadastur-lightbox.lb-visible {
+            animation: lbFadeIn .25s ease;
+        }
+    </style>
+    <script>
+        (function () {
+            var lb = document.getElementById('cadastur-lightbox');
+            var btnOpen = document.getElementById('btn-ver-cadastur');
+            var btnClose = document.getElementById('cadastur-lb-close');
+
+            // começa escondido
+            lb.style.display = 'none';
+
+            function abrirLB() {
+                lb.style.display = 'flex';
+                lb.classList.add('lb-visible');
+                document.body.style.overflow = 'hidden';
+            }
+            function fecharLB() {
+                lb.style.display = 'none';
+                lb.classList.remove('lb-visible');
+                document.body.style.overflow = '';
+            }
+
+            btnOpen.addEventListener('click', abrirLB);
+            btnClose.addEventListener('click', fecharLB);
+            lb.addEventListener('click', function (e) { if (e.target === lb) fecharLB(); });
+            document.addEventListener('keydown', function (e) { if (e.key === 'Escape') fecharLB(); });
+        })();
+    </script>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="footer-logo-text"><span class="logo-uai">Uai</span><span class="logo-turismo">
+                        Turismo</span></div>
+                <p>Passeios privativos e compartilhados,<br>Buggy em Pernambuco e Alagoas.</p>
+                <p style="margin-top:8px;font-size:.76rem;color:rgba(255,255,255,.35);">CNPJ:
+                    54.181.357/0001-42<br>MARCOS VINICIUS SILVA SOUZA</p>
+            </div>
+            <div class="footer-links"><h5>Links Rápidos</h5><a href="index.html#hero">Início</a><a href="index.html#destinos">Destinos</a><a href="index.html#galeria">Galeria</a><a href="index.html#faq">Dúvidas</a><a href="quem-somos.html">Sobre nós</a><a href="https://uaiturismo.surishop.ai/catalog" target="_blank">Catálogo</a></div>
+            <div class="footer-contact">
+                <h5>Contato</h5>
+                <a href="https://wa.me/5581997484915?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais"
+                    target="_blank">📞 (81) 99748-4915</a>
+                <p>📍 Porto de Galinhas, PE</p>
+                <p>✉️ contato@uaitur.com</p>
+            </div>
+            <div class="footer-social">
+                <h5>Siga no Instagram</h5>
+                <p>Veja mais fotos dos nossos passeios e clientes felizes!</p>
+                <a href="https://www.instagram.com/uai_turismo/" target="_blank"
+                    style="display:inline-flex;align-items:center;gap:8px;margin-top:6px;font-weight:600;"><svg
+                        width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg>@uai_turismo</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 Uai Turismo. Todos os direitos reservados. &nbsp;|&nbsp; <a href="politica-de-privacidade.html"
+                    style="color:rgba(255,255,255,.55);transition:color .3s" onmouseover="this.style.color='#FFD166'"
+                    onmouseout="this.style.color='rgba(255,255,255,.55)'">Política de Privacidade</a></p>
+        </div>
+    </footer>
+
+
+
+    <!-- LIBS -->
+    <script src="https://cdn.jsdelivr.net/npm/@studio-freight/lenis@1.0.42/dist/lenis.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
+    <script src="script.js"></script>
+    <script>
+        // PRELOADER
+        window.addEventListener('load', () => { setTimeout(() => { document.getElementById('preloader').classList.add('done'); heroEntrance(); }, 1500); });
+
+        // CURSOR
+        const dot = document.getElementById('cursor-dot'), ring = document.getElementById('cursor-ring');
+        if (window.matchMedia('(pointer: fine)').matches) { document.addEventListener('mousemove', e => { dot.style.left = e.clientX + 'px'; dot.style.top = e.clientY + 'px'; ring.style.left = e.clientX + 'px'; ring.style.top = e.clientY + 'px'; }); }
+
+        // SCROLL PROGRESS
+        const pb = document.getElementById('scroll-progress');
+        window.addEventListener('scroll', () => { pb.style.transform = `scaleX(${window.scrollY / (document.body.scrollHeight - window.innerHeight)})`; }, { passive: true });
+
+        // LENIS
+        try { window._lenis = new Lenis({ lerp: .08, smooth: true }); function raf(t) { window._lenis.raf(t); requestAnimationFrame(raf); } requestAnimationFrame(raf); window._lenis.on('scroll', ScrollTrigger.update); gsap.ticker.add(t => { window._lenis.raf(t * 1000); }); gsap.ticker.lagSmoothing(0); } catch (e) { }
+
+        // AOS
+        AOS.init({ duration: 700, easing: 'ease-out-cubic', once: true, offset: 60 });
+
+        // NAV — fechar menu ao clicar em link (script.js cuida do toggle principal)
+        (function () {
+            var menu = document.getElementById('navMenu');
+            var toggle = document.getElementById('navToggle');
+            if (!menu || !toggle) return;
+            menu.querySelectorAll('a').forEach(function (link) {
+                link.addEventListener('click', function () {
+                    menu.classList.remove('open');
+                    toggle.classList.remove('open');
+                    toggle.setAttribute('aria-expanded', 'false');
+                    document.body.style.overflow = '';
+                    document.documentElement.style.overflow = '';
+                });
+            });
+        })();
+
+        // GSAP HERO
+        function heroEntrance() { const tl = gsap.timeline({ defaults: { ease: 'power3.out' } }); tl.from('#heroTag', { y: 30, opacity: 0, duration: .7 }).from('#heroTitle', { y: 50, opacity: 0, duration: .9 }, '-=.4').from('#heroP', { y: 30, opacity: 0, duration: .7 }, '-=.5').from('#heroActions', { y: 24, opacity: 0, duration: .6 }, '-=.4').from('#heroBadges', { y: 20, opacity: 0, duration: .6 }, '-=.3').from('#heroRight', { x: 60, opacity: 0, duration: 1 }, '-=.9'); }
+
+        // PARALLAX CARDS
+        gsap.utils.toArray('.destino-card img').forEach(img => { gsap.to(img, { yPercent: -8, ease: 'none', scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true } }); });
+
+        // COUNTERS
+        document.querySelectorAll('.counter').forEach(el => { const t = +el.dataset.target; ScrollTrigger.create({ trigger: el, start: 'top 85%', once: true, onEnter: () => { gsap.to({ val: 0 }, { val: t, duration: 1.8, ease: 'power2.out', onUpdate: function () { const v = Math.round(this.targets()[0].val); el.textContent = (v >= 1000 ? v.toLocaleString('pt-BR') : v) + (t >= 1000 ? '+' : ''); } }); } }); });
+
+        // PARTICLES
+        (function () { const c = document.getElementById('hero-canvas'); if (!c) return; const ctx = c.getContext('2d'); let W, H, p = []; function resize() { W = c.width = c.offsetWidth; H = c.height = c.offsetHeight; } resize(); window.addEventListener('resize', resize); function rand(a, b) { return Math.random() * (b - a) + a; } function P() { this.x = rand(0, W); this.y = rand(0, H); this.r = rand(1, 3); this.vx = rand(-.3, .3); this.vy = rand(-.5, -.1); this.alpha = rand(.2, .7); this.color = Math.random() > .5 ? '245,168,0' : '0,151,167'; } for (let i = 0; i < 55; i++)p.push(new P()); function draw() { ctx.clearRect(0, 0, W, H); p.forEach(pt => { ctx.beginPath(); ctx.arc(pt.x, pt.y, pt.r, 0, Math.PI * 2); ctx.fillStyle = `rgba(${pt.color},${pt.alpha})`; ctx.fill(); pt.x += pt.vx; pt.y += pt.vy; if (pt.y < -5) { pt.y = H + 5; pt.x = rand(0, W); } if (pt.x < -5) pt.x = W + 5; if (pt.x > W + 5) pt.x = -5; }); requestAnimationFrame(draw); } draw(); })();
+
+        // TILT 3D
+        document.querySelectorAll('.destino-card').forEach(card => { card.addEventListener('mousemove', e => { const r = card.getBoundingClientRect(), x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5; card.style.transform = `perspective(600px) rotateY(${x * 8}deg) rotateX(${-y * 6}deg) translateY(-8px)`; }); card.addEventListener('mouseleave', () => { card.style.transform = ''; }); });
+
+        // MARQUEE SPEED — velocidade constante, sem aceleração no scroll
+        // (efeito removido pois causava sensação de "corrida" excessiva)
+    </script>
+
+    <!-- ═══════════════════════════════════════ CHATBOT ══════════════════════════════════════ -->
+    <style>
+        #uai-chat-btn {
+            position: fixed;
+            bottom: 92px;
+            right: 24px;
+            z-index: 997;
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            background: none;
+            filter: drop-shadow(0 4px 14px rgba(0, 105, 120, .45));
+            transition: transform .3s ease;
+        }
+
+        #uai-chat-btn:hover {
+            transform: scale(1.1) rotate(-5deg);
+        }
+
+        #uai-chat-btn img {
+            width: 72px;
+            height: 72px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+        }
+
+        #uai-chat-notif {
+            position: fixed;
+            bottom: 174px;
+            right: 80px;
+            z-index: 998;
+            background: white;
+            border-radius: 14px 14px 4px 14px;
+            padding: 10px 14px;
+            font-size: .82rem;
+            font-weight: 600;
+            color: var(--text);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, .14);
+            white-space: nowrap;
+            animation: notifPop .5s ease 2s both;
+            pointer-events: none;
+        }
+
+        @keyframes notifPop {
+            from {
+                opacity: 0;
+                transform: translateY(8px) scale(.9);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        #uai-chat-window {
+            position: fixed;
+            bottom: 100px;
+            right: 24px;
+            z-index: 9990;
+            width: 340px;
+            max-height: 520px;
+            background: white;
+            border-radius: 24px;
+            box-shadow: 0 12px 56px rgba(0, 105, 120, .22);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            opacity: 0;
+            pointer-events: none;
+            transform: translateY(16px) scale(.97);
+            transition: opacity .3s ease, transform .3s ease;
+        }
+
+        #uai-chat-window.open {
+            opacity: 1;
+            pointer-events: all;
+            transform: translateY(0) scale(1);
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--teal-deeper), var(--teal));
+            padding: 14px 18px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .chat-header img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255, 255, 255, .4);
+            flex-shrink: 0;
+        }
+
+        .chat-header-info {
+            flex: 1;
+        }
+
+        .chat-header-name {
+            font-weight: 700;
+            font-size: .92rem;
+            color: white;
+        }
+
+        .chat-header-status {
+            font-size: .75rem;
+            color: rgba(255, 255, 255, .75);
+        }
+
+        .chat-close {
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, .7);
+            font-size: 1.3rem;
+            cursor: pointer;
+            line-height: 1;
+            padding: 2px 6px;
+            border-radius: 6px;
+            transition: color .2s;
+        }
+
+        .chat-close:hover {
+            color: white;
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 14px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            background: #f4f8f7;
+            max-height: 320px;
+        }
+
+        .chat-messages::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .chat-messages::-webkit-scrollbar-thumb {
+            background: rgba(0, 151, 167, .3);
+            border-radius: 2px;
+        }
+
+        .msg {
+            max-width: 82%;
+            font-size: .85rem;
+            line-height: 1.5;
+            padding: 10px 13px;
+            border-radius: 16px;
+            animation: msgIn .25s ease;
+        }
+
+        @keyframes msgIn {
+            from {
+                opacity: 0;
+                transform: translateY(6px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .msg.bot {
+            background: white;
+            color: var(--text);
+            border-radius: 4px 16px 16px 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .07);
+            align-self: flex-start;
+        }
+
+        .msg.user {
+            background: var(--teal);
+            color: white;
+            border-radius: 16px 16px 4px 16px;
+            align-self: flex-end;
+        }
+
+        .chat-suggestions {
+            padding: 8px 14px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            background: #f4f8f7;
+            border-top: 1px solid rgba(0, 151, 167, .1);
+        }
+
+        .sug-btn {
+            background: white;
+            border: 1px solid rgba(0, 151, 167, .25);
+            color: var(--teal-dark);
+            font-size: .74rem;
+            font-weight: 600;
+            padding: 5px 11px;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: background .2s, color .2s;
+            white-space: nowrap;
+        }
+
+        .sug-btn:hover {
+            background: var(--teal);
+            color: white;
+            border-color: var(--teal);
+        }
+
+        .sug-btn-whatsapp {
+            background: linear-gradient(135deg, #c8900a, #f5c200) !important;
+            color: #1a0900 !important;
+            border-color: #b07800 !important;
+            font-weight: 800 !important;
+            box-shadow: 0 2px 12px rgba(200, 144, 10, .35) !important;
+        }
+
+        .sug-btn-whatsapp:hover {
+            background: linear-gradient(135deg, #b07800, #e6a800) !important;
+            color: #000 !important;
+        }
+
+        .dc-btn-reserve {
+            background: linear-gradient(135deg, var(--amber), #e6950a) !important;
+            color: var(--text) !important;
+            font-weight: 700 !important;
+        }
+
+        .dc-btn-reserve:hover {
+            background: var(--amber-light) !important;
+        }
+
+        .chat-input-row {
+            display: flex;
+            gap: 8px;
+            padding: 12px 14px;
+            border-top: 1px solid rgba(0, 0, 0, .07);
+            background: white;
+        }
+
+        #uai-chat-input {
+            flex: 1;
+            border: 1.5px solid rgba(0, 151, 167, .25);
+            border-radius: 50px;
+            padding: 8px 14px;
+            font-size: .85rem;
+            font-family: inherit;
+            outline: none;
+            transition: border-color .2s;
+        }
+
+        #uai-chat-input:focus {
+            border-color: var(--teal);
+        }
+
+        #uai-chat-send {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: none;
+            background: var(--teal);
+            color: white;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .2s, transform .2s;
+            flex-shrink: 0;
+        }
+
+        #uai-chat-send:hover {
+            background: var(--teal-dark);
+            transform: scale(1.08);
+        }
+
+        .chat-typing {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            padding: 10px 13px;
+            background: white;
+            border-radius: 4px 16px 16px 16px;
+            align-self: flex-start;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, .07);
+            width: fit-content;
+        }
+
+        .chat-typing span {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: var(--teal);
+            opacity: .5;
+            animation: typeDot 1.2s infinite;
+        }
+
+        .chat-typing span:nth-child(2) {
+            animation-delay: .2s;
+        }
+
+        .chat-typing span:nth-child(3) {
+            animation-delay: .4s;
+        }
+
+        @keyframes typeDot {
+
+            0%,
+            80%,
+            100% {
+                opacity: .2;
+                transform: scale(.8);
+            }
+
+            40% {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @media (max-width: 480px) {
+            #uai-chat-window {
+                width: calc(100vw - 24px);
+                right: 12px;
+                bottom: 90px;
+            }
+
+            #uai-chat-btn {
+                right: 12px;
+                bottom: 90px;
+                width: 60px;
+                height: 60px;
+            }
+
+            #uai-chat-btn img {
+                width: 60px;
+                height: 60px;
+            }
+
+            #uai-chat-notif {
+                right: 68px;
+                bottom: 164px;
+            }
+        }
+    
+    <style>
+        .floating-wpp {
+            position: fixed;
+            bottom: 24px;
+            left: 24px;
+            width: 60px;
+            height: 60px;
+            background-color: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            box-shadow: 0 4px 14px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: transform 0.3s ease;
+        }
+        .floating-wpp:hover {
+            transform: scale(1.1);
+        }
+        @media (max-width: 480px) {
+            .floating-wpp {
+                bottom: 16px;
+                left: 16px;
+                width: 50px;
+                height: 50px;
+            }
+            .floating-wpp svg { padding: 4px; }
+        }
+    </style>
+    
+    <!-- Botão flutuante -->
+    <button id="uai-chat-btn" aria-label="Chat com o mascote da Uai Turismo" title="Tire suas dúvidas comigo!">
+        <img src="foto/Mascote Uai Chatbot.png" alt="Mascote Uai Turismo">
+    </button>
+    <div id="uai-chat-notif">Duvida? clique em mim!</div>
+
+    <!-- Janela do chat -->
+    <div id="uai-chat-window" role="dialog" aria-label="Chat Uai Turismo">
+        <div class="chat-header">
+            <img src="foto/Mascote Uai Chatbot.png" alt="Mascote">
+            <div class="chat-header-info">
+                <div class="chat-header-name">Assistente Uai Turismo</div>
+                <div class="chat-header-status">🟢 Online agora</div>
+            </div>
+            <button class="chat-close" id="uaiChatClose" aria-label="Fechar chat">✕</button>
+        </div>
+        <div class="chat-messages" id="uaiMsgs"></div>
+        <div class="chat-suggestions" id="uaiSugs">
+            <button class="sug-btn">📍 Quais destinos?</button>
+            <button class="sug-btn">🕐 Horários de saída</button>
+            <button class="sug-btn">✅ O que está incluso?</button>
+            <button class="sug-btn">💳 Como reservar?</button>
+            <button class="sug-btn">👨‍👩‍👧 Crianças pagam?</button>
+            <button class="sug-btn">🚐 Ônibus ou carro?</button>
+            <a href="https://wa.me/5581997484915?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais"
+                target="_blank" class="sug-btn sug-btn-whatsapp" id="sug-whatsapp">💬 Falar no WhatsApp</a>
+        </div>
+        <div class="chat-input-row">
+            <input type="text" id="uai-chat-input" placeholder="Escreva sua dúvida..." autocomplete="off"
+                maxlength="200">
+            <button id="uai-chat-send" aria-label="Enviar">➤</button>
+        </div>
+    </div>
+
+    <script>
+        (function () {
+            // ─── BASE DE CONHECIMENTO ───────────────────────────────────────────
+            const KB = [
+                {
+                    keys: ['destino', 'passeio', 'onde', 'roteiro', 'lugar', 'opcao', 'opção', 'tem', 'quais', 'opções'],
+                    answer: '🗺️ Trabalhamos com os seguintes destinos:\n\n📍 Praia dos Carneiros\n📍 Maragogi (AL)\n📍 Cabo de Santo Agostinho\n📍 Ilha de Santo Aleixo\n📍 São Miguel dos Milagres\n🏛️ City Tour Recife & Olinda\n\nTodos são passeios bate e volta saindo de Porto de Galinhas!'
+                },
+                {
+                    keys: ['horario', 'horário', 'saida', 'saída', 'sair', 'horas', 'manha', 'manhã', 'quando', 'que hora'],
+                    answer: '🕐 A saída é geralmente às <b>07:30</b> da manhã.\n\nPara <b>Maragogi</b> e <b>São Miguel dos Milagres</b>, dependendo da maré, pode ser necessário sair às <b>05:00</b>. O horário é definido pela tábua da maré para garantir o melhor aproveitamento! 🌊'
+                },
+                {
+                    keys: ['retorno', 'volta', 'chegada', 'chegar', 'voltar', 'termina', 'termino', 'fim'],
+                    answer: '🕒 O retorno acontece entre <b>15:00 e 15:30</b>.\n\nA chegada prevista em Porto de Galinhas é entre <b>17:30 e 18:00</b>. Saímos nesse horário para evitar rodovia à noite 😉'
+                },
+                {
+                    keys: ['incluso', 'inclui', 'incluido', 'incluído', 'contem', 'contém', 'tem o que', 'o que vem'],
+                    answer: '✅ Todos os passeios incluem:\n\n✓ Transporte ida e volta (buscamos na hospedagem)\n✓ Guiamento completo\n✓ Fotos de cortesia 📸 (enviadas após o passeio)\n\nConforme o destino:\n✨ Lancha — Carneiros e Maragogi\n✨ Buggy — Cabo de Santo Agostinho\n✨ Travessia em lancha — Ilha de Santo Aleixo\n✨ Jangada — São Miguel dos Milagres'
+                },
+                {
+                    keys: ['foto', 'fotos', 'camera', 'câmera', 'fotografia', 'cortesia'],
+                    answer: '📸 Sim! As <b>fotos de cortesia</b> estão inclusas em todos os passeios.\n\nEnviamos as fotos após o passeio, sem custo adicional!'
+                },
+                {
+                    keys: ['reserva', 'reservar', 'reservação', 'como faço', 'como reservo', 'garantir', 'vaga'],
+                    answer: '📲 Para reservar é simples!\n\n1. Entre em contato pelo WhatsApp: <b>(81) 99748-4915</b>\n2. Pedimos <b>30% como entrada</b> para garantir sua vaga\n3. Aceitamos <b>PIX, cartão e dinheiro</b>\n\nApós a confirmação, organizamos o roteiro conforme sua disponibilidade e a tábua da maré!'
+                },
+                {
+                    keys: ['pagamento', 'pagar', 'preco', 'preço', 'valor', 'quanto', 'custo', 'pix', 'cartao', 'cartão', 'dinheiro'],
+                    answer: '💳 Aceitamos:\n\n✓ PIX\n✓ Cartão (consulte condições)\n✓ Dinheiro\n\nPedimos <b>30% de entrada</b> para confirmação da reserva. Para saber os preços de cada passeio, entre em contato pelo WhatsApp: <b>(81) 99748-4915</b>'
+                },
+                {
+                    keys: ['criança', 'crianças', 'filho', 'filhos', 'bebe', 'bebê', 'menor', 'kid'],
+                    answer: '👶 Crianças até <b>5 anos têm cortesia!</b>\n\nAcima dessa idade, consulte pelo WhatsApp: (81) 99748-4915 — atendemos com muito carinho as famílias! 🌴'
+                },
+                {
+                    keys: ['onibus', 'ônibus', 'van', 'coletivo', 'lotado', 'grupo', 'outros'],
+                    answer: '🚐 <b>Não utilizamos ônibus ou vans coletivas!</b>\n\nTrabalhamos com <b>carros para até 6 passageiros</b>, de forma privativa ou compartilhada.\n\nIsso garante mais conforto, segurança e atenção do guia durante todo o passeio!'
+                },
+                {
+                    keys: ['privativo', 'privado', 'exclusivo', 'só nos', 'somente'],
+                    answer: '🔒 Sim! Oferecemos passeios <b>privativos</b>!\n\nNesse formato o carro é exclusivo para o seu grupo (até 6 pessoas), com total atenção do guia e horários mais flexíveis. Entre em contato para saber mais: (81) 99748-4915'
+                },
+                {
+                    keys: ['compartilhado', 'dividido', 'junto', 'outros clientes'],
+                    answer: '🤝 Nos passeios <b>compartilhados</b> você divide o transporte com outros clientes que vão ao mesmo destino.\n\nMesmo assim, o atendimento é próximo e personalizado — nunca em ônibus ou vans! Máximo 6 pessoas por carro.'
+                },
+                {
+                    keys: ['mare', 'maré', 'tabua', 'tábua', 'piscina', 'recife', 'quando é melhor'],
+                    answer: '🌊 A maré é quem define o melhor horário!\n\nAnalisamos a <b>tábua da maré</b> antes de cada passeio para garantir que vocês aproveitem ao máximo as piscinas naturais. Por isso, o horário de saída pode variar — mas sempre avisamos com antecedência!'
+                },
+                {
+                    keys: ['maragogi', 'caribe', 'galés', 'alagoas'],
+                    answer: '🌊 <b>Maragogi – o Caribe Brasileiro!</b>\n\nOferecemos dois roteiros:\n🏖️ <b>Barra Grande</b> — com o Caminho de Moisés (maré até 0.2)\n🌿 <b>Ponta de Mangue</b> — mais natural e tranquilo, realizável até maré 0.7\n\nIncluso: lancha + transporte + fotos + guia.\nSaída pode ser às 05:00 conforme a maré!'
+                },
+                {
+                    keys: ['carneiros', 'carneiro', 'igrejinha', 'formoso', 'rio'],
+                    answer: '⛵ <b>Praia dos Carneiros!</b>\n\nUm dos cenários mais fotogênicos do Nordeste — mar esmeralda, coqueiros e a famosa Igrejinha de São Benedito.\n\nIncluso: lancha + transporte + fotos + guia + tempo livre para almoço.'
+                },
+                {
+                    keys: ['milagres', 'sao miguel', 'são miguel', 'jangada', 'alagoas'],
+                    answer: '🐠 <b>São Miguel dos Milagres!</b>\n\nPasseio <b>exclusivamente privativo</b>! Praias desertas, piscinas naturais e natureza preservada — longe do turismo de massa.\n\nQuase sempre a saída é às <b>05:00 da manhã</b> para aproveitar ao máximo.\n\nIncluso: jangada + transporte + fotos + guiamento completo com orientações durante o trajeto e no destino.'
+                },
+                {
+                    keys: ['cabo', 'buggy', 'santo agostinho', 'porto galinhas buggy', 'galinhas buggy'],
+                    answer: '🚗 <b>Passeio de Buggy!</b>\n\nOferecemos dois roteiros de buggy:\n\n🏖️ <b>Porto de Galinhas</b> — ponta a ponta pelas praias do Balneário, paisagens paradisíacas e dunas incríveis!\n🌿 <b>Cabo de Santo Agostinho</b> — pontos históricos, praias belíssimas e mirantes em um roteiro único.\n\nIncluso: buggy + transporte + fotos + guiamento completo.\n💡 Dica: evite roupas claras no passeio de buggy!'
+                },
+                {
+                    keys: ['ilha', 'santo aleixo', 'travessia', 'lancha'],
+                    answer: '⛵ <b>Ilha de Santo Aleixo!</b>\n\nUm paraíso de águas cristalinas, formações rochosas únicas, trilha ecológica e as famosas piscinas naturais. Os turistas alimentam os esquilos — os guias ajudam no momento da alimentação! 🐿️\n\nIncluso: travessia em lancha + transporte + fotos + guiamento completo.'
+                },
+                {
+                    keys: ['recife', 'olinda', 'city tour', 'cultural', 'historico', 'histórico'],
+                    answer: '🏛️ <b>City Tour Recife & Olinda!</b>\n\nUm dia completo de cultura, história e paisagens incríveis, saindo de Porto de Galinhas.\n\nVisitamos diversos pontos históricos, conhecemos curiosidades culturais, com tempo reservado para almoço.'
+                },
+                {
+                    keys: ['cancelar', 'cancelamento', 'reagendar', 'remarcar', 'mudar data'],
+                    answer: '📅 Oferecemos flexibilidade para cancelar ou reagendar!\n\nEntre em contato pelo WhatsApp com antecedência: <b>(81) 99748-4915</b>.\n\nAtenção: após a reserva podem ocorrer pequenas alterações de datas/horários por logística ou condições naturais — mas sem alterar o que foi contratado!'
+                },
+                {
+                    keys: ['levar', 'mochila', 'roupa', 'protetor', 'equipamento', 'checklist', 'preparar', 'o que trazer'],
+                    answer: '🎒 O que levar no passeio:\n\n✓ Protetor solar e boné\n✓ Óculos de sol\n✓ Roupa de banho + toalha + chinelo\n✓ Dinheiro para alimentação\n✓ Para buggy: evite roupas claras!'
+                },
+                {
+                    keys: ['whatsapp', 'telefone', 'contato', 'ligar', 'numero', 'número', 'falar', 'atendimento'],
+                    answer: '📱 Fale com a gente!\n\n<b>WhatsApp: (81) 99748-4915</b>\n\nEstamos disponíveis para tirar todas as suas dúvidas e montar o roteiro perfeito para você! 🌴'
+                },
+                {
+                    keys: ['cadastur', 'cnpj', 'regularizado', 'empresa', 'legal', 'oficial', 'registro'],
+                    answer: '🛡️ A Uai Turismo é cadastrada no <b>CADASTUR</b> — sistema oficial do Ministério do Turismo do Brasil.\n\nCNPJ: 54.181.357/0001-42\n\nVoce pode viajar com total segurança jurídica e tranquilidade!'
+                },
+                {
+                    keys: ['porto galinhas', 'porto de galinhas', 'local', 'saída', 'base'],
+                    answer: '📍 Nossa base é em <b>Porto de Galinhas, PE</b>!\n\nTodos os nossos passeios saem daqui — buscamos você no local de hospedagem. Para o passeio de Porto de Galinhas, fazemos jangada até as piscinas naturais e/ou buggy pelo litoral.'
+                },
+                {
+                    keys: ['instagram', 'insta', 'social', 'rede', '@'],
+                    answer: '📸 Nos siga no Instagram!\n\n<b>@uai_turismo</b>\n\nLá você encontra fotos e vídeos reais dos nossos passeios!'
+                }
+            ];
+
+            const DEFAULT = '🤔 Não encontrei uma resposta exata para isso!\n\nPara informações detalhadas, fale com a gente pelo WhatsApp: <b>(81) 99748-4915</b> — será um prazer te ajudar! 🌴';
+
+            function findAnswer(text) {
+                const t = text.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                let best = null, bestScore = 0;
+                for (const item of KB) {
+                    let score = 0;
+                    for (const k of item.keys) {
+                        const kn = k.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                        if (t.includes(kn)) score += 2;
+                        else if (kn.split(' ').some(w => t.includes(w) && w.length > 3)) score += 1;
+                    }
+                    if (score > bestScore) { bestScore = score; best = item; }
+                }
+                return bestScore >= 1 ? best.answer : DEFAULT;
+            }
+
+            // ─── UI ────────────────────────────────────────────────────────────
+            const btn = document.getElementById('uai-chat-btn');
+            const win = document.getElementById('uai-chat-window');
+            const closeBtn = document.getElementById('uaiChatClose');
+            const msgs = document.getElementById('uaiMsgs');
+            const input = document.getElementById('uai-chat-input');
+            const send = document.getElementById('uai-chat-send');
+            const sugs = document.getElementById('uaiSugs');
+            const notif = document.getElementById('uai-chat-notif');
+
+            let opened = false;
+
+            function toggleChat() {
+                opened = !opened;
+                win.classList.toggle('open', opened);
+                if (notif) notif.style.display = 'none';
+                if (opened && msgs.children.length === 0) {
+                    addMsg('bot', 'Olá! 👋 Sou a assistente da <b>Uai Turismo</b>!\n\nPosso te ajudar com informações sobre nossos <b>passeios, destinos, horários e reservas</b>. O que quer saber?');
+                }
+                if (opened) setTimeout(() => input.focus(), 300);
+            }
+
+            function addMsg(type, text) {
+                const el = document.createElement('div');
+                el.className = 'msg ' + type;
+                el.innerHTML = text.replace(/\n/g, '<br>');
+                msgs.appendChild(el);
+                msgs.scrollTop = msgs.scrollHeight;
+                return el;
+            }
+
+            function showTyping() {
+                const t = document.createElement('div');
+                t.className = 'chat-typing';
+                t.id = 'typingIndicator';
+                t.innerHTML = '<span></span><span></span><span></span>';
+                msgs.appendChild(t);
+                msgs.scrollTop = msgs.scrollHeight;
+            }
+
+            function removeTyping() {
+                const t = document.getElementById('typingIndicator');
+                if (t) t.remove();
+            }
+
+            function sendMessage(text) {
+                text = text.trim();
+                if (!text) return;
+                addMsg('user', text);
+                input.value = '';
+                sugs.style.display = 'none';
+                showTyping();
+                setTimeout(() => {
+                    removeTyping();
+                    addMsg('bot', findAnswer(text));
+                    // Sempre reapresenta as sugestões após cada resposta
+                    setTimeout(() => { sugs.style.display = 'flex'; sugs.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }, 300);
+                }, 800 + Math.random() * 600);
+            }
+
+            btn.addEventListener('click', toggleChat);
+            closeBtn.addEventListener('click', () => { opened = false; win.classList.remove('open'); });
+            send.addEventListener('click', () => sendMessage(input.value));
+            input.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(input.value); });
+
+            sugs.querySelectorAll('.sug-btn').forEach(b => {
+                b.addEventListener('click', () => sendMessage(b.textContent.replace(/^[^\w]+/, '')));
+            });
+
+            // Esconde notificação ao rolar
+            setTimeout(() => { if (notif) notif.style.opacity = '0'; }, 6000);
+        })();
+    </script>
+
+    
+    
+</body>
+
+
+<style>
+    /* Desativa o cursor personalizado em dispositivos touch para evitar bugs de clique */
+    @media (pointer: coarse) {
+
+        #cursor-dot,
+        #cursor-ring {
+            display: none !important;
+        }
+
+        * {
+            cursor: auto !important;
+        }
+    }
+</style>
+
+<!-- CARROSSEL 3 CARDS – JS -->
+<script>
+    (function () {
+        var track = document.getElementById('rc3-track');
+        var viewport = document.getElementById('rc3-viewport');
+        var prev = document.getElementById('rc3-prev');
+        var next = document.getElementById('rc3-next');
+        var dotsEl = document.getElementById('rc3-dots');
+        if (!track) return;
+
+        var cards = track.querySelectorAll('.rc3-card');
+        var total = cards.length;
+        var cur = 0;
+
+        function getVis() {
+            var w = window.innerWidth;
+            if (w <= 600) return 1;
+            if (w <= 900) return 2;
+            return 3;
+        }
+
+        function getCardW() {
+            if (!cards[0]) return 0;
+            var gap = 24;
+            var vis = getVis();
+            var vw = viewport.getBoundingClientRect().width;
+            return (vw - gap * (vis - 1)) / vis + gap;
+        }
+
+        function getPages() {
+            return Math.ceil(total / getVis());
+        }
+
+        function buildDots() {
+            if (!dotsEl) return;
+            var pages = getPages();
+            dotsEl.innerHTML = '';
+            for (var i = 0; i < pages; i++) {
+                var d = document.createElement('button');
+                d.className = 'rc3-dot' + (i === 0 ? ' active' : '');
+                d.setAttribute('aria-label', 'Página ' + (i + 1));
+                (function (idx) { d.addEventListener('click', function () { goTo(idx * getVis()); }); })(i);
+                dotsEl.appendChild(d);
+            }
+        }
+
+        function updateDots() {
+            if (!dotsEl) return;
+            var dots = dotsEl.querySelectorAll('.rc3-dot');
+            var page = Math.floor(cur / getVis());
+            dots.forEach(function (d, i) { d.classList.toggle('active', i === page); });
+        }
+
+        function update() {
+            var offset = cur * getCardW();
+            track.style.transform = 'translateX(-' + offset + 'px)';
+            if (prev) prev.disabled = false;
+            if (next) next.disabled = false;
+            updateDots();
+        }
+
+        function goTo(i) {
+            var vis = getVis();
+            var maxCur = Math.max(0, total - vis);
+            if (i > maxCur) i = 0;
+            if (i < 0) i = maxCur;
+            cur = i;
+            update();
+        }
+
+        if (prev) prev.addEventListener('click', function () { goTo(cur - 1); });
+        if (next) next.addEventListener('click', function () { goTo(cur + 1); });
+
+        // Touch swipe
+        var tx = 0;
+        track.addEventListener('touchstart', function (e) { tx = e.touches[0].clientX; }, { passive: true });
+        track.addEventListener('touchend', function (e) {
+            var d = tx - e.changedTouches[0].clientX;
+            if (Math.abs(d) > 50) goTo(d > 0 ? cur + 1 : cur - 1);
+        });
+
+        window.addEventListener('resize', function () {
+            buildDots();
+            update();
+        });
+
+        buildDots();
+        update();
+
+        // Autoplay Loop
+        var autoPlayLoop = setInterval(function() { goTo(cur + 1); }, 3500);
+        track.closest('.rc3-outer').addEventListener('mouseenter', function() { clearInterval(autoPlayLoop); });
+        track.closest('.rc3-outer').addEventListener('mouseleave', function() { autoPlayLoop = setInterval(function() { goTo(cur + 1); }, 3500); });
+        
+    })();
+</script>
+
+</html>
