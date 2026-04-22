@@ -656,6 +656,24 @@
         height: 36px;
         font-size: .9rem;
       }
+
+      /* Fix roteiro mobile */
+      .pinc li {
+        flex-direction: column;
+        gap: 4px;
+      }
+      .pinc li .ii {
+        margin-top: 0;
+      }
+      .pinc li span:last-child {
+        padding-left: 0;
+      }
+      .pbody {
+        padding: 36px 4%;
+      }
+      .pinc {
+        padding: 22px 18px;
+      }
     }
 
     <style id="nav-mobile-fix">@media (max-width: 768px) {
@@ -821,7 +839,7 @@
                   <img src="foto/carneiros/Carneiros 1.jpeg" alt="Praia dos Carneiros foto 1" loading="lazy">
                 </div>
                 <div class="pcs">
-                  <img src="foto/carneiros/image-18.jpeg" alt="Praia dos Carneiros foto 2" loading="lazy">
+                  <img src="foto/carneiros/Foto capa passeio, galeria - Carneiros.jpeg" alt="Praia dos Carneiros foto 2" loading="lazy">
                 </div>
                 <div class="pcs">
                   <img src="foto/carneiros/image-17.jpeg" alt="Praia dos Carneiros foto 3" loading="lazy">
@@ -873,6 +891,20 @@
           </ul>
         </div>
 
+
+        <!-- DICAS PARA O PASSEIO -->
+        <div class="pinc" style="background: linear-gradient(135deg, #e8f6f9 0%, #d0eef5 100%); border: 1px solid #a0d9e8; border-radius: 20px; padding: 32px 28px; margin-bottom: 24px;">
+          <h3 style="font-family: 'Playfair Display', serif; font-size: 1.15rem; color: #004D5C; margin-bottom: 18px;">💡 Dicas para o Passeio</h3>
+          <ul style="list-style: none; display: flex; flex-direction: column; gap: 10px;">
+            <li style="display: flex; align-items: flex-start; gap: 10px; font-size: .91rem; color: #2a5a66;"><span style="flex-shrink:0;">☀️</span> Use protetor solar e reaplique ao longo do dia (mesmo nublado, o sol queima forte)</li>
+            <li style="display: flex; align-items: flex-start; gap: 10px; font-size: .91rem; color: #2a5a66;"><span style="flex-shrink:0;">💧</span> Leve água — o calor é intenso</li>
+            <li style="display: flex; align-items: flex-start; gap: 10px; font-size: .91rem; color: #2a5a66;"><span style="flex-shrink:0;">👕</span> Vá com roupa leve, já com roupa de banho por baixo e leve roupa seca para a volta</li>
+            <li style="display: flex; align-items: flex-start; gap: 10px; font-size: .91rem; color: #2a5a66;"><span style="flex-shrink:0;">🏖️</span> Leve toalha ou canga</li>
+            <li style="display: flex; align-items: flex-start; gap: 10px; font-size: .91rem; color: #2a5a66;"><span style="flex-shrink:0;">👟</span> Use chinelo ou sandália confortável</li>
+            <li style="display: flex; align-items: flex-start; gap: 10px; font-size: .91rem; color: #2a5a66;"><span style="flex-shrink:0;">🕶️</span> Leve óculos de sol e boné/chapéu</li>
+            <li style="display: flex; align-items: flex-start; gap: 10px; font-size: .91rem; color: #2a5a66;"><span style="flex-shrink:0;">📱</span> Proteja o celular com capa à prova d'água</li>
+          </ul>
+        </div>
         <!-- DICAS -->
         
       </div>
@@ -902,7 +934,7 @@
           </a>
         </div>
 
-        <a href="index.html#destinos" class="back-link">← Ver todos os destinos</a>
+        <button onclick="(function(){var d=['passeio-porto-de-galinhas.html','passeio-maragogi.html','passeio-maragogi-ponta-de-mangue.html','passeio-carneiros.html','passeio-cabo-santo-agostinho.html','passeio-ilha-santo-aleixo.html','passeio-milagres.html','passeio-city-tour.html'];var cur=window.location.pathname.split('/').pop();var opts=d.filter(function(x){return x!==cur;});window.location.href=opts[Math.floor(Math.random()*opts.length)];})();" class="back-link" style="background:none;border:none;cursor:pointer;padding:0;font-family:inherit;">← Ver todos os destinos</a>
       </div>
 
     </div>
@@ -921,13 +953,13 @@
       <div class="rc-viewport">
         <div class="rc-track" id="rc-track">
           <div class="rc-card"><img src="foto/Passeio Buggy - Porto de Galinhas/image-8.jpeg" alt="Porto de Galinhas" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Pernambuco</span><h4>Porto de Galinhas – Buggy</h4><a href="passeio-porto-de-galinhas.html">Ver passeio &rarr;</a></div></div>
-          <div class="rc-card"><img src="foto/Maragogi - Barra Grande/image-7.jpeg" alt="Maragogi – Barra Grande" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Alagoas</span><h4>Maragogi – Barra Grande</h4><a href="passeio-maragogi.html">Ver passeio &rarr;</a></div></div>
+          <div class="rc-card"><img src="foto/Maragogi - Barra Grande/Foto Capa passeio, galeria - Maragogi Barra Grande.jpeg" alt="Maragogi – Barra Grande" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Alagoas</span><h4>Maragogi – Barra Grande</h4><a href="passeio-maragogi.html">Ver passeio &rarr;</a></div></div>
           <div class="rc-card"><img src="foto/Maragogi - Ponta de Mangue/image-8.jpeg" alt="Maragogi – Ponta de Mangue" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Alagoas</span><h4>Maragogi – Ponta de Mangue</h4><a href="passeio-maragogi-ponta-de-mangue.html">Ver passeio &rarr;</a></div></div>
-          <div class="rc-card"><img src="foto/carneiros/image-18.jpeg" alt="Praia dos Carneiros" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Pernambuco</span><h4>Praia dos Carneiros</h4><a href="passeio-carneiros.html">Ver passeio &rarr;</a></div></div>
+          <div class="rc-card"><img src="foto/carneiros/Foto capa passeio, galeria - Carneiros.jpeg" alt="Praia dos Carneiros" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Pernambuco</span><h4>Praia dos Carneiros</h4><a href="passeio-carneiros.html">Ver passeio &rarr;</a></div></div>
           <div class="rc-card"><img src="foto/Cabo de Santo Agostinho Passeios de Buggy/image-1.jpeg" alt="Cabo de Santo Agostinho" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Pernambuco</span><h4>Cabo de Santo Agostinho – Buggy</h4><a href="passeio-cabo-santo-agostinho.html">Ver passeio &rarr;</a></div></div>
-          <div class="rc-card"><img src="foto/Santo Aleixo/image-10.jpeg" alt="Ilha de Santo Aleixo" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Pernambuco</span><h4>Ilha de Santo Aleixo</h4><a href="passeio-ilha-santo-aleixo.html">Ver passeio &rarr;</a></div></div>
-          <div class="rc-card"><img src="foto/milagres/IMG_0303.jpg" alt="São Miguel dos Milagres" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Alagoas</span><h4>São Miguel dos Milagres</h4><a href="passeio-milagres.html">Ver passeio &rarr;</a></div></div>
-          <div class="rc-card"><img src="foto/Citytour Recife e Olinda/principal.jpeg" alt="City Tour Recife e Olinda" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Pernambuco</span><h4>City Tour Recife &amp; Olinda</h4><a href="passeio-city-tour.html">Ver passeio &rarr;</a></div></div>
+          <div class="rc-card"><img src="foto/Santo Aleixo/Foto galeria e capa do passeio - Ilha de Santo Aleixo.jpg" alt="Ilha de Santo Aleixo" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Pernambuco</span><h4>Ilha de Santo Aleixo</h4><a href="passeio-ilha-santo-aleixo.html">Ver passeio &rarr;</a></div></div>
+          <div class="rc-card"><img src="foto/milagres/Foto capa passeio, galeria - Milagres.jpeg" alt="São Miguel dos Milagres" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Alagoas</span><h4>São Miguel dos Milagres</h4><a href="passeio-milagres.html">Ver passeio &rarr;</a></div></div>
+          <div class="rc-card"><img src="foto/Citytour Recife e Olinda/Foto capa passeio e galeria - Citytour.jpg" alt="City Tour Recife e Olinda" loading="lazy"><div class="rc-overlay"><span class="rc-tag">Pernambuco</span><h4>City Tour Recife &amp; Olinda</h4><a href="passeio-city-tour.html">Ver passeio &rarr;</a></div></div>
         </div>
       </div>
       <button class="rc-next-btn" id="rc-next" aria-label="Próximo">&#8594;</button>
