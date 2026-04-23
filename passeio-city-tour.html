@@ -182,7 +182,7 @@
           <div class="pcframe">
             <div class="pc" id="pc-citytour">
               <div class="pctrack" id="pct-citytour">
-                <div class="pcs"><img src="foto/Citytour Recife e Olinda/Foto Carrossel - Citytour.JPEG" alt="City Tour Recife e Olinda" loading="lazy"></div>
+                <div class="pcs"><img src="foto/Citytour Recife e Olinda/Foto capa passeio e galeria - Citytour.jpg" alt="City Tour Recife e Olinda" loading="lazy"></div>
                 <div class="pcs"><img src="foto/Citytour Recife e Olinda/Foto Carrossel - Citytour.JPEG" alt="City Tour Recife e Olinda" loading="lazy"></div>
                 <div class="pcs"><img src="foto/Citytour Recife e Olinda/image-4.jpeg" alt="City Tour" loading="lazy"></div>
                 <div class="pcs">
@@ -309,18 +309,19 @@
     function update() {
       var vis = getVis();
       var maxCur = Math.max(0, total - vis);
-      if (cur > maxCur) cur = maxCur;
+      if (cur > maxCur) cur = 0;
+      if (cur < 0) cur = maxCur;
       track.style.transform = 'translateX(-' + (cur * getCardW()) + 'px)';
-      if (prev) prev.disabled = cur <= 0;
-      if (next) next.disabled = cur >= maxCur;
+      if (prev) prev.disabled = false;
+      if (next) next.disabled = false;
     }
-    if (prev) prev.addEventListener('click', function() { if (cur > 0) { cur--; update(); } });
-    if (next) next.addEventListener('click', function() { var maxCur = Math.max(0, total - getVis()); if (cur < maxCur) { cur++; update(); } });
+    if (prev) prev.addEventListener('click', function() { cur--; update(); });
+    if (next) next.addEventListener('click', function() { cur++; update(); });
     var tx = 0;
     track.addEventListener('touchstart', function(e) { tx = e.touches[0].clientX; }, { passive: true });
     track.addEventListener('touchend', function(e) {
       var d = tx - e.changedTouches[0].clientX;
-      if (Math.abs(d) > 40) { if (d > 0) { cur = Math.min(cur + 1, total - getVis()); } else { cur = Math.max(cur - 1, 0); } update(); }
+      if (Math.abs(d) > 40) { if (d > 0) { cur++; } else { cur--; } update(); }
     });
     window.addEventListener('resize', update);
     update();
@@ -330,7 +331,10 @@
   <footer class="main-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <div style="display:flex;align-items:center;gap:4px;font-family:'Playfair Display',serif;font-size:1.4rem;line-height:1;margin-bottom:10px;"><span style="color:var(--amber-light);font-weight:900;font-style:italic;">Uai</span><span style="color:rgba(255,255,255,.85);font-weight:900;font-style:italic;">Turismo</span></div>
+        <div class="footer-logo-text" style="display:flex;align-items:center;gap:6px;font-family:'Playfair Display',serif;font-size:1.8rem;line-height:1;margin-bottom:10px;">
+          <span style="color:var(--amber-light);font-weight:800;font-style:italic;">Uai</span>
+          <span style="color:white;font-weight:800;font-style:italic;">Turismo</span>
+        </div>
         <p>Passeios privativos e compartilhados,<br>Buggy em Pernambuco e Alagoas.</p>
         <p style="margin-top:8px;font-size:.78rem;color:rgba(255,255,255,.4);">CNPJ: 54.181.357/0001-42<br>MARCOS VINICIUS SILVA SOUZA</p>
       </div>

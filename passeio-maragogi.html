@@ -807,7 +807,7 @@
   <!-- HERO -->
   <section class="ph">
     <div class="phc">
-      <span class="ph-emoji"></span>
+      <span class="ph-emoji">🏖️</span>
       <h1>Maragogi - Barra Grande<br><span>o Caribe Brasileiro em Alagoas</span></h1>
       <p class="ph-sub">O Caribe Brasileiro, onde o mar ganha tons de azul e verde, com piscinas naturais repletas de peixes coloridos para explorar e se apaixonar. Um cenário que hipnotiza, onde a água morninha convida para mergulhos sem pressa e cada parada revela um novo encantamento.</p>
       <div class="ph-badges">
@@ -851,7 +851,7 @@
               <button class="pcprev" id="pcp-maragogi" aria-label="Anterior">&#8592;</button>
               <button class="pcnext" id="pcn-maragogi" aria-label="Próxima">&#8594;</button>
               <div class="pccount" id="pcc-maragogi">1 / 4</div>
-              <div class="pccap">📍 Maragogi</div>
+              <div class="pccap">📍 Barra Grande - Maragogi</div>
             </div>
           </div>
           <div class="pcdots" id="pcd-maragogi"><button class="pcd active" data-i="0"
@@ -981,18 +981,19 @@
     function update() {
       var vis = getVis();
       var maxCur = Math.max(0, total - vis);
-      if (cur > maxCur) cur = maxCur;
+      if (cur > maxCur) cur = 0;
+      if (cur < 0) cur = maxCur;
       track.style.transform = 'translateX(-' + (cur * getCardW()) + 'px)';
-      if (prev) prev.disabled = cur <= 0;
-      if (next) next.disabled = cur >= maxCur;
+      if (prev) prev.disabled = false;
+      if (next) next.disabled = false;
     }
-    if (prev) prev.addEventListener('click', function() { if (cur > 0) { cur--; update(); } });
-    if (next) next.addEventListener('click', function() { var maxCur = Math.max(0, total - getVis()); if (cur < maxCur) { cur++; update(); } });
+    if (prev) prev.addEventListener('click', function() { cur--; update(); });
+    if (next) next.addEventListener('click', function() { cur++; update(); });
     var tx = 0;
     track.addEventListener('touchstart', function(e) { tx = e.touches[0].clientX; }, { passive: true });
     track.addEventListener('touchend', function(e) {
       var d = tx - e.changedTouches[0].clientX;
-      if (Math.abs(d) > 40) { if (d > 0) { cur = Math.min(cur + 1, total - getVis()); } else { cur = Math.max(cur - 1, 0); } update(); }
+      if (Math.abs(d) > 40) { if (d > 0) { cur++; } else { cur--; } update(); }
     });
     window.addEventListener('resize', update);
     update();
@@ -1003,9 +1004,9 @@
   <footer class="main-footer">
     <div class="footer-inner">
       <div class="footer-brand">
-        <div class="footer-logo-text" style="display:flex;align-items:center;gap:4px;font-family:'Playfair Display',serif;font-size:1.4rem;line-height:1;margin-bottom:10px;">
-          <span style="color:var(--amber-light);font-weight:900;font-style:italic;">Uai</span>
-          <span style="color:rgba(255,255,255,.85);font-weight:900;font-style:italic;">Turismo</span>
+        <div class="footer-logo-text" style="display:flex;align-items:center;gap:6px;font-family:'Playfair Display',serif;font-size:1.8rem;line-height:1;margin-bottom:10px;">
+          <span style="color:var(--amber-light);font-weight:800;font-style:italic;">Uai</span>
+          <span style="color:white;font-weight:800;font-style:italic;">Turismo</span>
         </div>
         <p>Passeios privativos e compartilhados,<br>Buggy em Pernambuco e Alagoas.</p>
         <p style="margin-top:8px;font-size:.78rem;color:rgba(255,255,255,.4);">CNPJ: 54.181.357/0001-42<br>MARCOS VINICIUS SILVA SOUZA</p>

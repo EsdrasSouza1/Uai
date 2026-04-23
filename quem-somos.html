@@ -83,14 +83,20 @@
         }
 
         .preloader-logo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-size: 2rem;
+            font-weight: 800;
+            font-style: italic;
             color: white;
-            letter-spacing: .04em;
+            letter-spacing: 0;
         }
 
         .preloader-logo span {
             color: var(--amber-light);
+            font-weight: 800;
             font-style: italic;
         }
 
@@ -745,8 +751,10 @@
     <footer class="main-footer">
         <div class="footer-inner">
             <div class="footer-brand">
-                <div class="footer-logo-text"><span class="logo-uai">Uai</span><span class="logo-turismo">
-                        Turismo</span></div>
+                <div class="footer-logo-text" style="display:flex;align-items:center;gap:6px;font-family:'Playfair Display',serif;font-size:1.8rem;line-height:1;margin-bottom:10px;">
+          <span style="color:var(--amber-light);font-weight:800;font-style:italic;">Uai</span>
+          <span style="color:white;font-weight:800;font-style:italic;">Turismo</span>
+        </div>
                 <p>Passeios privativos e compartilhados,<br>Buggy em Pernambuco e Alagoas.</p>
                 <p style="margin-top:8px;font-size:.76rem;color:rgba(255,255,255,.35);">CNPJ:
                     54.181.357/0001-42<br>MARCOS VINICIUS SILVA SOUZA</p>
@@ -843,7 +851,7 @@
     <style>
         #uai-chat-btn {
             position: fixed;
-            bottom: 92px;
+            bottom: 24px;
             right: 24px;
             z-index: 997;
             width: 72px;
@@ -871,8 +879,8 @@
 
         #uai-chat-notif {
             position: fixed;
-            bottom: 174px;
-            right: 80px;
+            bottom: 110px;
+            right: 86px;
             z-index: 998;
             background: white;
             border-radius: 14px 14px 4px 14px;
@@ -900,7 +908,7 @@
 
         #uai-chat-window {
             position: fixed;
-            bottom: 100px;
+            bottom: 32px;
             right: 24px;
             z-index: 9990;
             width: 340px;
@@ -1170,12 +1178,12 @@
             #uai-chat-window {
                 width: calc(100vw - 24px);
                 right: 12px;
-                bottom: 90px;
+                bottom: 24px;
             }
 
             #uai-chat-btn {
-                right: 12px;
-                bottom: 90px;
+                right: 16px;
+                bottom: 20px;
                 width: 60px;
                 height: 60px;
             }
@@ -1186,8 +1194,8 @@
             }
 
             #uai-chat-notif {
-                right: 68px;
-                bottom: 164px;
+                right: 70px;
+                bottom: 90px;
             }
         }
     

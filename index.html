@@ -101,14 +101,20 @@
         }
 
         .preloader-logo {
+            display: flex;
+            align-items: center;
+            gap: 6px;
             font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
+            font-size: 2rem;
+            font-weight: 800;
+            font-style: italic;
             color: white;
-            letter-spacing: .04em;
+            letter-spacing: 0;
         }
 
         .preloader-logo span {
             color: var(--amber-light);
+            font-weight: 800;
             font-style: italic;
         }
 
@@ -547,7 +553,7 @@
                 <h1 id="heroTitle">Sua jornada<br><span>inesquecível</span><br>começa aqui</h1>
                 <p id="heroP">Os melhores roteiros da região de Porto de Galinhas. <strong> Maragogi, Carneiros,
                         Milagres e muito mais!</strong>
-                    — passeios compartilhados e privativos, com atendimento próximo, personalizado e fotos de cortesia
+                    Passeios compartilhados e privativos, com atendimento próximo, personalizado e fotos de cortesia
                     inclusas.</p>
                 <div class="hero-actions" id="heroActions">
                     <a href="https://wa.me/5581997484915?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais"
@@ -651,12 +657,12 @@
                 <!-- Text -->
                 <div style="flex: 1; min-width: 320px; text-align: center; color: white;">
                     <h2
-                        style="font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4vw, 2.8rem); font-weight: 900; line-height: 1.35; margin: 0; letter-spacing: -0.02em;">
-                        <span style="color: var(--amber, #F5A800);">Experiências</span><br>
-                        inesquecíveis no<br>
-                        litoral Sul de<br>
-                        <span style="color: var(--amber, #F5A800);">Pernambuco</span> e Norte<br>
-                        de <span style="color: var(--amber, #F5A800);">Alagoas!</span>
+                        style="font-family: 'Playfair Display', serif; font-size: clamp(2.2rem, 4.5vw, 3.8rem); line-height: 1.12; margin: 0; font-weight: normal;">
+                        Experiências<br>
+                        <span style="color: var(--amber-light, #FFD166); font-style: italic;">inesquecíveis</span><br>
+                        no litoral Sul de<br>
+                        <span style="color: var(--amber-light, #FFD166); font-style: italic;">Pernambuco</span> e Norte<br>
+                        de <span style="color: var(--amber-light, #FFD166); font-style: italic;">Alagoas!</span>
                     </h2>
                 </div>
             </div>
@@ -666,15 +672,15 @@
                 style="display: flex; gap: 16px; flex-wrap: wrap; justify-content: center; margin-top: 10px; margin-bottom: 20px;">
                 <a href="https://wa.me/5581997484915?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais"
                     target="_blank"
-                    style="background: #25D366; color: white; padding: 14px 36px; border-radius: 50px; font-weight: 800; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; text-transform: uppercase; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);"
+                    style="background: #25D366; color: white; padding: 14px 36px; border-radius: 50px; font-weight: 700; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; text-decoration: none; transition: transform 0.2s, box-shadow 0.2s; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);"
                     onmouseover="this.style.transform='scale(1.05)'"
-                    onmouseout="this.style.transform='scale(1)'">Reserve Já</a>
+                    onmouseout="this.style.transform='scale(1)'">Reserve já</a>
 
                 <a href="#destinos"
-                    style="background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.8); color: white; padding: 12px 36px; border-radius: 50px; font-weight: 800; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; text-transform: uppercase; text-decoration: none; transition: all 0.2s; backdrop-filter: blur(5px);"
+                    style="background: rgba(255,255,255,0.05); border: 2px solid rgba(255,255,255,0.8); color: white; padding: 12px 36px; border-radius: 50px; font-weight: 700; font-family: 'DM Sans', sans-serif; font-size: 0.95rem; text-decoration: none; transition: all 0.2s; backdrop-filter: blur(5px);"
                     onmouseover="this.style.background='white'; this.style.color='#006978';"
                     onmouseout="this.style.background='rgba(255,255,255,0.05)'; this.style.color='white';">Ver
-                    Passeios</a>
+                    passeios</a>
             </div>
         </section>
 
@@ -1221,7 +1227,7 @@
             </div>
             <div class="diferencial-card" data-aos="fade-up" data-aos-delay="400"><span
                     class="diferencial-num">05</span>
-                <div class="diferencial-icon"></div>
+                <div class="diferencial-icon">🧭</div>
                 <h4>Roteiros Personalizados</h4>
                 <p>Montamos o passeio ideal para o seu grupo — horários, destinos e ritmo do seu jeito.</p>
             </div>
@@ -1407,7 +1413,7 @@
             </div>
             <div class="faq-cta" data-aos="fade-up">
                 <div class="faq-cta-inner">
-                    <span class="faq-cta-emoji">🐢</span>
+                    <img src="foto/boneco_confuso.PNG" alt="Dúvida" style="width: 70px; height: auto; flex-shrink: 0; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));">
                     <div class="faq-cta-text"><strong>Tem outra dúvida?</strong><span>Nos chame no WhatsApp, estamos
                             prontos para te ajudar!</span></div>
                     <a href="https://wa.me/5581997484915?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais"
@@ -1427,11 +1433,10 @@
     <footer class="main-footer">
         <div class="footer-inner">
             <div class="footer-brand">
-                <div class="footer-logo-text"
-                    style="display:flex;align-items:center;gap:4px;font-family:'Playfair Display',serif;font-size:1.4rem;line-height:1;margin-bottom:10px;">
-                    <span style="color:var(--amber-light);font-weight:900;font-style:italic;">Uai</span>
-                    <span style="color:rgba(255,255,255,.85);font-weight:900;font-style:italic;">Turismo</span>
-                </div>
+                <div class="footer-logo-text" style="display:flex;align-items:center;gap:6px;font-family:'Playfair Display',serif;font-size:1.8rem;line-height:1;margin-bottom:10px;">
+          <span style="color:var(--amber-light);font-weight:800;font-style:italic;">Uai</span>
+          <span style="color:white;font-weight:800;font-style:italic;">Turismo</span>
+        </div>
                 <p>Passeios privativos e compartilhados,<br>Buggy em Pernambuco e Alagoas.</p>
                 <p style="margin-top:8px;font-size:.76rem;color:rgba(255,255,255,.35);">CNPJ:
                     54.181.357/0001-42<br>MARCOS VINICIUS SILVA SOUZA</p>
@@ -1535,7 +1540,7 @@
     <style>
         #uai-chat-btn {
             position: fixed;
-            bottom: 92px;
+            bottom: 24px;
             right: 24px;
             z-index: 997;
             width: 85px;
@@ -1563,7 +1568,7 @@
 
         #uai-chat-notif {
             position: fixed;
-            bottom: 178px;
+            bottom: 110px;
             right: 86px;
             z-index: 998;
             background: white;
@@ -1592,7 +1597,7 @@
 
         #uai-chat-window {
             position: fixed;
-            bottom: 100px;
+            bottom: 32px;
             right: 24px;
             z-index: 9990;
             width: 340px;
@@ -1862,12 +1867,12 @@
             #uai-chat-window {
                 width: calc(100vw - 24px);
                 right: 12px;
-                bottom: 90px;
+                bottom: 24px;
             }
 
             #uai-chat-btn {
-                right: 12px;
-                bottom: 90px;
+                right: 16px;
+                bottom: 20px;
                 width: 65px;
                 height: 65px;
             }
@@ -1878,8 +1883,8 @@
             }
 
             #uai-chat-notif {
-                right: 68px;
-                bottom: 160px;
+                right: 70px;
+                bottom: 90px;
             }
         }
 
