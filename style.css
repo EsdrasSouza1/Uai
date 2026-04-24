@@ -50,7 +50,7 @@ html {
 body {
   font-family: 'DM Sans', sans-serif;
   color: var(--text);
-  background: var(--white);
+  background: var(--teal-deeper);
   overflow-x: hidden;
   max-width: 100vw;
 }
@@ -96,6 +96,19 @@ a { text-decoration: none; }
 .diferenciais-grid,
 .cadastur-inner,
 .section-header { position: relative; z-index: var(--z-base); }
+
+/* Conteúdo por cima das silhuetas decorativas */
+.rc3-section,
+.section-header,
+.destinos-intro,
+.diferenciais-grid,
+.avaliacoes-wrapper,
+.faq-wrapper,
+.faq-cta {
+  position: relative;
+  z-index: var(--z-base);
+}
+
 
 /* ============================================
    UTILITÁRIOS
@@ -960,6 +973,8 @@ a { text-decoration: none; }
 .diferenciais-section {
   padding: 100px 5%;
   background: var(--white);
+  position: relative;
+  overflow: hidden;
 }
 
 .diferenciais-grid {

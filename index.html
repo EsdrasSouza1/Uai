@@ -1280,7 +1280,7 @@
     </section>
 
     <svg class="wave-divider" viewBox="0 0 1440 48" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"
-        style="background:#fff">
+        style="background:var(--white)">
         <path d="M0,0 C360,48 1080,0 1440,24 L1440,48 L0,48 Z" fill="#f4f8f7" />
     </svg>
 
@@ -1534,6 +1534,177 @@
 
         // MARQUEE SPEED — velocidade constante, sem aceleração no scroll
         // (efeito removido pois causava sensação de "corrida" excessiva)
+    </script>
+
+    <!-- ══════════════════ SILHUETAS DECORATIVAS ══════════════════ -->
+    <style>
+        /* Container de silhuetas em cada seção clara */
+        .silhuetas-bg {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            overflow: hidden;
+            z-index: 0;
+        }
+
+        .silhueta-icon {
+            position: absolute;
+            pointer-events: none;
+            user-select: none;
+            opacity: 0;
+            filter: grayscale(1) brightness(0.1) contrast(0.9);
+            transition: opacity 1.2s ease;
+            will-change: transform;
+        }
+
+        .silhueta-icon.visible {
+            opacity: var(--sil-op, 0.07);
+        }
+
+        /* Animações de flutuação suave */
+        @keyframes silFloat1 {
+            0%, 100% { transform: var(--sil-base-transform) translateY(0px) rotate(var(--sil-rot)); }
+            50%       { transform: var(--sil-base-transform) translateY(-12px) rotate(calc(var(--sil-rot) + 2deg)); }
+        }
+        @keyframes silFloat2 {
+            0%, 100% { transform: var(--sil-base-transform) translateY(0px) rotate(var(--sil-rot)); }
+            50%       { transform: var(--sil-base-transform) translateY(-8px) rotate(calc(var(--sil-rot) - 3deg)); }
+        }
+        @keyframes silFloat3 {
+            0%, 100% { transform: var(--sil-base-transform) translateY(0px) rotate(var(--sil-rot)); }
+            33%       { transform: var(--sil-base-transform) translateY(-6px) rotate(calc(var(--sil-rot) + 1deg)); }
+            66%       { transform: var(--sil-base-transform) translateY(-14px) rotate(calc(var(--sil-rot) - 2deg)); }
+        }
+    </style>
+
+    <script>
+    (function() {
+        // Lista de todos os ícones disponíveis
+        var icons = [
+            'foto/\u00cdcones/\u00cdcones/1.png',
+            'foto/\u00cdcones/\u00cdcones/2.png',
+            'foto/\u00cdcones/\u00cdcones/3.png',
+            'foto/\u00cdcones/\u00cdcones/4.png',
+            'foto/\u00cdcones/\u00cdcones/5.png',
+            'foto/\u00cdcones/\u00cdcones/6.png',
+            'foto/\u00cdcones/\u00cdcones/7.png',
+            'foto/\u00cdcones/\u00cdcones/8.png',
+            'foto/\u00cdcones/\u00cdcones/9.png',
+            'foto/\u00cdcones/\u00cdcones/10.png',
+            'foto/\u00cdcones/\u00cdcones/11.png',
+            'foto/\u00cdcones/\u00cdcones/12.png',
+            'foto/\u00cdcones/\u00cdcones/13.png',
+            'foto/\u00cdcones/\u00cdcones/14.png',
+            'foto/\u00cdcones/\u00cdcones/15.png',
+            'foto/\u00cdcones/\u00cdcones/16.png',
+            'foto/\u00cdcones/\u00cdcones/17.png',
+            'foto/\u00cdcones/\u00cdcones/18.png',
+            'foto/\u00cdcones/\u00cdcones/19.png'
+        ];
+
+        var floatAnims = ['silFloat1', 'silFloat2', 'silFloat3'];
+
+        // Configuração de cada seção: quais IDs/classes recebem silhuetas e quantas
+        var sections = [
+            { selector: '#destinos',     count: 6,  opMin: 0.05, opMax: 0.09 },
+            { selector: '#diferenciais', count: 5,  opMin: 0.05, opMax: 0.08 },
+            { selector: '#avaliacoes',   count: 4,  opMin: 0.05, opMax: 0.08 },
+            { selector: '#faq',          count: 5,  opMin: 0.05, opMax: 0.09 }
+        ];
+
+        function rand(min, max) {
+            return Math.random() * (max - min) + min;
+        }
+
+        function shuffle(arr) {
+            var a = arr.slice();
+            for (var i = a.length - 1; i > 0; i--) {
+                var j = Math.floor(Math.random() * (i + 1));
+                var tmp = a[i]; a[i] = a[j]; a[j] = tmp;
+            }
+            return a;
+        }
+
+        function placeSilhuetas() {
+            sections.forEach(function(cfg) {
+                var section = document.querySelector(cfg.selector);
+                if (!section) return;
+
+                // Garantir position relative na seção
+                var pos = window.getComputedStyle(section).position;
+                if (pos === 'static') section.style.position = 'relative';
+
+                // Criar ou reutilizar container
+                var bg = section.querySelector('.silhuetas-bg');
+                if (!bg) {
+                    bg = document.createElement('div');
+                    bg.className = 'silhuetas-bg';
+                    section.insertBefore(bg, section.firstChild);
+                }
+
+                // Embaralhar ícones e escolher aleatoriamente
+                var shuffled = shuffle(icons);
+
+                for (var i = 0; i < cfg.count; i++) {
+                    var iconSrc = shuffled[i % shuffled.length];
+                    var img = document.createElement('img');
+                    img.src = iconSrc;
+                    img.alt = '';
+                    img.className = 'silhueta-icon';
+                    img.setAttribute('aria-hidden', 'true');
+                    img.setAttribute('loading', 'lazy');
+
+                    // Tamanho aleatório entre 80px e 220px
+                    var size = Math.round(rand(80, 220));
+                    img.style.width = size + 'px';
+                    img.style.height = 'auto';
+
+                    // Posição aleatória dentro da seção
+                    // Evitar bordas extremas (10% a 90% horizontal, 5% a 95% vertical)
+                    var leftPct = rand(5, 88);
+                    var topPct  = rand(5, 88);
+                    img.style.left = leftPct + '%';
+                    img.style.top  = topPct  + '%';
+
+                    // Rotação aleatória suave
+                    var rot = rand(-25, 25);
+                    img.style.setProperty('--sil-rot', rot + 'deg');
+                    img.style.setProperty('--sil-base-transform', 'scale(1)');
+
+                    // Opacidade aleatória (visível depois de load)
+                    var op = rand(cfg.opMin, cfg.opMax);
+                    img.style.setProperty('--sil-op', op.toFixed(3));
+
+                    // Animação de flutuação aleatória
+                    var anim = floatAnims[Math.floor(Math.random() * floatAnims.length)];
+                    var duration = rand(8, 18).toFixed(1);
+                    var delay    = rand(0, 5).toFixed(1);
+                    img.style.animation = anim + ' ' + duration + 's ' + delay + 's ease-in-out infinite';
+
+                    // Tornar visível quando a imagem carrega (suave fade-in)
+                    img.addEventListener('load', function(el) {
+                        return function() {
+                            setTimeout(function() { el.classList.add('visible'); }, 100);
+                        };
+                    }(img));
+
+                    // Se a imagem já está em cache, acionar manualmente
+                    if (img.complete) {
+                        setTimeout(function(el) { return function() { el.classList.add('visible'); }; }(img), 200);
+                    }
+
+                    bg.appendChild(img);
+                }
+            });
+        }
+
+        // Executar após o DOM estar pronto
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', placeSilhuetas);
+        } else {
+            placeSilhuetas();
+        }
+    })();
     </script>
 
     <!-- ═══════════════════════════════════════ CHATBOT ══════════════════════════════════════ -->
