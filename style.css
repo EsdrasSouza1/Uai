@@ -50,7 +50,7 @@ html {
 body {
   font-family: 'DM Sans', sans-serif;
   color: var(--text);
-  background: var(--teal-deeper);
+  background: var(--white);
   overflow-x: hidden;
   max-width: 100vw;
 }
@@ -306,7 +306,7 @@ a { text-decoration: none; }
 
 .hero-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr 1.25fr;
   gap: 56px;
   max-width: 1240px;
   margin: 0 auto;
@@ -394,7 +394,9 @@ a { text-decoration: none; }
   overflow: hidden;
   box-shadow: 0 24px 64px rgba(0,0,0,.35);
   background: var(--teal-dark);
-  height: 460px;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  max-height: 700px;
 }
 
 .hero-carousel-track {
@@ -1603,7 +1605,6 @@ a { text-decoration: none; }
   .hero-left p    { margin: 0 auto 24px; }
   .hero-actions   { justify-content: center; }
   .hero-badges    { justify-content: center; }
-  .hero-carousel  { height: 280px; }
 
   /* ── Numbers ── */
   .numbers-grid {
@@ -1702,7 +1703,7 @@ a { text-decoration: none; }
   #hero { padding-top: 60px; }
 
   .hero-left h1 { font-size: 2rem; }
-  .hero-carousel { height: 240px; }
+
   .hero-actions { flex-direction: column; align-items: center; gap: 12px; }
   .hero-tag { font-size: .72rem; }
 
