@@ -1230,8 +1230,8 @@
                 <p class="section-label">Momentos Reais</p>
                 <h2>Galeria de <span>Experiências</span></h2>
                 <p class="gallery-sub">Siga-nos no Instagram para acompanhar nossos roteiros</p>
-                <a href="https://www.instagram.com/uai_turismo/" target="_blank" class="instagram-badge"><svg width="16"
-                        height="16" viewBox="0 0 24 24" fill="white">
+                <a href="https://www.instagram.com/uai_turismo/" target="_blank" class="instagram-badge"
+                    style="margin-top:18px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="white">
                         <path
                             d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
                     </svg>@uai_turismo no Instagram</a>
@@ -1520,9 +1520,10 @@
             position: absolute;
             top: 0;
             bottom: 0;
-            width: 180px;
+            width: 200px;
             pointer-events: none;
-            overflow: visible;
+            overflow: hidden;
+            /* corta o que sair da faixa */
             z-index: 1;
         }
 
@@ -1625,74 +1626,75 @@
              * faq           → esq e dir (imagens 1 e 2)
              */
             var cfg = [
-                /* HERO — apenas lateral direita (rabisco imagem 9) */
+                /* HERO — lateral direita — ícones 1,2 */
                 {
                     sel: '#hero', theme: 'light', icons: [
-                        { src: B + '5.png', side: 'right', top: '18%', size: 145, rot: 8, op: 0.22, anim: 'silFA', dur: 12, delay: 0 },
-                        { src: B + '11.png', side: 'right', top: '58%', size: 115, rot: -6, op: 0.18, anim: 'silFB', dur: 15, delay: 2 }
+                        { src: B + '1.png', side: 'right', top: '15%', size: 150, rot: 8, op: 0.22, anim: 'silFA', dur: 12, delay: 0 },
+                        { src: B + '2.png', side: 'right', top: '58%', size: 118, rot: -6, op: 0.18, anim: 'silFB', dur: 15, delay: 2 }
                     ]
                 },
 
-                /* VÍDEO DESTAQUE — seção teal escura, ícones bem brancos (imagens 4 e 8) */
+                /* VÍDEO DESTAQUE — ícones 3,4,5,6 */
                 {
                     sel: '.video-destaque-wrapper', theme: 'light', icons: [
-                        { src: B + '3.png', side: 'left', top: '15%', size: 150, rot: -12, op: 0.28, anim: 'silFC', dur: 13, delay: 1 },
-                        { src: B + '8.png', side: 'left', top: '62%', size: 120, rot: 10, op: 0.22, anim: 'silFA', dur: 16, delay: 3 },
-                        { src: B + '6.png', side: 'right', top: '12%', size: 145, rot: 8, op: 0.28, anim: 'silFB', dur: 12, delay: 0.5 },
-                        { src: B + '14.png', side: 'right', top: '60%', size: 115, rot: -8, op: 0.22, anim: 'silFC', dur: 14, delay: 2.5 }
+                        { src: B + '3.png', side: 'left', top: '15%', size: 155, rot: -12, op: 0.28, anim: 'silFC', dur: 13, delay: 1 },
+                        { src: B + '4.png', side: 'left', top: '62%', size: 122, rot: 10, op: 0.22, anim: 'silFA', dur: 16, delay: 3 },
+                        { src: B + '5.png', side: 'right', top: '12%', size: 150, rot: 8, op: 0.28, anim: 'silFB', dur: 12, delay: 0.5 },
+                        { src: B + '6.png', side: 'right', top: '60%', size: 118, rot: -8, op: 0.22, anim: 'silFC', dur: 14, delay: 2.5 }
                     ]
                 },
 
-                /* DESTINOS — esq e dir (imagem 4) */
+                /* DESTINOS — ícones 7,8,9,10 */
                 {
                     sel: '#destinos', theme: 'dark', icons: [
-                        { src: B + '1.png', side: 'left', top: '18%', size: 148, rot: -10, op: 0.18, anim: 'silFB', dur: 13, delay: 1 },
-                        { src: B + '9.png', side: 'left', top: '65%', size: 118, rot: 14, op: 0.14, anim: 'silFA', dur: 11, delay: 3 },
-                        { src: B + '4.png', side: 'right', top: '15%', size: 145, rot: 9, op: 0.18, anim: 'silFC', dur: 14, delay: 0.5 },
-                        { src: B + '12.png', side: 'right', top: '65%', size: 110, rot: -7, op: 0.14, anim: 'silFB', dur: 16, delay: 2.5 }
+                        { src: B + '7.png', side: 'left', top: '18%', size: 152, rot: -10, op: 0.18, anim: 'silFB', dur: 13, delay: 1 },
+                        { src: B + '8.png', side: 'left', top: '65%', size: 120, rot: 14, op: 0.14, anim: 'silFA', dur: 11, delay: 3 },
+                        { src: B + '9.png', side: 'right', top: '15%', size: 150, rot: 9, op: 0.18, anim: 'silFC', dur: 14, delay: 0.5 },
+                        { src: B + '10.png', side: 'right', top: '65%', size: 115, rot: -7, op: 0.14, anim: 'silFB', dur: 16, delay: 2.5 }
                     ]
                 },
 
-                /* DIFERENCIAIS — esq e dir (imagem 5) */
+                /* DIFERENCIAIS — ícones 11,12,13,14 */
                 {
                     sel: '#diferenciais', theme: 'dark', icons: [
-                        { src: B + '2.png', side: 'left', top: '22%', size: 140, rot: -14, op: 0.18, anim: 'silFA', dur: 12, delay: 0 },
-                        { src: B + '7.png', side: 'left', top: '68%', size: 110, rot: 8, op: 0.14, anim: 'silFC', dur: 15, delay: 2.5 },
-                        { src: B + '10.png', side: 'right', top: '18%', size: 145, rot: 11, op: 0.18, anim: 'silFB', dur: 13, delay: 1 },
-                        { src: B + '15.png', side: 'right', top: '66%', size: 110, rot: -9, op: 0.14, anim: 'silFA', dur: 14, delay: 3.5 }
+                        { src: B + '11.png', side: 'left', top: '22%', size: 145, rot: -14, op: 0.18, anim: 'silFA', dur: 12, delay: 0 },
+                        { src: B + '12.png', side: 'left', top: '68%', size: 112, rot: 8, op: 0.14, anim: 'silFC', dur: 15, delay: 2.5 },
+                        { src: B + '13.png', side: 'right', top: '18%', size: 148, rot: 11, op: 0.18, anim: 'silFB', dur: 13, delay: 1 },
+                        { src: B + '14.png', side: 'right', top: '66%', size: 112, rot: -9, op: 0.14, anim: 'silFA', dur: 14, delay: 3.5 }
                     ]
                 },
 
-                /* GALERIA — esq e dir, seção escura (imagem 6) */
+                /* GALERIA — ícones 15,16,17,18 */
                 {
                     sel: '.experience-gallery', theme: 'light', icons: [
-                        { src: B + '16.png', side: 'left', top: '25%', size: 140, rot: -8, op: 0.26, anim: 'silFC', dur: 13, delay: 1 },
-                        { src: B + '19.png', side: 'left', top: '68%', size: 110, rot: 12, op: 0.20, anim: 'silFA', dur: 11, delay: 0 },
-                        { src: B + '13.png', side: 'right', top: '20%', size: 145, rot: 7, op: 0.26, anim: 'silFB', dur: 15, delay: 2 },
-                        { src: B + '17.png', side: 'right', top: '66%', size: 110, rot: -10, op: 0.20, anim: 'silFC', dur: 12, delay: 3 }
+                        { src: B + '15.png', side: 'left', top: '25%', size: 145, rot: -8, op: 0.26, anim: 'silFC', dur: 13, delay: 1 },
+                        { src: B + '16.png', side: 'left', top: '68%', size: 112, rot: 12, op: 0.20, anim: 'silFA', dur: 11, delay: 0 },
+                        { src: B + '17.png', side: 'right', top: '20%', size: 148, rot: 7, op: 0.26, anim: 'silFB', dur: 15, delay: 2 },
+                        { src: B + '18.png', side: 'right', top: '66%', size: 112, rot: -10, op: 0.20, anim: 'silFC', dur: 12, delay: 3 }
                     ]
                 },
 
-                /* AVALIAÇÕES — esq e dir (imagem 7) */
+                /* AVALIAÇÕES — ícone 19 + volta de 1,2,3 (sem repetir dentro da seção) */
                 {
                     sel: '#avaliacoes', theme: 'dark', icons: [
-                        { src: B + '18.png', side: 'left', top: '20%', size: 140, rot: -11, op: 0.18, anim: 'silFB', dur: 14, delay: 0.5 },
-                        { src: B + '3.png', side: 'left', top: '66%', size: 110, rot: 7, op: 0.14, anim: 'silFA', dur: 12, delay: 2 },
-                        { src: B + '8.png', side: 'right', top: '18%', size: 145, rot: 10, op: 0.18, anim: 'silFC', dur: 13, delay: 1.5 },
-                        { src: B + '11.png', side: 'right', top: '64%', size: 110, rot: -12, op: 0.14, anim: 'silFB', dur: 15, delay: 3 }
+                        { src: B + '19.png', side: 'left', top: '20%', size: 145, rot: -11, op: 0.18, anim: 'silFB', dur: 14, delay: 0.5 },
+                        { src: B + '2.png', side: 'left', top: '66%', size: 112, rot: 7, op: 0.14, anim: 'silFA', dur: 12, delay: 2 },
+                        { src: B + '4.png', side: 'right', top: '18%', size: 148, rot: 10, op: 0.18, anim: 'silFC', dur: 13, delay: 1.5 },
+                        { src: B + '6.png', side: 'right', top: '64%', size: 112, rot: -12, op: 0.14, anim: 'silFB', dur: 15, delay: 3 }
                     ]
                 },
 
-                /* FAQ — esq e dir (imagens 1 e 2) */
+                /* FAQ — ícones 8,10,12,14 (todos distintos dentro da seção) */
                 {
                     sel: '#faq', theme: 'dark', icons: [
-                        { src: B + '5.png', side: 'left', top: '15%', size: 140, rot: -10, op: 0.18, anim: 'silFA', dur: 12, delay: 0 },
-                        { src: B + '9.png', side: 'left', top: '60%', size: 110, rot: 13, op: 0.14, anim: 'silFB', dur: 15, delay: 2.5 },
-                        { src: B + '2.png', side: 'right', top: '12%', size: 145, rot: -7, op: 0.18, anim: 'silFC', dur: 11, delay: 1.5 },
-                        { src: B + '6.png', side: 'right', top: '62%', size: 110, rot: 11, op: 0.14, anim: 'silFA', dur: 14, delay: 3 }
+                        { src: B + '8.png', side: 'left', top: '15%', size: 145, rot: -10, op: 0.18, anim: 'silFA', dur: 12, delay: 0 },
+                        { src: B + '10.png', side: 'left', top: '62%', size: 112, rot: 13, op: 0.14, anim: 'silFB', dur: 15, delay: 2.5 },
+                        { src: B + '16.png', side: 'right', top: '12%', size: 148, rot: -7, op: 0.18, anim: 'silFC', dur: 11, delay: 1.5 },
+                        { src: B + '18.png', side: 'right', top: '62%', size: 112, rot: 11, op: 0.14, anim: 'silFA', dur: 14, delay: 3 }
                     ]
                 }
             ];
+
 
             function getLateral(section, side, theme) {
                 var cls = 'sil-lateral sil-' + side + ' sil-' + theme;
@@ -1719,7 +1721,7 @@
                         img.setAttribute('aria-hidden', 'true');
                         img.setAttribute('loading', 'lazy');
 
-                        var leftRight = ic.side === 'left' ? 'left:-10px' : 'right:-10px';
+                        var leftRight = ic.side === 'left' ? 'left:20px' : 'right:20px';
                         img.style.cssText = [
                             'width:' + ic.size + 'px',
                             'height:auto',
