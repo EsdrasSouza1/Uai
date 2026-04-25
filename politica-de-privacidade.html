@@ -5,6 +5,24 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Política de Privacidade – Uai Turismo</title>
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="foto/logoo.png">
+    <link rel="apple-touch-icon" href="foto/logoo.png">
+    <!-- Open Graph / WhatsApp / redes sociais -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://www.uaitur.com/politica-de-privacidade.html">
+    <meta property="og:title" content="Política de Privacidade – Uai Turismo">
+    <meta property="og:description"
+        content="Política de privacidade da Uai Turismo. Saiba como tratamos seus dados pessoais.">
+    <meta property="og:image" content="https://www.uaitur.com/foto/logoo.png">
+    <meta property="og:image:width" content="400">
+    <meta property="og:image:height" content="400">
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Política de Privacidade – Uai Turismo">
+    <meta name="twitter:description"
+        content="Política de privacidade da Uai Turismo. Saiba como tratamos seus dados pessoais.">
+    <meta name="twitter:image" content="https://www.uaitur.com/foto/logoo.png">
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap"
         rel="stylesheet" />
@@ -25,11 +43,17 @@
             --transition: 0.35s cubic-bezier(.4, 0, .2, 1);
         }
 
-        *, *::before, *::after {
-            margin: 0; padding: 0; box-sizing: border-box;
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        html { scroll-behavior: smooth; }
+        html {
+            scroll-behavior: smooth;
+        }
 
         body {
             font-family: 'DM Sans', sans-serif;
@@ -38,7 +62,9 @@
             overflow-x: hidden;
         }
 
-        a { text-decoration: none; }
+        a {
+            text-decoration: none;
+        }
 
         /* ---- NAV ---- */
         #nav {
@@ -62,17 +88,17 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            color: rgba(255,255,255,.85);
+            color: rgba(255, 255, 255, .85);
             font-size: .88rem;
             font-weight: 500;
             padding: 9px 20px;
             border-radius: 50px;
-            border: 1px solid rgba(255,255,255,.20);
+            border: 1px solid rgba(255, 255, 255, .20);
             transition: var(--transition);
         }
 
         .nav-back:hover {
-            background: rgba(255,255,255,.10);
+            background: rgba(255, 255, 255, .10);
             color: white;
         }
 
@@ -95,12 +121,15 @@
         /* decoração onda no fundo do hero */
         .pp-hero-wave {
             position: absolute;
-            bottom: 0; left: 0;
-            width: 100%; height: 56px;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 56px;
         }
 
         .pp-hero-wave svg {
-            width: 100%; height: 100%;
+            width: 100%;
+            height: 100%;
         }
 
         .pp-hero-label {
@@ -128,7 +157,7 @@
         }
 
         .pp-hero-meta {
-            color: rgba(255,255,255,.60);
+            color: rgba(255, 255, 255, .60);
             font-size: .88rem;
             margin-top: 14px;
             position: relative;
@@ -227,7 +256,7 @@
 
         .pp-divider {
             border: none;
-            border-top: 1px solid rgba(0,151,167,.12);
+            border-top: 1px solid rgba(0, 151, 167, .12);
             margin: 48px 0;
         }
 
@@ -256,7 +285,7 @@
         }
 
         .pp-highlight-text p {
-            color: rgba(255,255,255,.70) !important;
+            color: rgba(255, 255, 255, .70) !important;
             font-size: .9rem !important;
             margin: 0 !important;
         }
@@ -274,7 +303,7 @@
         }
 
         .pp-footer p {
-            color: rgba(255,255,255,.45);
+            color: rgba(255, 255, 255, .45);
             font-size: .82rem;
         }
 
@@ -297,7 +326,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 6px 24px rgba(37,211,102,.50);
+            box-shadow: 0 6px 24px rgba(37, 211, 102, .50);
             transition: var(--transition);
         }
 
@@ -306,9 +335,19 @@
         }
 
         @media (max-width: 768px) {
-            .pp-hero { padding: 100px 5% 60px; }
-            .pp-body { padding: 48px 5% 80px; }
-            .pp-highlight { flex-direction: column; text-align: center; padding: 28px 24px; }
+            .pp-hero {
+                padding: 100px 5% 60px;
+            }
+
+            .pp-body {
+                padding: 48px 5% 80px;
+            }
+
+            .pp-highlight {
+                flex-direction: column;
+                text-align: center;
+                padding: 28px 24px;
+            }
         }
     </style>
 
@@ -330,9 +369,11 @@
             z-index: 1000;
             transition: transform 0.3s ease;
         }
+
         .floating-wpp:hover {
             transform: scale(1.1);
         }
+
         @media (max-width: 480px) {
             .floating-wpp {
                 bottom: 16px;
@@ -340,49 +381,147 @@
                 width: 50px;
                 height: 50px;
             }
-            .floating-wpp svg { padding: 4px; }
+
+            .floating-wpp svg {
+                padding: 4px;
+            }
         }
     </style>
-    
+
 
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="style-upgrade.css" />
     <style>
-      #cursor-dot, #cursor-ring { position: fixed; top: 0; left: 0; border-radius: 50%; pointer-events: none; z-index: 99999; transform: translate(-50%, -50%); transition-property: opacity, background, border-color, transform; transition-timing-function: ease; }
-      #cursor-dot { width: 8px; height: 8px; background: var(--amber); transition-duration: .08s; }
-      #cursor-ring { width: 36px; height: 36px; border: 2px solid rgba(245,168,0,.5); background: transparent; transition-duration: .18s; }
+        #cursor-dot,
+        #cursor-ring {
+            position: fixed;
+            top: 0;
+            left: 0;
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 99999;
+            transform: translate(-50%, -50%);
+            transition-property: opacity, background, border-color, transform;
+            transition-timing-function: ease;
+        }
+
+        #cursor-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--amber);
+            transition-duration: .08s;
+        }
+
+        #cursor-ring {
+            width: 36px;
+            height: 36px;
+            border: 2px solid rgba(245, 168, 0, .5);
+            background: transparent;
+            transition-duration: .18s;
+        }
     </style>
-    <style id="nav-mobile-fix">@media (max-width: 768px) {
-      #navMenu { display: flex !important; position: fixed !important; top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important; width: 100% !important; height: 100% !important; z-index: 99990 !important; background: var(--teal-deeper) !important; flex-direction: column !important; align-items: center !important; justify-content: center !important; gap: 8px !important; transform: none !important; opacity: 0; visibility: hidden; pointer-events: none; transition: opacity 0.35s ease, visibility 0.35s ease; }
-      #navMenu.open { opacity: 1 !important; visibility: visible !important; pointer-events: all !important; }
-      #navMenu li { width: 100%; text-align: center; }
-      #navMenu li a { display: block; font-size: 1.2rem !important; padding: 14px 24px !important; color: white !important; border-radius: 12px; transition: background 0.2s ease; }
-      #navMenu li a:hover { background: rgba(255,255,255,0.10); }
-      #navMenu .nav-cta { background: var(--amber) !important; color: var(--text) !important; border-radius: 50px !important; font-weight: 700 !important; margin-top: 8px; display: inline-flex !important; width: auto !important; padding: 12px 28px !important; }
-      .nav-toggle { z-index: 99995 !important; position: relative; }
-      #nav { z-index: 99992 !important; }
-    }</style>
+    <style id="nav-mobile-fix">
+        @media (max-width: 768px) {
+            #navMenu {
+                display: flex !important;
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                width: 100% !important;
+                height: 100% !important;
+                z-index: 99990 !important;
+                background: var(--teal-deeper) !important;
+                flex-direction: column !important;
+                align-items: center !important;
+                justify-content: center !important;
+                gap: 8px !important;
+                transform: none !important;
+                opacity: 0;
+                visibility: hidden;
+                pointer-events: none;
+                transition: opacity 0.35s ease, visibility 0.35s ease;
+            }
+
+            #navMenu.open {
+                opacity: 1 !important;
+                visibility: visible !important;
+                pointer-events: all !important;
+            }
+
+            #navMenu li {
+                width: 100%;
+                text-align: center;
+            }
+
+            #navMenu li a {
+                display: block;
+                font-size: 1.2rem !important;
+                padding: 14px 24px !important;
+                color: white !important;
+                border-radius: 12px;
+                transition: background 0.2s ease;
+            }
+
+            #navMenu li a:hover {
+                background: rgba(255, 255, 255, 0.10);
+            }
+
+            #navMenu .nav-cta {
+                background: var(--amber) !important;
+                color: var(--text) !important;
+                border-radius: 50px !important;
+                font-weight: 700 !important;
+                margin-top: 8px;
+                display: inline-flex !important;
+                width: auto !important;
+                padding: 12px 28px !important;
+            }
+
+            .nav-toggle {
+                z-index: 99995 !important;
+                position: relative;
+            }
+
+            #nav {
+                z-index: 99992 !important;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-  <!-- NAV -->
-  <nav id="nav">
-    <a class="nav-logo" href="index.html">
-      <img src="foto/logoo.png" alt="Uai Turismo" class="nav-logo-img">
-    </a>
-    <button class="nav-toggle" id="navToggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
-    <ul id="navMenu">
-      <li><a href="index.html#hero">Início</a></li>
-      <li><a href="index.html#destinos">Destinos</a></li>
-      <li><a href="index.html#galeria">Galeria</a></li>
-      <li><a href="index.html#faq">Dúvidas</a></li>
-      <li><a href="quem-somos.html">Sobre nós</a></li>
-      <li><a href="https://uaiturismo.surishop.ai/catalog" target="_blank">Catálogo</a></li>
-      <li><a href="https://www.instagram.com/uai_turismo/" target="_blank" aria-label="Instagram" title="@uai_turismo" style="display:flex;align-items:center;padding:4px 8px;color:rgba(255,255,255,.75);transition:color .2s" onmouseover="this.style.color='#FFD166'" onmouseout="this.style.color='rgba(255,255,255,.75)'"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a></li>
-      <li><a href="https://wa.me/5581997484915?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais" class="nav-cta" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" /></svg> Solicitar Orçamento</a></li>
-    </ul>
-  </nav>
+    <!-- NAV -->
+    <nav id="nav">
+        <a class="nav-logo" href="index.html">
+            <img src="foto/logoo.png" alt="Uai Turismo" class="nav-logo-img">
+        </a>
+        <button class="nav-toggle" id="navToggle"
+            aria-label="Abrir menu"><span></span><span></span><span></span></button>
+        <ul id="navMenu">
+            <li><a href="index.html#hero">Início</a></li>
+            <li><a href="index.html#destinos">Destinos</a></li>
+            <li><a href="index.html#galeria">Galeria</a></li>
+            <li><a href="index.html#faq">Dúvidas</a></li>
+            <li><a href="quem-somos.html">Sobre nós</a></li>
+            <li><a href="https://uaiturismo.surishop.ai/catalog" target="_blank">Catálogo</a></li>
+            <li><a href="https://www.instagram.com/uai_turismo/" target="_blank" aria-label="Instagram"
+                    title="@uai_turismo"
+                    style="display:flex;align-items:center;padding:4px 8px;color:rgba(255,255,255,.75);transition:color .2s"
+                    onmouseover="this.style.color='#FFD166'" onmouseout="this.style.color='rgba(255,255,255,.75)'"><svg
+                        width="20" height="20" viewBox="0 0 24 24" fill="currentColor" style="vertical-align:middle">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg></a></li>
+            <li><a href="https://wa.me/5581997484915?text=Olá%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais"
+                    class="nav-cta" target="_blank"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                    </svg> Solicitar Orçamento</a></li>
+        </ul>
+    </nav>
 
     <!-- HERO -->
     <div class="pp-hero">
@@ -391,16 +530,19 @@
         <p class="pp-hero-meta">Última atualização: abril de 2026</p>
         <div class="pp-hero-wave">
             <svg viewBox="0 0 1440 56" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
-                <path d="M0,28 C360,56 1080,0 1440,28 L1440,56 L0,56 Z" fill="#ffffff"/>
+                <path d="M0,28 C360,56 1080,0 1440,28 L1440,56 L0,56 Z" fill="#ffffff" />
             </svg>
         </div>
     </div>
 
     <!-- CONTEÚDO -->
-    <div class="pp-body">
+    <div class="pp-wrapper pp-body">
 
         <div class="pp-intro">
-            A <strong>Uai Turismo</strong> respeita a sua privacidade e está comprometida em proteger os dados pessoais que você compartilha conosco. Esta Política de Privacidade explica como coletamos, usamos, armazenamos e protegemos suas informações, em conformidade com a <strong>Lei Geral de Proteção de Dados Pessoais (LGPD – Lei nº 13.709/2018)</strong>.
+            A <strong>Uai Turismo</strong> respeita a sua privacidade e está comprometida em proteger os dados pessoais
+            que você compartilha conosco. Esta Política de Privacidade explica como coletamos, usamos, armazenamos e
+            protegemos suas informações, em conformidade com a <strong>Lei Geral de Proteção de Dados Pessoais (LGPD –
+                Lei nº 13.709/2018)</strong>.
         </div>
 
         <!-- 1 -->
@@ -409,8 +551,11 @@
                 <div class="pp-section-icon">🏢</div>
                 <h2>1. Quem somos</h2>
             </div>
-            <p><strong>Uai Turismo</strong> é uma empresa de turismo receptivo localizada em Porto de Galinhas, PE, inscrita no CNPJ <strong>54.181.357/0001-42</strong>, cadastrada no CADASTUR — sistema oficial do Ministério do Turismo do Brasil.</p>
-            <p>Para dúvidas sobre esta política ou sobre o tratamento dos seus dados, entre em contato conosco pelo WhatsApp <strong>(81) 99748-4915</strong>.</p>
+            <p><strong>Uai Turismo</strong> é uma empresa de turismo receptivo localizada em Porto de Galinhas, PE,
+                inscrita no CNPJ <strong>54.181.357/0001-42</strong>, cadastrada no CADASTUR — sistema oficial do
+                Ministério do Turismo do Brasil.</p>
+            <p>Para dúvidas sobre esta política ou sobre o tratamento dos seus dados, entre em contato conosco pelo
+                WhatsApp <strong>(81) 99748-4915</strong>.</p>
         </div>
 
         <hr class="pp-divider">
@@ -451,7 +596,8 @@
                 <li>Melhorar nossos serviços com base nas avaliações recebidas</li>
                 <li>Cumprir obrigações legais e regulatórias</li>
             </ul>
-            <p style="margin-top:16px;">Não utilizamos seus dados para envio de spam ou publicidade sem o seu consentimento.</p>
+            <p style="margin-top:16px;">Não utilizamos seus dados para envio de spam ou publicidade sem o seu
+                consentimento.</p>
         </div>
 
         <hr class="pp-divider">
@@ -462,13 +608,16 @@
                 <div class="pp-section-icon">🤝</div>
                 <h2>4. Compartilhamento de dados</h2>
             </div>
-            <p>A Uai Turismo <strong>não vende, aluga ou comercializa</strong> seus dados pessoais. Podemos compartilhar informações somente nas seguintes situações:</p>
+            <p>A Uai Turismo <strong>não vende, aluga ou comercializa</strong> seus dados pessoais. Podemos compartilhar
+                informações somente nas seguintes situações:</p>
             <ul>
-                <li>Com parceiros operacionais (guias, motoristas) estritamente para a execução do passeio contratado</li>
+                <li>Com parceiros operacionais (guias, motoristas) estritamente para a execução do passeio contratado
+                </li>
                 <li>Com plataformas de pagamento certificadas (PCI-DSS)</li>
                 <li>Com autoridades públicas, quando exigido por lei ou ordem judicial</li>
             </ul>
-            <p style="margin-top:16px;">Todos os nossos parceiros são orientados a tratar seus dados com a mesma seriedade que aplicamos internamente.</p>
+            <p style="margin-top:16px;">Todos os nossos parceiros são orientados a tratar seus dados com a mesma
+                seriedade que aplicamos internamente.</p>
         </div>
 
         <hr class="pp-divider">
@@ -479,13 +628,15 @@
                 <div class="pp-section-icon">🍪</div>
                 <h2>5. Cookies e rastreamento</h2>
             </div>
-            <p>Nosso site utiliza cookies e tecnologias similares para melhorar sua experiência de navegação. Os cookies nos ajudam a:</p>
+            <p>Nosso site utiliza cookies e tecnologias similares para melhorar sua experiência de navegação. Os cookies
+                nos ajudam a:</p>
             <ul>
                 <li>Entender como os visitantes interagem com o site (Google Analytics)</li>
                 <li>Exibir conteúdos relevantes através de widgets de terceiros (Elfsight, Instagram)</li>
                 <li>Lembrar suas preferências de navegação</li>
             </ul>
-            <p style="margin-top:16px;">Você pode desativar os cookies nas configurações do seu navegador a qualquer momento. Isso pode afetar algumas funcionalidades do site.</p>
+            <p style="margin-top:16px;">Você pode desativar os cookies nas configurações do seu navegador a qualquer
+                momento. Isso pode afetar algumas funcionalidades do site.</p>
         </div>
 
         <hr class="pp-divider">
@@ -496,7 +647,8 @@
                 <div class="pp-section-icon">🔒</div>
                 <h2>6. Como protegemos seus dados</h2>
             </div>
-            <p>Adotamos medidas técnicas e organizacionais para proteger suas informações contra acesso não autorizado, perda ou divulgação indevida:</p>
+            <p>Adotamos medidas técnicas e organizacionais para proteger suas informações contra acesso não autorizado,
+                perda ou divulgação indevida:</p>
             <ul>
                 <li>Comunicações via WhatsApp com criptografia de ponta a ponta</li>
                 <li>Acesso restrito aos dados somente por colaboradores autorizados</li>
@@ -513,7 +665,9 @@
                 <div class="pp-section-icon">⏱️</div>
                 <h2>7. Por quanto tempo guardamos seus dados</h2>
             </div>
-            <p>Seus dados são mantidos pelo tempo necessário para a prestação dos serviços contratados e para cumprimento de obrigações legais (em geral, até 5 anos para fins fiscais e contábeis, conforme a legislação brasileira).</p>
+            <p>Seus dados são mantidos pelo tempo necessário para a prestação dos serviços contratados e para
+                cumprimento de obrigações legais (em geral, até 5 anos para fins fiscais e contábeis, conforme a
+                legislação brasileira).</p>
             <p>Após esse período, os dados são eliminados de forma segura ou anonimizados.</p>
         </div>
 
@@ -534,7 +688,8 @@
                 <li><strong>Revogação do consentimento:</strong> retirar seu consentimento a qualquer momento</li>
                 <li><strong>Oposição:</strong> opor-se ao tratamento realizado em determinadas bases legais</li>
             </ul>
-            <p style="margin-top:16px;">Para exercer qualquer um desses direitos, entre em contato conosco pelo WhatsApp <strong>(81) 99748-4915</strong>. Responderemos em até 15 dias úteis.</p>
+            <p style="margin-top:16px;">Para exercer qualquer um desses direitos, entre em contato conosco pelo WhatsApp
+                <strong>(81) 99748-4915</strong>. Responderemos em até 15 dias úteis.</p>
         </div>
 
         <hr class="pp-divider">
@@ -545,7 +700,9 @@
                 <div class="pp-section-icon">🔗</div>
                 <h2>9. Links e serviços de terceiros</h2>
             </div>
-            <p>Nosso site pode conter links para sites externos (como Instagram, Google e WhatsApp) e widgets de terceiros. A Uai Turismo não se responsabiliza pelas práticas de privacidade dessas plataformas. Recomendamos que você consulte as políticas de privacidade de cada serviço utilizado.</p>
+            <p>Nosso site pode conter links para sites externos (como Instagram, Google e WhatsApp) e widgets de
+                terceiros. A Uai Turismo não se responsabiliza pelas práticas de privacidade dessas plataformas.
+                Recomendamos que você consulte as políticas de privacidade de cada serviço utilizado.</p>
         </div>
 
         <hr class="pp-divider">
@@ -556,16 +713,21 @@
                 <div class="pp-section-icon">📝</div>
                 <h2>10. Alterações nesta política</h2>
             </div>
-            <p>Esta Política de Privacidade pode ser atualizada periodicamente para refletir mudanças nos nossos serviços ou na legislação aplicável. A data da última atualização sempre será indicada no topo desta página.</p>
-            <p>Recomendamos que você revise esta página ocasionalmente para se manter informado sobre como protegemos suas informações.</p>
+            <p>Esta Política de Privacidade pode ser atualizada periodicamente para refletir mudanças nos nossos
+                serviços ou na legislação aplicável. A data da última atualização sempre será indicada no topo desta
+                página.</p>
+            <p>Recomendamos que você revise esta página ocasionalmente para se manter informado sobre como protegemos
+                suas informações.</p>
         </div>
 
         <!-- DESTAQUE CONTATO -->
         <div class="pp-highlight">
-            <img src="foto/boneco_confuso.PNG" alt="Dúvida" style="width: 70px; height: auto; flex-shrink: 0; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));">
+            <img src="foto/boneco_confuso.PNG" alt="Dúvida"
+                style="width: 70px; height: auto; flex-shrink: 0; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.2));">
             <div class="pp-highlight-text">
                 <strong>Dúvidas sobre sua privacidade?</strong>
-                <p>Entre em contato conosco pelo WhatsApp <a href="https://wa.me/5581997484915" target="_blank">(81) 99748-4915</a> — respondemos rapidinho!</p>
+                <p>Entre em contato conosco pelo WhatsApp <a href="https://wa.me/5581997484915" target="_blank">(81)
+                        99748-4915</a> — respondemos rapidinho!</p>
             </div>
         </div>
 
@@ -573,28 +735,57 @@
 
     <!-- FOOTER PADRONIZADO -->
     <footer class="main-footer">
-      <div class="footer-inner">
-        <div class="footer-brand">
-          <div class="footer-logo-text" style="display:flex;align-items:center;gap:6px;font-family:'Playfair Display',serif;font-size:1.8rem;line-height:1;margin-bottom:10px;">
-          <span style="color:var(--amber-light);font-weight:800;font-style:italic;">Uai</span>
-          <span style="color:white;font-weight:800;font-style:italic;">Turismo</span>
+        <div class="footer-inner">
+            <div class="footer-brand">
+                <div class="footer-logo-text"
+                    style="display:flex;align-items:center;gap:6px;font-family:'Playfair Display',serif;font-size:1.8rem;line-height:1;margin-bottom:10px;">
+                    <span style="color:var(--amber-light);font-weight:800;font-style:italic;">Uai</span>
+                    <span style="color:white;font-weight:800;font-style:italic;">Turismo</span>
+                </div>
+                <p>Passeios privativos e compartilhados,<br>Buggy em Pernambuco e Alagoas.</p>
+                <p style="margin-top:8px;font-size:.78rem;color:rgba(255,255,255,.4);">CNPJ:
+                    54.181.357/0001-42<br>MARCOS VINICIUS SILVA SOUZA</p>
+            </div>
+            <div class="footer-links">
+                <h5>Links Rápidos</h5><a href="index.html#hero">Início</a><a href="index.html#destinos">Destinos</a><a
+                    href="index.html#galeria">Galeria</a><a href="index.html#faq">Dúvidas</a><a
+                    href="quem-somos.html">Sobre nós</a><a href="https://uaiturismo.surishop.ai/catalog"
+                    target="_blank">Catálogo</a>
+            </div>
+            <div class="footer-contact">
+                <h5>Contato</h5><a
+                    href="https://wa.me/5581997484915?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais"
+                    target="_blank">📞 (81) 99748-4915</a>
+                <p>📍 Porto de Galinhas, PE</p>
+                <p>✉️ contato@uaitur.com</p>
+            </div>
+            <div class="footer-social">
+                <h5>Siga no Instagram</h5>
+                <p>Veja mais fotos dos nossos passeios!</p><a href="https://www.instagram.com/uai_turismo/"
+                    target="_blank"
+                    style="display:inline-flex;align-items:center;gap:8px;margin-top:10px;color:var(--amber);font-weight:600;"><svg
+                        width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
+                    </svg>@uai_turismo</a>
+            </div>
         </div>
-          <p>Passeios privativos e compartilhados,<br>Buggy em Pernambuco e Alagoas.</p>
-          <p style="margin-top:8px;font-size:.78rem;color:rgba(255,255,255,.4);">CNPJ: 54.181.357/0001-42<br>MARCOS VINICIUS SILVA SOUZA</p>
+        <div class="footer-bottom">
+            <p>© 2026 Uai Turismo. Todos os direitos reservados. &nbsp;|&nbsp; <a href="politica-de-privacidade.html"
+                    style="color:rgba(255,255,255,.55);transition:color .3s" onmouseover="this.style.color='#FFD166'"
+                    onmouseout="this.style.color='rgba(255,255,255,.55)'">Política de Privacidade</a></p>
+            <p style="margin-top:6px;font-size:.72rem;color:rgba(255,255,255,.3);">Desenvolvido por <a
+                    href="https://www.instagram.com/Souza.Web_/" target="_blank"
+                    style="color:rgba(255,255,255,.4);transition:color .3s" onmouseover="this.style.color='#FFD166'"
+                    onmouseout="this.style.color='rgba(255,255,255,.4)'">@Souza.Web_</a></p>
         </div>
-        <div class="footer-links"><h5>Links Rápidos</h5><a href="index.html#hero">Início</a><a href="index.html#destinos">Destinos</a><a href="index.html#galeria">Galeria</a><a href="index.html#faq">Dúvidas</a><a href="quem-somos.html">Sobre nós</a><a href="https://uaiturismo.surishop.ai/catalog" target="_blank">Catálogo</a></div>
-        <div class="footer-contact"><h5>Contato</h5><a href="https://wa.me/5581997484915?text=Ol%C3%A1%2C%20vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais" target="_blank">📞 (81) 99748-4915</a><p>📍 Porto de Galinhas, PE</p><p>✉️ contato@uaitur.com</p></div>
-        <div class="footer-social"><h5>Siga no Instagram</h5><p>Veja mais fotos dos nossos passeios!</p><a href="https://www.instagram.com/uai_turismo/" target="_blank" style="display:inline-flex;align-items:center;gap:8px;margin-top:10px;color:var(--amber);font-weight:600;"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>@uai_turismo</a></div>
-      </div>
-      <div class="footer-bottom"><p>© 2026 Uai Turismo. Todos os direitos reservados. &nbsp;|&nbsp; <a href="politica-de-privacidade.html" style="color:rgba(255,255,255,.55);transition:color .3s" onmouseover="this.style.color='#FFD166'" onmouseout="this.style.color='rgba(255,255,255,.55)'">Política de Privacidade</a></p>
-        <p style="margin-top:6px;font-size:.72rem;color:rgba(255,255,255,.3);">Desenvolvido por <a href="https://www.instagram.com/Souza.Web_/" target="_blank" style="color:rgba(255,255,255,.4);transition:color .3s" onmouseover="this.style.color='#FFD166'" onmouseout="this.style.color='rgba(255,255,255,.4)'">@Souza.Web_</a></p>
-      </div>
     </footer>
 
     <!-- WhatsApp flutuante -->
     <a href="https://wa.me/5581997484915" class="whatsapp-float" target="_blank" aria-label="WhatsApp">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+            <path
+                d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
         </svg>
     </a>
 
@@ -604,8 +795,8 @@
             var menu = document.getElementById('navMenu');
             var toggle = document.getElementById('navToggle');
             if (!menu || !toggle) return;
-            
-            toggle.addEventListener('click', function() {
+
+            toggle.addEventListener('click', function () {
                 var isOpen = menu.classList.contains('open');
                 if (isOpen) {
                     menu.classList.remove('open');
@@ -617,7 +808,7 @@
                     document.body.style.overflow = 'hidden';
                 }
             });
-            
+
             menu.querySelectorAll('a').forEach(function (link) {
                 link.addEventListener('click', function () {
                     menu.classList.remove('open');
@@ -627,5 +818,215 @@
             });
         })();
     </script>
+
+    <!-- ══════════════════ SILHUETAS DECORATIVAS (FIXAS NAS LATERAIS) ══════════════════ -->
+    <style>
+        .sil-lateral {
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 200px;
+            pointer-events: none;
+            overflow: visible;
+            z-index: 0;
+        }
+
+        .sil-lateral.sil-left {
+            left: 0;
+        }
+
+        .sil-lateral.sil-right {
+            right: 0;
+        }
+
+        .sil-lateral img {
+            position: absolute;
+            pointer-events: none;
+            user-select: none;
+            opacity: 0;
+            transition: opacity 1.4s ease;
+            will-change: transform;
+        }
+
+        .sil-lateral img.sil-visible {
+            opacity: var(--sil-op, 0.18);
+        }
+
+        .sil-dark img {
+            filter: grayscale(1) brightness(0.15) contrast(1);
+        }
+
+        .sil-light img {
+            filter: grayscale(1) brightness(2.5) contrast(0.6);
+        }
+
+        @keyframes silFA {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(var(--sil-rot));
+            }
+
+            50% {
+                transform: translateY(-14px) rotate(calc(var(--sil-rot) + 3deg));
+            }
+        }
+
+        @keyframes silFB {
+
+            0%,
+            100% {
+                transform: translateY(0px) rotate(var(--sil-rot));
+            }
+
+            50% {
+                transform: translateY(-10px) rotate(calc(var(--sil-rot) - 2deg));
+            }
+        }
+
+        @keyframes silFC {
+
+            0%,
+            33%,
+            100% {
+                transform: translateY(0px) rotate(var(--sil-rot));
+            }
+
+            66% {
+                transform: translateY(-12px) rotate(calc(var(--sil-rot) + 1deg));
+            }
+        }
+    </style>
+
+    <script>
+        (function () {
+            var B = 'foto/\u00cdcones/\u00cdcones/';
+
+            /* ── QUEM SOMOS ──
+               Seções claras (off-white / white) → theme dark
+               Seção cadastur (teal) → theme light
+               Ícones: todos diferentes dentro de cada seção
+            */
+            var cfgQS = [
+                {
+                    sel: '#cadastur', theme: 'light', icons: [
+                        { src: B + '1.png', side: 'left', top: '20%', size: 150, rot: -10, op: 0.26, anim: 'silFA', dur: 13, delay: 0 },
+                        { src: B + '2.png', side: 'left', top: '65%', size: 118, rot: 10, op: 0.20, anim: 'silFB', dur: 15, delay: 2 },
+                        { src: B + '3.png', side: 'right', top: '18%', size: 148, rot: 8, op: 0.26, anim: 'silFC', dur: 12, delay: 1 },
+                        { src: B + '4.png', side: 'right', top: '63%', size: 115, rot: -8, op: 0.20, anim: 'silFA', dur: 16, delay: 3 }
+                    ]
+                },
+                {
+                    sel: '#nossa-historia', theme: 'dark', icons: [
+                        { src: B + '5.png', side: 'left', top: '25%', size: 148, rot: -12, op: 0.18, anim: 'silFB', dur: 12, delay: 0 },
+                        { src: B + '6.png', side: 'left', top: '68%', size: 115, rot: 9, op: 0.14, anim: 'silFA', dur: 15, delay: 2.5 },
+                        { src: B + '7.png', side: 'right', top: '22%', size: 145, rot: 7, op: 0.18, anim: 'silFC', dur: 13, delay: 1 },
+                        { src: B + '8.png', side: 'right', top: '66%', size: 112, rot: -10, op: 0.14, anim: 'silFB', dur: 11, delay: 3 }
+                    ]
+                },
+                {
+                    sel: '#nossa-equipe', theme: 'dark', icons: [
+                        { src: B + '9.png', side: 'left', top: '20%', size: 148, rot: -8, op: 0.18, anim: 'silFC', dur: 14, delay: 0.5 },
+                        { src: B + '10.png', side: 'left', top: '65%', size: 112, rot: 12, op: 0.14, anim: 'silFA', dur: 12, delay: 2 },
+                        { src: B + '11.png', side: 'right', top: '18%', size: 145, rot: -6, op: 0.18, anim: 'silFB', dur: 16, delay: 1 },
+                        { src: B + '12.png', side: 'right', top: '64%', size: 112, rot: 10, op: 0.14, anim: 'silFC', dur: 13, delay: 3.5 }
+                    ]
+                },
+                {
+                    sel: '#nossa-equipe-2', theme: 'dark', icons: [
+                        { src: B + '13.png', side: 'left', top: '22%', size: 148, rot: -11, op: 0.18, anim: 'silFA', dur: 13, delay: 0 },
+                        { src: B + '14.png', side: 'left', top: '67%', size: 112, rot: 8, op: 0.14, anim: 'silFC', dur: 11, delay: 2 },
+                        { src: B + '15.png', side: 'right', top: '20%', size: 145, rot: 9, op: 0.18, anim: 'silFB', dur: 14, delay: 1.5 },
+                        { src: B + '16.png', side: 'right', top: '65%', size: 112, rot: -8, op: 0.14, anim: 'silFA', dur: 16, delay: 3 }
+                    ]
+                },
+                {
+                    sel: '#nossos-passeios-lista', theme: 'dark', icons: [
+                        { src: B + '17.png', side: 'left', top: '20%', size: 148, rot: -9, op: 0.18, anim: 'silFB', dur: 12, delay: 0.5 },
+                        { src: B + '18.png', side: 'left', top: '65%', size: 112, rot: 11, op: 0.14, anim: 'silFA', dur: 15, delay: 2 },
+                        { src: B + '19.png', side: 'right', top: '18%', size: 145, rot: 7, op: 0.18, anim: 'silFC', dur: 13, delay: 1 },
+                        { src: B + '3.png', side: 'right', top: '64%', size: 112, rot: -12, op: 0.14, anim: 'silFB', dur: 11, delay: 3.5 }
+                    ]
+                }
+            ];
+
+            /* ── POLÍTICA DE PRIVACIDADE ──
+               Fundo claro → theme dark
+               Ícones diferentes entre si na mesma seção
+            */
+            var cfgPP = [
+                {
+                    sel: 'body', theme: 'dark', icons: [
+                        { src: B + '1.png', side: 'left', top: '5%', size: 140, rot: -10, op: 0.14, anim: 'silFA', dur: 14, delay: 0 },
+                        { src: B + '4.png', side: 'left', top: '22%', size: 118, rot: 8, op: 0.12, anim: 'silFB', dur: 12, delay: 2 },
+                        { src: B + '7.png', side: 'left', top: '40%', size: 130, rot: -12, op: 0.13, anim: 'silFC', dur: 16, delay: 4 },
+                        { src: B + '10.png', side: 'left', top: '58%', size: 118, rot: 6, op: 0.12, anim: 'silFA', dur: 13, delay: 6 },
+                        { src: B + '13.png', side: 'left', top: '75%', size: 125, rot: -8, op: 0.13, anim: 'silFB', dur: 15, delay: 8 },
+                        { src: B + '16.png', side: 'left', top: '90%', size: 115, rot: 10, op: 0.11, anim: 'silFC', dur: 11, delay: 10 },
+                        { src: B + '2.png', side: 'right', top: '5%', size: 140, rot: 10, op: 0.14, anim: 'silFB', dur: 15, delay: 1 },
+                        { src: B + '5.png', side: 'right', top: '22%', size: 118, rot: -8, op: 0.12, anim: 'silFC', dur: 11, delay: 3 },
+                        { src: B + '8.png', side: 'right', top: '40%', size: 130, rot: 11, op: 0.13, anim: 'silFA', dur: 14, delay: 5 },
+                        { src: B + '11.png', side: 'right', top: '58%', size: 118, rot: -6, op: 0.12, anim: 'silFB', dur: 12, delay: 7 },
+                        { src: B + '14.png', side: 'right', top: '75%', size: 125, rot: 9, op: 0.13, anim: 'silFC', dur: 16, delay: 9 },
+                        { src: B + '17.png', side: 'right', top: '90%', size: 115, rot: -10, op: 0.11, anim: 'silFA', dur: 13, delay: 11 }
+                    ]
+                }
+            ];
+
+            var isQS = !!document.querySelector('#nossa-historia');
+            var activeCfg = isQS ? cfgQS : cfgPP;
+
+            function getLateral(section, side, theme) {
+                var existing = section.querySelector('.sil-lateral.sil-' + side);
+                if (existing) return existing;
+                var d = document.createElement('div');
+                d.className = 'sil-lateral sil-' + side + ' sil-' + theme;
+                if (section.tagName === 'BODY') {
+                    section.appendChild(d);
+                } else {
+                    section.insertBefore(d, section.firstChild);
+                }
+                return d;
+            }
+
+            function build() {
+                activeCfg.forEach(function (c) {
+                    var section = document.querySelector(c.sel);
+                    if (!section) return;
+                    if (section.tagName !== 'BODY' && window.getComputedStyle(section).position === 'static')
+                        section.style.position = 'relative';
+                    if (section.tagName === 'BODY')
+                        section.style.position = 'relative';
+
+                    c.icons.forEach(function (ic) {
+                        var wrap = getLateral(section, ic.side, c.theme);
+                        var img = document.createElement('img');
+                        img.src = ic.src;
+                        img.alt = '';
+                        img.setAttribute('aria-hidden', 'true');
+                        img.setAttribute('loading', 'lazy');
+                        var lr = ic.side === 'left' ? 'left:20px' : 'right:20px';
+                        img.style.cssText = [
+                            'width:' + ic.size + 'px', 'height:auto',
+                            'top:' + ic.top, lr,
+                            '--sil-rot:' + ic.rot + 'deg',
+                            '--sil-op:' + ic.op,
+                            'animation:' + ic.anim + ' ' + ic.dur + 's ' + ic.delay + 's ease-in-out infinite'
+                        ].join(';');
+                        function reveal() { setTimeout(function () { img.classList.add('sil-visible'); }, 150); }
+                        img.addEventListener('load', reveal);
+                        if (img.complete) reveal();
+                        wrap.appendChild(img);
+                    });
+                });
+            }
+
+            if (document.readyState === 'loading') {
+                document.addEventListener('DOMContentLoaded', build);
+            } else { build(); }
+        })();
+    </script>
+
 </body>
+
 </html>
