@@ -793,7 +793,7 @@ a { text-decoration: none; }
    ============================================ */
 .destinos-section {
   padding: 100px 5% 60px;
-  background: var(--off-white);
+  background: linear-gradient(145deg, #e8f5f6 0%, #f4f8f7 45%, #fef9ee 100%);
 }
 
 .destinos-intro {
@@ -974,7 +974,7 @@ a { text-decoration: none; }
    ============================================ */
 .diferenciais-section {
   padding: 100px 5%;
-  background: var(--white);
+  background: linear-gradient(155deg, #eaf5f6 0%, #f7fafa 35%, #fffbf0 70%, #eef7f7 100%);
   position: relative;
   overflow: hidden;
 }
@@ -988,11 +988,14 @@ a { text-decoration: none; }
 }
 
 .diferencial-card {
-  background: var(--off-white);
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   border-radius: var(--radius);
   padding: 36px 28px;
   text-align: center;
-  border: 1px solid rgba(0,151,167,.10);
+  border: 1px solid rgba(255, 255, 255, 0.75);
+  box-shadow: 0 4px 24px rgba(0, 105, 120, 0.10), inset 0 1px 0 rgba(255,255,255,0.9);
   transition: var(--transition);
   position: relative;
   overflow: hidden;

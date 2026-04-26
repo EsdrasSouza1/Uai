@@ -53,9 +53,9 @@
       position: fixed;
       inset: 0;
       background:
-        radial-gradient(ellipse 70% 50% at 10% 15%, rgba(0, 151, 167, 0.06) 0%, transparent 65%),
-        radial-gradient(ellipse 55% 45% at 90% 80%, rgba(245, 168, 0, 0.04) 0%, transparent 65%),
-        radial-gradient(ellipse 45% 60% at 55% 45%, rgba(0, 77, 92, 0.07) 0%, transparent 70%);
+        radial-gradient(ellipse 70% 50% at 10% 15%, rgba(0, 151, 167, 0.02) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 45% at 90% 80%, rgba(245, 168, 0, 0.01) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 60% at 55% 45%, rgba(0, 77, 92, 0.02) 0%, transparent 70%);
       pointer-events: none;
       z-index: 0;
     }
@@ -77,8 +77,8 @@
       pointer-events: none;
       user-select: none;
       z-index: 1;
-      /* fundo escuro/teal → ícone claro/branco (igual sil-light do index) */
-      filter: grayscale(1) brightness(2.5) contrast(0.6);
+      /* fundo escuro/teal → ícone claro/branco — mais brilhante e forte */
+      filter: grayscale(1) brightness(3.5) contrast(0.55);
       opacity: 0;
       transition: opacity 1.4s ease;
       height: auto;
@@ -86,7 +86,7 @@
     }
 
     .sil.on {
-      opacity: var(--sil-op, 0.20);
+      opacity: var(--sil-op, 0.32);
     }
 
     @keyframes silFA {
@@ -113,6 +113,16 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      /* ── Glassmorphism ── */
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 28px;
+      padding: 40px 28px 36px;
+      box-shadow:
+        0 8px 40px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.12);
     }
 
     /* Logo */
@@ -229,6 +239,8 @@
       box-shadow: 0 6px 24px rgba(0, 0, 0, .30);
       transition: transform .22s cubic-bezier(.34, 1.56, .64, 1), box-shadow .22s ease;
       -webkit-tap-highlight-color: transparent;
+      /* sutil brilho na borda dos botões */
+      outline: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .link-btn:hover {
