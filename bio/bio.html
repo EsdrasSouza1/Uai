@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uai Turismo – Links</title>
+  <link rel="icon" type="image/png" href="foto/logoo.png">
+  <link rel="apple-touch-icon" href="foto/logoo.png">
+  <meta property="og:title" content="Uai Turismo – Porto de Galinhas">
+  <meta property="og:description" content="Os melhores passeios de Porto de Galinhas e região!">
+  <meta property="og:image" content="https://www.uaitur.com/foto/logoo.png">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <style>
+    :root {
+      --teal: #0097A7;
+      --teal-dark: #006978;
+      --teal-deeper: #004D5C;
+      --amber: #F5A800;
+      --amber-light: #FFD166;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html,
+    body {
+      min-height: 100%;
+    }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--teal-deeper);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 48px 20px 80px;
+      position: relative;
+      /* SEM overflow:hidden — essencial para position:fixed nos ícones */
+    }
+
+    /* Gradiente de fundo */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 50% at 10% 15%, rgba(0, 151, 167, 0.06) 0%, transparent 65%),
+        radial-gradient(ellipse 55% 45% at 90% 80%, rgba(245, 168, 0, 0.04) 0%, transparent 65%),
+        radial-gradient(ellipse 45% 60% at 55% 45%, rgba(0, 77, 92, 0.07) 0%, transparent 70%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Linhas diagonais */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: repeating-linear-gradient(-45deg, transparent, transparent 38px,
+          rgba(0, 151, 167, 0.04) 38px, rgba(0, 151, 167, 0.04) 39px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── Silhuetas: <img> com position:fixed — mesmo sistema do index ── */
+    .sil {
+      position: fixed;
+      pointer-events: none;
+      user-select: none;
+      z-index: 1;
+      /* fundo escuro/teal → ícone claro/branco (igual sil-light do index) */
+      filter: grayscale(1) brightness(2.5) contrast(0.6);
+      opacity: 0;
+      transition: opacity 1.4s ease;
+      height: auto;
+      will-change: transform;
+    }
+
+    .sil.on {
+      opacity: var(--sil-op, 0.20);
+    }
+
+    @keyframes silFA {
+      0%, 100% { transform: translateY(0px) rotate(var(--sil-rot, 0deg)); }
+      50%       { transform: translateY(-14px) rotate(calc(var(--sil-rot, 0deg) + 3deg)); }
+    }
+
+    @keyframes silFB {
+      0%, 100% { transform: translateY(0px) rotate(var(--sil-rot, 0deg)); }
+      50%       { transform: translateY(-10px) rotate(calc(var(--sil-rot, 0deg) - 2deg)); }
+    }
+
+    @keyframes silFC {
+      0%, 33%, 100% { transform: translateY(0px) rotate(var(--sil-rot, 0deg)); }
+      66%            { transform: translateY(-12px) rotate(calc(var(--sil-rot, 0deg) + 1deg)); }
+    }
+
+    /* ── Wrapper central ── */
+    .wrapper {
+      position: relative;
+      z-index: 3;
+      width: 100%;
+      max-width: 480px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Logo */
+    .brand-logo {
+      width: 148px;
+      height: 148px;
+      border-radius: 50%;
+      object-fit: cover;
+      margin-bottom: 18px;
+      box-shadow: 0 0 0 3px var(--amber), 0 0 0 7px rgba(245, 168, 0, 0.12), 0 12px 40px rgba(0, 0, 0, 0.4);
+      animation: fadeUp .55s .05s cubic-bezier(.22, 1, .36, 1) both, ringPulse 3.2s .6s ease-in-out infinite;
+    }
+
+    @keyframes ringPulse {
+
+      0%,
+      100% {
+        box-shadow: 0 0 0 3px var(--amber), 0 0 0 7px rgba(245, 168, 0, 0.12), 0 12px 40px rgba(0, 0, 0, 0.4);
+      }
+
+      50% {
+        box-shadow: 0 0 0 5px var(--amber), 0 0 0 14px rgba(245, 168, 0, .10), 0 12px 40px rgba(0, 0, 0, 0.4);
+      }
+    }
+
+    /* Nome */
+    .brand-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      font-weight: 900;
+      font-style: italic;
+      color: white;
+      margin-bottom: 4px;
+      animation: fadeUp .55s .13s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    .brand-name span {
+      color: var(--amber-light);
+    }
+
+    .brand-tagline {
+      font-size: .74rem;
+      color: rgba(255, 255, 255, .42);
+      font-weight: 500;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      animation: fadeUp .55s .17s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    .brand-location {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: .8rem;
+      color: rgba(255, 255, 255, .5);
+      margin-bottom: 8px;
+      animation: fadeUp .55s .21s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    .brand-location svg {
+      width: 12px;
+      height: 12px;
+      fill: var(--amber);
+      flex-shrink: 0;
+    }
+
+    /* Estrelas */
+    .brand-stars {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-bottom: 28px;
+      animation: fadeUp .55s .24s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    .stars-icons {
+      color: var(--amber);
+      font-size: .85rem;
+      letter-spacing: 2px;
+    }
+
+    .stars-label {
+      font-size: .72rem;
+      color: rgba(255, 255, 255, .4);
+      font-weight: 500;
+    }
+
+    /* Divider */
+    .divider {
+      width: 44px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--teal), var(--amber));
+      border-radius: 1px;
+      margin-bottom: 28px;
+      animation: fadeUp .55s .26s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    /* Botões */
+    .links-list {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .link-btn {
+      display: block;
+      width: 100%;
+      border-radius: 18px;
+      overflow: hidden;
+      text-decoration: none;
+      position: relative;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, .30);
+      transition: transform .22s cubic-bezier(.34, 1.56, .64, 1), box-shadow .22s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .link-btn:hover {
+      transform: translateY(-3px) scale(1.015);
+      box-shadow: 0 16px 40px rgba(0, 0, 0, .40);
+    }
+
+    .link-btn:active {
+      transform: scale(.975);
+    }
+
+    .link-btn img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 18px;
+    }
+
+    .link-btn:nth-child(1) {
+      animation: fadeUp .52s .30s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    .link-btn:nth-child(2) {
+      animation: fadeUp .52s .39s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    .link-btn:nth-child(3) {
+      animation: fadeUp .52s .48s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    .link-btn:nth-child(4) {
+      animation: fadeUp .52s .57s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    /* Rodapé */
+    .footer {
+      margin-top: 36px;
+      text-align: center;
+      animation: fadeUp .55s .68s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    .footer-text {
+      font-size: .68rem;
+      color: rgba(255, 255, 255, .20);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+
+    .footer-text span {
+      color: var(--amber);
+      font-style: italic;
+    }
+
+    /* Política de privacidade */
+    .privacy-link {
+      margin-top: 14px;
+      text-align: center;
+      animation: fadeUp .55s .75s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    .privacy-link a {
+      font-size: .63rem;
+      color: rgba(255, 255, 255, .18);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      letter-spacing: .05em;
+      transition: color .2s;
+    }
+
+    .privacy-link a:hover {
+      color: rgba(255, 255, 255, .45);
+    }
+
+    /* Dev credit */
+    .dev-credit {
+      margin-top: 8px;
+      text-align: center;
+      animation: fadeUp .55s .80s cubic-bezier(.22, 1, .36, 1) both;
+    }
+
+    .dev-credit a {
+      font-size: .60rem;
+      color: rgba(255, 255, 255, .13);
+      text-decoration: none;
+      letter-spacing: .06em;
+      transition: color .2s;
+    }
+
+    .dev-credit a:hover {
+      color: rgba(255, 255, 255, .38);
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* ── Modal Política ── */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9999;
+      background: rgba(0, 0, 0, .65);
+      backdrop-filter: blur(4px);
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .modal-overlay.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--teal-deeper);
+      border: 1px solid rgba(255, 255, 255, .1);
+      border-radius: 20px;
+      max-width: 500px;
+      width: 100%;
+      max-height: 80vh;
+      overflow-y: auto;
+      padding: 32px 28px 28px;
+      position: relative;
+    }
+
+    .modal-box h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: white;
+      margin-bottom: 16px;
+    }
+
+    .modal-box h3 {
+      font-size: .8rem;
+      color: var(--amber-light);
+      margin: 18px 0 6px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .modal-box p {
+      font-size: .82rem;
+      line-height: 1.75;
+      color: rgba(255, 255, 255, .65);
+      margin-bottom: 8px;
+    }
+
+    .modal-box ul {
+      padding-left: 18px;
+      margin-bottom: 8px;
+    }
+
+    .modal-box li {
+      font-size: .82rem;
+      line-height: 1.75;
+      color: rgba(255, 255, 255, .65);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      background: none;
+      border: none;
+      color: rgba(255, 255, 255, .4);
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: color .2s;
+    }
+
+    .modal-close:hover {
+      color: white;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="wrapper">
+
+    <img class="brand-logo" src="fotos/Logo Vibrante de Uai Turismo.png" alt="Uai Turismo" />
+
+    <p class="brand-name"><span>Uai</span> Turismo</p>
+    <p class="brand-tagline">Porto de Galinhas &amp; Região</p>
+
+    <p class="brand-location">
+      <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z" />
+      </svg>
+      Porto de Galinhas, PE
+    </p>
+
+    <div class="brand-stars">
+      <span class="stars-icons">★★★★★</span>
+      <span class="stars-label">+5.000 viajantes atendidos</span>
+    </div>
+
+    <div class="divider"></div>
+
+    <div class="links-list">
+
+      <a class="link-btn"
+        href="https://wa.me/5581997484915?text=ol%C3%A1%20vim%20pela%20bio%20e%20gostaria%20de%20saber%20mais!"
+        target="_blank" rel="noopener noreferrer">
+        <img src="fotos/whats.png" alt="WhatsApp" />
+      </a>
+
+      <a class="link-btn" href="https://www.instagram.com/uai_turismo/" target="_blank" rel="noopener noreferrer">
+        <img src="fotos/insta.png" alt="Instagram" />
+      </a>
+
+      <a class="link-btn"
+        href="https://www.google.com/search?hl=pt-BR&gl=br&q=Uai+Turismo+-+Porto+de+Galinhas&ludocid=8410691925157875842&lsig=AB86z5XFjwpDBiKcopi9Aduaxquu#lrd=0x7aa93325309b7b7:0x74b8c7be82481082,1,,,,"
+        target="_blank" rel="noopener noreferrer">
+        <img src="fotos/avaliacao.png" alt="Avaliação Google" />
+      </a>
+
+      <a class="link-btn" href="https://www.uaitur.com/" target="_blank" rel="noopener noreferrer">
+        <img src="fotos/sit.png" alt="Nosso site" />
+      </a>
+
+    </div>
+
+    <div class="footer">
+      <p class="footer-text"><span>Uai Turismo</span> · Porto de Galinhas, PE</p>
+    </div>
+
+    <div class="privacy-link">
+      <a href="#" id="openPrivacy">Política de Privacidade</a>
+    </div>
+
+    <div class="dev-credit">
+      <a href="https://www.instagram.com/souza.web_" target="_blank" rel="noopener noreferrer">desenvolvido por
+        @souza.web_</a>
+    </div>
+
+  </div>
+
+  <!-- Modal Política de Privacidade -->
+  <div class="modal-overlay" id="modalPrivacy">
+    <div class="modal-box">
+      <button class="modal-close" id="closePrivacy">✕</button>
+      <h2>Política de Privacidade</h2>
+      <p>A <strong style="color:white">Uai Turismo</strong> respeita a sua privacidade e está comprometida com a
+        proteção dos seus dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (LGPD — Lei nº
+        13.709/2018).</p>
+
+      <h3>Dados Coletados</h3>
+      <p>Ao entrar em contato conosco, podemos coletar:</p>
+      <ul>
+        <li>Nome e número de telefone/WhatsApp</li>
+        <li>Informações sobre o passeio desejado</li>
+        <li>Data de viagem e número de pessoas</li>
+      </ul>
+
+      <h3>Uso das Informações</h3>
+      <p>Seus dados são utilizados exclusivamente para:</p>
+      <ul>
+        <li>Realizar o atendimento e confirmação de reservas</li>
+        <li>Enviar informações sobre passeios contratados</li>
+        <li>Enviar fotos de cortesia após o passeio</li>
+      </ul>
+
+      <h3>Compartilhamento</h3>
+      <p>Não vendemos, alugamos ou compartilhamos seus dados pessoais com terceiros para fins comerciais.</p>
+
+      <h3>Seus Direitos</h3>
+      <p>Você pode solicitar a qualquer momento a exclusão, correção ou acesso aos seus dados entrando em contato pelo
+        WhatsApp <strong style="color:white">(81) 99748-4915</strong>.</p>
+
+      <h3>Contato</h3>
+      <p>Dúvidas sobre esta política? Fale conosco:<br>
+        📱 (81) 99748-4915 · 📍 Porto de Galinhas, PE</p>
+    </div>
+  </div>
+
+  <script>
+    /* ── Modal ── */
+    document.getElementById('openPrivacy').addEventListener('click', function (e) {
+      e.preventDefault();
+      document.getElementById('modalPrivacy').classList.add('open');
+    });
+    document.getElementById('closePrivacy').addEventListener('click', function () {
+      document.getElementById('modalPrivacy').classList.remove('open');
+    });
+    document.getElementById('modalPrivacy').addEventListener('click', function (e) {
+      if (e.target === this) this.classList.remove('open');
+    });
+
+    /* ── Silhuetas — mesmo sistema visual do index.html ── */
+    (function () {
+      var B = '../foto/Ícones/Ícones/';
+
+      /*
+       * Distribuição igual ao index: ícones variados, tamanhos variados,
+       * 4 na esquerda e 4 na direita, cobrindo toda a altura da página.
+       * theme: fundo escuro/teal → filtro 'light' (brightness 2.5).
+       */
+      var icons = [
+        /* ── Esquerda ── */
+        { src: B + '3.png',  t: '4vh',  l: '8px',  w: 150, rot: -12, op: 0.22, anim: 'silFC', dur: 13, delay: 0.8 },
+        { src: B + '7.png',  t: '26vh', l: '6px',  w: 118, rot:   8, op: 0.18, anim: 'silFA', dur: 11, delay: 2.2 },
+        { src: B + '11.png', t: '52vh', l: '10px', w: 130, rot:  -7, op: 0.20, anim: 'silFB', dur: 15, delay: 1.0 },
+        { src: B + '15.png', t: '76vh', l: '4px',  w: 105, rot:   5, op: 0.16, anim: 'silFA', dur: 12, delay: 3.2 },
+        /* ── Direita ── */
+        { src: B + '1.png',  t: '5vh',  ri: '8px',  w: 148, rot:  9, op: 0.22, anim: 'silFA', dur: 12, delay: 0   },
+        { src: B + '5.png',  t: '27vh', ri: '6px',  w: 115, rot: -11, op: 0.18, anim: 'silFB', dur: 14, delay: 1.6 },
+        { src: B + '13.png', t: '53vh', ri: '10px', w: 128, rot:  10, op: 0.20, anim: 'silFC', dur: 13, delay: 2.6 },
+        { src: B + '19.png', t: '77vh', ri: '4px',  w: 102, rot:  -8, op: 0.16, anim: 'silFB', dur: 16, delay: 3.8 }
+      ];
+
+      icons.forEach(function (ic) {
+        var img = document.createElement('img');
+        img.src = ic.src;
+        img.alt = '';
+        img.setAttribute('aria-hidden', 'true');
+        img.setAttribute('loading', 'lazy');
+        img.className = 'sil';
+
+        var pos = ic.l
+          ? 'top:' + ic.t + ';left:' + ic.l
+          : 'top:' + ic.t + ';right:' + ic.ri;
+
+        img.style.cssText = [
+          pos,
+          'width:' + ic.w + 'px',
+          '--sil-rot:' + ic.rot + 'deg',
+          '--sil-op:' + ic.op,
+          'animation:' + ic.anim + ' ' + ic.dur + 's ' + ic.delay + 's ease-in-out infinite'
+        ].join(';');
+
+        document.body.appendChild(img);
+
+        /* Ativa a opacidade: load, error e timeout — à prova de falhas */
+        var done = false;
+        function show() {
+          if (done) return;
+          done = true;
+          img.classList.add('on');
+        }
+        img.addEventListener('load', show);
+        img.addEventListener('error', show);
+        setTimeout(show, 600);
+      });
+    })();
+  </script>
+
+</body>
+
+</html>
